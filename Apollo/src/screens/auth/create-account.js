@@ -29,6 +29,7 @@ function CreateAccount({ styles, onLinkPress }) {
             <TextInput
                 placeholder="Password"
                 style={styles.formItem}
+                secureTextEntry={true}
                 value={pass}
                 onChangeText={(t) => setPass(t)}
             />
