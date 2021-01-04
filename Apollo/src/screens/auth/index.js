@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native'
 
 import Container from '@app/components/container'
@@ -15,6 +15,12 @@ import CreateAccount from './create-account'
 import Login from './login'
 
 function Auth() {
+    const [screen, setScreen] = useState(false)
+
+    const toggleScreen = () => {
+        setScreen(!screen)
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <Container style={styles.container}>
@@ -25,20 +31,11 @@ function Auth() {
                     <Subtext>Some Promotional Text Goes Here</Subtext>
                 </View>
 
-                <View>
-                    <TextInput
-                        placeholder="Email/Phone"
-                        style={styles.formItem}
-                    />
-                    <TextInput placeholder="Password" style={styles.formItem} />
-                    <Button style={styles.formItem}>
-                        <Subtext>Login</Subtext>
-                    </Button>
-
-                    <TouchableOpacity style={styles.textButton}>
-                        <LinkText>or sign up</LinkText>
-                    </TouchableOpacity>
-                </View>
+                {!screen ? (
+                    <Login styles={styles} onLinkPress={toggleScreen} />
+                ) : (
+                    <CreateAccount styles={styles} onLinkPress={toggleScreen} />
+                )}
             </Container>
         </SafeAreaView>
     )
