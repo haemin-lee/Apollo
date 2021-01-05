@@ -5,12 +5,14 @@ import Button from '@app/components/buttons'
 import { LinkText, Subtext } from '@app/components/text'
 import TextInput from '@app/components/text-input'
 
-function CreateAccount({ styles, onLinkPress }) {
+function CreateAccount({ styles, onLinkPress, onSubmit }) {
     const [name, setName] = useState('')
     const [contact, setContact] = useState('')
     const [pass, setPass] = useState('')
 
-    const createAccount = () => {}
+    const createAccount = () => {
+        onSubmit()
+    }
 
     return (
         <View>

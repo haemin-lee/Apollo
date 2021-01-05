@@ -14,8 +14,8 @@ function TextInput(p) {
                         : Color.dark.textColor,
                 backgroundColor:
                     Appearance.getColorScheme() === 'light'
-                        ? Color.light.backgroundColor
-                        : Color.dark.backgroundColor,
+                        ? Color.light.textInputBackgroundColor
+                        : Color.dark.textInputBackgroundColor,
                 ...styles.textInput,
                 ...style,
             }}

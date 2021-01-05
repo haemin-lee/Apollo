@@ -1,24 +1,23 @@
 import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import Container from '@app/components/container'
-import Button from '@app/components/buttons'
-import Text, {
-    Header,
-    Subheader,
-    LinkText,
-    Subtext,
-} from '@app/components/text'
-import TextInput from '@app/components/text-input'
+import { Header, Subheader, Subtext } from '@app/components/text'
 
 import CreateAccount from './create-account'
 import Login from './login'
 
 function Auth() {
     const [screen, setScreen] = useState(false)
+    const navigation = useNavigation()
 
     const toggleScreen = () => {
         setScreen(!screen)
+    }
+
+    const onSubmit = () => {
+        navigation.navigate('Check In')
     }
 
     return (
@@ -32,9 +31,17 @@ function Auth() {
                 </View>
 
                 {!screen ? (
-                    <Login styles={styles} onLinkPress={toggleScreen} />
+                    <Login
+                        styles={styles}
+                        onLinkPress={toggleScreen}
+                        onSubmit={onSubmit}
+                    />
                 ) : (
-                    <CreateAccount styles={styles} onLinkPress={toggleScreen} />
+                    <CreateAccount
+                        styles={styles}
+                        onLinkPress={toggleScreen}
+                        onSubmit={onSubmit}
+                    />
                 )}
             </Container>
         </SafeAreaView>
