@@ -5,6 +5,7 @@ import path from 'path'
 import config from '@app/config'
 
 import oauth from '@app/routes/oauth'
+import webhooks from '@app/routes/webhooks'
 import api from '@app/routes/api'
 
 const PORT = config.PORT
@@ -22,6 +23,9 @@ mongoose.connect(config.db_connection_url, {
 
 // Handle OAuth
 app.use('/oauth', oauth)
+
+// Handle webhooks
+app.use('/webhooks', webhooks)
 
 // Run all routes through /api to avoid React pathing conflicts
 app.use('/api', api)
