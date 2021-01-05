@@ -24,7 +24,18 @@ function Button(props) {
 function RoundButton(props) {
     return (
         <Button
-            style={{ ...styles.round, ...props.style }}
+            style={{
+                color:
+                    Appearance.getColorScheme() === 'light'
+                        ? Color.light.textColor
+                        : Color.dark.textColor,
+                backgroundColor:
+                    Appearance.getColorScheme() === 'light'
+                        ? Color.light.backgroundColor
+                        : Color.dark.backgroundColor,
+                ...styles.round,
+                ...props.style,
+            }}
             onPress={props.onPress}
         >
             {props.children}
@@ -50,7 +61,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    round: {},
+    round: { borderRadius: 25 },
     icon: {},
 })
 
