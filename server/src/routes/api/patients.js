@@ -1,35 +1,71 @@
 import express from 'express'
-import User from '@app/models/user'
+
+import Patient from '@app/models/patient'
 
 let router = express.Router()
 
-// CRUD
-// create new user
-router.post('/', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
-        const user = await new User(req.body).save().exec()
-        res.json(user)
+        const patients = await Patient.find()
+        res.json(patients)
     } catch (e) {
         next(e)
     }
 })
 
-// get user
 router.get('/:id', async (req, res, next) => {
-    const user_id = req.params.id
     try {
-        const user = await User.findOne({ finastra_id: user_id }).exec()
-        res.json(user)
+        const patient = await Patient.findById(req.params.id)
+        res.json(patient)
     } catch (e) {
         next(e)
     }
 })
 
-// update user
-// maybe cut this for sake of time
-router.put('/:id', (req, res) => {
-    const user_id = req.params.id
-    res.json({ id: user_id })
+// Authentication
+router.post('/login', async (req, res, next) => {
+    const contact = req.body.contact
+    const password = req.body.password
+    try {
+        const patient = await Patient.findOne({
+            'data.email': contact,
+        })
+
+        if (!patient) throw 'patient does not exist'
+
+        // TODO: hash password
+        if (patient.password !== password) throw 'incorrect password'
+
+        res.json(patient)
+    } catch (e) {
+        next(e)
+    }
+})
+
+// Set password
+router.post('/create-account', async (req, res, next) => {
+    const contact = req.body.contact
+    const password = req.body.password
+    try {
+        let patient = await Patient.findOne({
+            'data.email': contact,
+        })
+
+        if (!patient) throw 'patient does not exist'
+
+        patient = await Patient.findOneAndUpdate(
+            {
+                'data.email': contact,
+            },
+            {
+                password: password,
+            }
+        )
+
+        res.json(patient)
+    } catch (e) {
+        next(e)
+    }
 })
 
 export default router

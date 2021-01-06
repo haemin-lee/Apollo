@@ -2,12 +2,12 @@ import mongoose from 'mongoose'
 
 const schema = mongoose.Schema(
     {
-        firstName: String,
-        lastName: String,
+        drchrono_id: Number,
+        data: mongoose.Schema.Types.Mixed,
     },
     {
         timestamps: true,
     }
 )
 
-export default mongoose.model('User', schema)
+export default mongoose.model('Appointment', schema)
