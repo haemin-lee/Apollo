@@ -1,5 +1,5 @@
-import Dashboard from './dashboard'
-import Loans from './loans'
-import Predictions from './predictions'
+import PatientInfo from './patientInfo'
+import Images from './images'
+import Graphs from './graphs'
 
-export { Dashboard, Loans, Predictions }
+export { PatientInfo, Images, Graphs }

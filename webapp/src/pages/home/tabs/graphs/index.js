@@ -31,7 +31,7 @@ function Pill(props) {
     )
 }
 
-function Loans() {
+function Graphs(props) {
     const [bills, setBills] = useState(example_data)
     return (
         <>
@@ -48,4 +48,4 @@ function Loans() {
     )
 }
 
-export default Loans
+export default Graphs

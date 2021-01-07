@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import { Navbar, Nav } from 'react-bootstrap'
-import Home from './pages/home'
+import Home from './pages'
 
 function TopNav() {
     return (
