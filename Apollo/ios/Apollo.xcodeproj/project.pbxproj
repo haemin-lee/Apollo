@@ -52,6 +52,7 @@
 		5EDAC26225A2E56C00B6DD06 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27A93EE3043846D0A417D79D /* Poppins-SemiBoldItalic.ttf */; };
 		5EDAC26325A2E56C00B6DD06 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF10A4E493FC416589D769D7 /* Poppins-Thin.ttf */; };
 		5EDAC26425A2E56C00B6DD06 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54050D213E8D4CF68C4E1CA6 /* Poppins-ThinItalic.ttf */; };
+		5EDAC26F25A4026B00B6DD06 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EDAC26E25A4026B00B6DD06 /* HealthKit.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		FF309792D8EF2C654117A034 /* libPods-Apollo-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74A1289AD53319291A664CDB /* libPods-Apollo-tvOSTests.a */; };
 /* End PBXBuildFile section */
@@ -116,6 +117,8 @@
 		5E7FA2F525A1DC740065E4D6 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
 		5E7FA2F625A1DC740065E4D6 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		5E7FA2F725A1DC740065E4D6 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
+		5EDAC26D25A4026B00B6DD06 /* Apollo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Apollo.entitlements; path = Apollo/Apollo.entitlements; sourceTree = "<group>"; };
+		5EDAC26E25A4026B00B6DD06 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		644FEEDE7A438132EC275215 /* Pods-Apollo-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Apollo-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Apollo-tvOSTests/Pods-Apollo-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		64BC2D54CBB64967B159380E /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../src/assets/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
 		66354745DCBE40C8AEE5E1BC /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BlackItalic.ttf"; path = "../src/assets/fonts/Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -167,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AEB3C7CD241A5ABEEDD7E04 /* libPods-Apollo.a in Frameworks */,
+				5EDAC26F25A4026B00B6DD06 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +213,7 @@
 		13B07FAE1A68108700A75B9A /* Apollo */ = {
 			isa = PBXGroup;
 			children = (
+				5EDAC26D25A4026B00B6DD06 /* Apollo.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -264,6 +269,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5EDAC26E25A4026B00B6DD06 /* HealthKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				FD401698FE0B0901F38EBA7B /* libPods-Apollo.a */,
@@ -871,6 +877,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Apollo/Apollo.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LJ32KZVZ54;
 				ENABLE_BITCODE = NO;
@@ -895,6 +902,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Apollo/Apollo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

@@ -1,20 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import Container from '@app/components/container'
-import Button from '@app/components/buttons'
-import Text, {
-    Header,
-    Subheader,
-    LinkText,
-    Subtext,
-} from '@app/components/text'
-import TextInput from '@app/components/text-input'
+import { Header, Subheader, Subtext } from '@app/components/text'
 
 import CreateAccount from './create-account'
 import Login from './login'
 
 function Auth() {
+    const [screen, setScreen] = useState(false)
+    const navigation = useNavigation()
+
+    const toggleScreen = () => {
+        setScreen(!screen)
+    }
+
+    const onSubmit = () => {
+        navigation.navigate('Check In')
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <Container style={styles.container}>
@@ -25,20 +30,19 @@ function Auth() {
                     <Subtext>Some Promotional Text Goes Here</Subtext>
                 </View>
 
-                <View>
-                    <TextInput
-                        placeholder="Email/Phone"
-                        style={styles.formItem}
+                {!screen ? (
+                    <Login
+                        styles={styles}
+                        onLinkPress={toggleScreen}
+                        onSubmit={onSubmit}
                     />
-                    <TextInput placeholder="Password" style={styles.formItem} />
-                    <Button style={styles.formItem}>
-                        <Subtext>Login</Subtext>
-                    </Button>
-
-                    <TouchableOpacity style={styles.textButton}>
-                        <LinkText>or sign up</LinkText>
-                    </TouchableOpacity>
-                </View>
+                ) : (
+                    <CreateAccount
+                        styles={styles}
+                        onLinkPress={toggleScreen}
+                        onSubmit={onSubmit}
+                    />
+                )}
             </Container>
         </SafeAreaView>
     )

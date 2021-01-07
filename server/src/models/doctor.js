@@ -10,4 +10,4 @@ const schema = mongoose.Schema(
     }
 )
 
-export default mongoose.model('User', schema)
+export default mongoose.model('Doctor', schema)
