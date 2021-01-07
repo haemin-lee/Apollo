@@ -1,9 +1,10 @@
 import { Nav } from 'react-bootstrap'
 import { Switch, Route, Routes, NavLink, Link } from 'react-router-dom'
 
-import { Dashboard, Predictions, Loans } from './tabs'
-// figure styles out later...
-function Home() {
+import { PatientInfo, Images, Graphs } from './tabs'
+// Future feature: import from Excel
+
+function Tabbar(props) {
     return (
         <div className="container">
             <Nav className="justify-content-center nav-pills">
@@ -14,41 +15,41 @@ function Home() {
                         exact
                         to="/"
                     >
-                        Dashboard
+                        Patient Information
                     </NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink
                         className="nav-link"
                         activeClassName="active"
-                        to="/predictions"
+                        to="/graphs"
                     >
-                        Predictions
+                        Graphs
                     </NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink
                         className="nav-link"
                         activeClassName="active"
-                        to="/loans"
+                        to="/images"
                     >
-                        Loans Info
+                        Images
                     </NavLink>
                 </li>
             </Nav>
             <Switch>
                 <Route exact path="/">
-                    <Dashboard />
+                    <PatientInfo userData={props.userData}/>
                 </Route>
                 <Route exact path="/predictions">
-                    <Predictions />
+                    <Graphs userData={props.userData}/>
                 </Route>
                 <Route exact path="/loans">
-                    <Loans />
+                    <Images userData={props.userData}/>
                 </Route>
             </Switch>
         </div>
-    )
+    );
 }
 
-export default Home
+export default Tabbar
