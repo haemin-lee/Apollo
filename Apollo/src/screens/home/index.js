@@ -75,12 +75,14 @@ const DATA = [
 
 function Home() {
     const [active, setActive] = useState(0)
-    const [appointments, setAppointments] = useState([])
+    const [upcomingAppointments, setUpcomingAppointments] = useState([])
+    const [pastAppointments, setPastAppointments] = useState([])
 
     const scrollY = useRef(new Animated.Value(0)).current
 
     useEffect(() => {
-        setAppointments(DATA)
+        setUpcomingAppointments(DATA)
+        setPastAppointments(DATA.slice(0, 3))
     }, [])
 
     const ListHeaderComponent = () => (
@@ -97,10 +99,24 @@ function Home() {
     )
 
     const ListEmptyComponent = () => (
-        <Subtext style={styles.empty}>There's nothing to see here...</Subtext>
+        <Container>
+            <Subtext style={styles.empty}>
+                There's nothing to see here...
+            </Subtext>
+        </Container>
     )
 
-    const renderItem = ({ item }) => <Card data={item} />
+    const ListFooterComponent = () => (
+        <Container>
+            <Subtext style={styles.footer}>
+                You can schedule an appointment through your doctor
+            </Subtext>
+        </Container>
+    )
+
+    // TODO: update card
+    const renderItem = ({ item }) =>
+        !active ? <Card data={item} /> : <Card data={item} />
 
     return (
         <>
@@ -119,13 +135,7 @@ function Home() {
             <FlatList
                 ListHeaderComponent={ListHeaderComponent}
                 ListEmptyComponent={ListEmptyComponent}
-                ListFooterComponent={
-                    <Container>
-                        <Subtext style={styles.textCenter}>
-                            You can schedule an appointment through your doctor
-                        </Subtext>
-                    </Container>
-                }
+                ListFooterComponent={ListFooterComponent}
                 ListFooterComponentStyle={{
                     paddingBottom: 20,
                 }}
@@ -142,7 +152,7 @@ function Home() {
                     { useNativeDriver: false }
                 )}
                 showsVerticalScrollIndicator={false}
-                data={appointments}
+                data={!active ? upcomingAppointments : pastAppointments}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
             />
@@ -177,8 +187,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 50,
     },
-    textCenter: {
+    footer: {
         textAlign: 'center',
+        marginTop: 15,
+        marginBottom: 15,
     },
 })
 
