@@ -21,7 +21,8 @@ function Auth() {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
+        <>
+            <View style={styles.sun} />
             <Container style={styles.container}>
                 <View style={{ ...styles.promo }}>
                     <Header>Apollo</Header>
@@ -44,11 +45,20 @@ function Auth() {
                     />
                 )}
             </Container>
-        </SafeAreaView>
+        </>
     )
 }
 
 const styles = StyleSheet.create({
+    sun: {
+        position: 'absolute',
+        top: -50,
+        left: -50,
+        borderRadius: 110,
+        width: 220,
+        height: 220,
+        backgroundColor: 'rgba(252, 255, 84, 0.8)',
+    },
     container: {
         flex: 1,
         justifyContent: 'center',

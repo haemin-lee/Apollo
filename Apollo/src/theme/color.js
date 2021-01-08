@@ -1,5 +1,5 @@
 const light = {
-    textColor: '#000000',
+    textColor: '#333333',
     secondaryTextColor: 'rgba(0, 0, 0, 0.5)',
     linkTextColor: '#23C133',
     accentColor: '#94DA9B',
