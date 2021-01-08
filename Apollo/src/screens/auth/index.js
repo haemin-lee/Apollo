@@ -17,7 +17,7 @@ function Auth() {
     }
 
     const onSubmit = () => {
-        navigation.navigate('Check In')
+        navigation.navigate('Home')
     }
 
     return (
