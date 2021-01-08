@@ -12,7 +12,7 @@ import Container, { ContainerFluid } from '@app/components/container'
 import { Subtext, Header } from '@app/components/text'
 
 import TabBar from './tab-bar'
-import Card from './card'
+import Card, { PastCard } from './card'
 
 const DATA = [
     {
@@ -82,7 +82,7 @@ function Home() {
 
     useEffect(() => {
         setUpcomingAppointments(DATA)
-        setPastAppointments(DATA.slice(0, 3))
+        setPastAppointments(DATA.slice(0, 6))
     }, [])
 
     const ListHeaderComponent = () => (
@@ -114,9 +114,8 @@ function Home() {
         </Container>
     )
 
-    // TODO: update card
     const renderItem = ({ item }) =>
-        !active ? <Card data={item} /> : <Card data={item} />
+        !active ? <Card data={item} /> : <PastCard data={item} />
 
     return (
         <>

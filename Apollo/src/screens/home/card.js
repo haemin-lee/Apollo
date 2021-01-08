@@ -1,5 +1,11 @@
 import React from 'react'
-import { Appearance, StyleSheet, TouchableOpacity, View } from 'react-native'
+import {
+    Appearance,
+    StyleSheet,
+    Pressable,
+    TouchableOpacity,
+    View,
+} from 'react-native'
 
 import { ContainerFluid } from '@app/components/container'
 import Text, { LinkText, Subtext } from '@app/components/text'
@@ -19,6 +25,67 @@ const MONTHS = [
     'Nov',
     'Dec',
 ]
+
+function PastCard(props) {
+    const date = new Date(props.data.scheduled_time)
+    // Imagine writing date logic yourself bc you're dumb
+    const month = MONTHS[date.getMonth()]
+    const day = date.getDate()
+    const hours =
+        date.getHours() > 12
+            ? date.getHours() - 12
+            : date.getHours() === 0
+            ? 12
+            : date.getHours()
+    const minutes =
+        date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+    const meridiem = date.getHours() > 12 ? 'pm' : 'am'
+
+    return (
+        <ContainerFluid style={styles.container}>
+            <Pressable>
+                <View
+                    style={{
+                        backgroundColor:
+                            Appearance.getColorScheme() === 'light'
+                                ? Color.light.backgroundColor
+                                : Color.dark.backgroundColor,
+                        ...styles.card,
+                        ...props.style,
+                    }}
+                >
+                    <View
+                        style={{
+                            ...styles.info,
+                            marginBottom: !props.data.notes ? 20 : 0,
+                        }}
+                    >
+                        <View>
+                            <Text style={styles.name}>{props.data.name}</Text>
+
+                            <Subtext>{props.data.appointment}</Subtext>
+                            <Subtext>{props.data.address}</Subtext>
+                        </View>
+                        <View style={styles.time}>
+                            <Text>
+                                {month} {day}
+                            </Text>
+                            <Text>
+                                {hours}:{minutes} {meridiem}
+                            </Text>
+                        </View>
+                    </View>
+
+                    {props.data.notes && (
+                        <Text style={styles.notes}>
+                            Notes: {props.data.notes}
+                        </Text>
+                    )}
+                </View>
+            </Pressable>
+        </ContainerFluid>
+    )
+}
 
 function Card(props) {
     const date = new Date(props.data.scheduled_time)
@@ -118,3 +185,4 @@ const styles = StyleSheet.create({
 })
 
 export default Card
+export { PastCard }
