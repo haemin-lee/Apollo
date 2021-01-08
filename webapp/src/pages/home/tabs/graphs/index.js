@@ -1,13 +1,36 @@
 // Future feature: import from Excel
 import { useState } from 'react'
 import { ResponsiveLine } from '@nivo/line'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 
-
+const useStyles = makeStyles((theme) => ({
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+  }));
+  
 
 // Prob better way to do prop mapping
 function Graphs(props) {
 
+
+    const classes = useStyles();
+    const [graphtype, setGraphType] = React.useState('');
+  
+    const handleChange = (event) => {
+      setGraphType(event.target.value);
+    };
 
     const MyResponsiveLine = ({ data }) => (
         <ResponsiveLine
@@ -76,6 +99,21 @@ function Graphs(props) {
 
         <MyResponsiveLine data={props.userData.data}/>
     
+        <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Graph Type</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={graphtype}
+          onChange={handleChange}
+        >
+          <MenuItem value={"Step Count"}>Step Count</MenuItem>
+          <MenuItem value={"Heart Rate"}>Heart Rate</MenuItem>
+          <MenuItem value={"Blood Pressure"}>Blood Pressure</MenuItem>
+          <MenuItem value={"Blood Glucose"}>Blood Glucose</MenuItem>
+          <MenuItem value={"Sleep"}>Sleep</MenuItem>
+        </Select>
+      </FormControl>
 
         </div>
     );

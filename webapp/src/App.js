@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import { Navbar, Nav } from 'react-bootstrap'
 import Home from './pages'
+import Splash from './pages/splash'
 
 function TopNav() {
     return (
@@ -23,9 +24,13 @@ function App() {
             <Router>
                 <Switch>
                     {/* this will probably have some 404 issues later... */}
+                    <Route exact path="/splash">
+                        <Splash />
+                    </Route>
                     <Route path="/">
                         <Home />
                     </Route>
+                    
                 </Switch>
             </Router>
         </>

@@ -8,12 +8,22 @@ import Tabbar from './home';
 //import { ResponsiveLine } from '@nivo/line'
 
 class User {
-    constructor(name, data, height, weight)
+    constructor(name, age, height, weight, biosex, DOB, BMI, BodyFat, notes, stepData, HeartData, BPData, BGData, SleepData)
     {
         this.name = name;
-        this.data = data;
+        this.age = age;
         this.height = height;
         this.weight = weight;
+        this.biosex = biosex;
+        this.DOB = DOB;
+        this.BMI = BMI;
+        this.BodyFat = BodyFat;
+        this.notes = notes;
+        this.stepData = stepData;
+        this.HeartData = HeartData;
+        this.BPData = BPData;
+        this.BGData = BGData;
+        this.SleepData = SleepData;
     }
 }
 
