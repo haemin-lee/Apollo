@@ -78,6 +78,9 @@ const styles = StyleSheet.create({
     formItem: {
         marginBottom: 10,
     },
+    buttonText: {
+        color: Color.light.textColor,
+    },
     textButton: {
         marginTop: 10,
         alignItems: 'center',
