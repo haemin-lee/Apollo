@@ -12,6 +12,8 @@ import { useNavigation } from '@react-navigation/native'
 
 import AppleHealthKit from 'rn-apple-healthkit'
 
+import LinearGradient from 'react-native-linear-gradient'
+
 import Container from '@app/components/container'
 import Text, { Header, Subheader, Subtext } from '@app/components/text'
 import { RoundButton } from '@app/components/buttons'
@@ -60,47 +62,52 @@ function Data() {
     }
 
     return (
-        <SafeAreaView
-            style={{
-                backgroundColor:
-                    Appearance.getColorScheme() === 'light'
-                        ? Color.light.accentColor
-                        : Color.dark.accentColor,
-                ...styles.container,
-            }}
+        <LinearGradient
+            style={styles.linearGradient}
+            colors={Color.gradients.health}
         >
-            <Container>
-                <View>
-                    <View style={styles.promo}>
-                        <Image
-                            style={styles.healthKitLogo}
-                            source={require('./apple-health.png')}
-                        />
-                        <Header>
-                            Provide your doctor with Apple Health insights
-                        </Header>
-                        <Subtext>
-                            Using Apollo with the Apple Health app empowers you
-                            to copy the Apple interface guidelines
-                        </Subtext>
-                    </View>
-                    <RoundButton onPress={getHealthData}>
-                        <Text>Sync Health Data</Text>
-                    </RoundButton>
+            <SafeAreaView style={styles.container}>
+                <Container>
+                    <View>
+                        <View style={styles.promo}>
+                            <Image
+                                style={styles.healthKitLogo}
+                                source={require('./apple-health.png')}
+                            />
+                            <Header>
+                                Provide your doctor with Apple Health insights
+                            </Header>
+                            <Subtext>
+                                Using Apollo with the Apple Health app empowers
+                                you to copy the Apple interface guidelines
+                            </Subtext>
+                        </View>
+                        <RoundButton
+                            style={styles.button}
+                            onPress={getHealthData}
+                        >
+                            <Text style={styles.buttonText}>
+                                Sync Health Data
+                            </Text>
+                        </RoundButton>
 
-                    <TouchableOpacity
-                        style={styles.textButton}
-                        onPress={finish}
-                    >
-                        <Subtext>Skip for now</Subtext>
-                    </TouchableOpacity>
-                </View>
-            </Container>
-        </SafeAreaView>
+                        <TouchableOpacity
+                            style={styles.textButton}
+                            onPress={finish}
+                        >
+                            <Subtext>Skip for now</Subtext>
+                        </TouchableOpacity>
+                    </View>
+                </Container>
+            </SafeAreaView>
+        </LinearGradient>
     )
 }
 
 const styles = StyleSheet.create({
+    linearGradient: {
+        flex: 1,
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -112,6 +119,12 @@ const styles = StyleSheet.create({
     },
     promo: {
         marginBottom: 30,
+    },
+    button: {
+        backgroundColor: Color.light.backgroundColor,
+    },
+    buttonText: {
+        color: Color.light.textColor,
     },
     textButton: {
         marginTop: 30,

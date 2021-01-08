@@ -1,15 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react'
 import {
     Animated,
+    Appearance,
     FlatList,
     SafeAreaView,
     StyleSheet,
     TouchableOpacity,
     View,
 } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import Container, { ContainerFluid } from '@app/components/container'
 import { Subtext, Header } from '@app/components/text'
+
+import Color from '@app/theme/color.js'
 
 import TabBar from './tab-bar'
 import Card, { PastCard } from './card'
@@ -78,6 +82,8 @@ function Home() {
     const [upcomingAppointments, setUpcomingAppointments] = useState([])
     const [pastAppointments, setPastAppointments] = useState([])
 
+    const navigation = useNavigation()
+
     const scrollY = useRef(new Animated.Value(0)).current
 
     useEffect(() => {
@@ -115,13 +121,26 @@ function Home() {
     )
 
     const renderItem = ({ item }) =>
-        !active ? <Card data={item} /> : <PastCard data={item} />
+        !active ? (
+            <Card
+                data={item}
+                onPress={() => {
+                    navigation.navigate('Check In')
+                }}
+            />
+        ) : (
+            <PastCard data={item} />
+        )
 
     return (
         <>
             <Animated.View
                 style={{
                     ...styles.shadow,
+                    backgroundColor:
+                        Appearance.getColorScheme() === 'light'
+                            ? Color.light.backgroundColor
+                            : Color.dark.backgroundColor,
                     shadowOpacity: scrollY.interpolate({
                         inputRange: [0, 50],
                         outputRange: [0, 0.15],

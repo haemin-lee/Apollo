@@ -43,13 +43,13 @@ function PastCard(props) {
 
     return (
         <ContainerFluid style={styles.container}>
-            <Pressable>
+            <Pressable onPress={props.onPress}>
                 <View
                     style={{
                         backgroundColor:
                             Appearance.getColorScheme() === 'light'
-                                ? Color.light.backgroundColor
-                                : Color.dark.backgroundColor,
+                                ? Color.light.cardColor
+                                : Color.dark.cardColor,
                         ...styles.card,
                         ...props.style,
                     }}
@@ -104,13 +104,13 @@ function Card(props) {
 
     return (
         <ContainerFluid style={styles.container}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={props.onPress}>
                 <View
                     style={{
                         backgroundColor:
                             Appearance.getColorScheme() === 'light'
-                                ? Color.light.backgroundColor
-                                : Color.dark.backgroundColor,
+                                ? Color.light.cardColor
+                                : Color.dark.cardColor,
                         ...styles.card,
                         ...props.style,
                     }}

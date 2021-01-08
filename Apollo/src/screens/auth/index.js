@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { Appearance, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import Container from '@app/components/container'
@@ -7,6 +7,8 @@ import { Header, Subheader, Subtext } from '@app/components/text'
 
 import CreateAccount from './create-account'
 import Login from './login'
+
+import Color from '@app/theme/color.js'
 
 function Auth() {
     const [screen, setScreen] = useState(false)
@@ -22,7 +24,15 @@ function Auth() {
 
     return (
         <>
-            <View style={styles.sun} />
+            <View
+                style={{
+                    backgroundColor:
+                        Appearance.getColorScheme() === 'light'
+                            ? Color.light.sunColor
+                            : Color.dark.sunColor,
+                    ...styles.sun,
+                }}
+            />
             <Container style={styles.container}>
                 <View style={{ ...styles.promo }}>
                     <Header>Apollo</Header>
@@ -57,7 +67,6 @@ const styles = StyleSheet.create({
         borderRadius: 110,
         width: 220,
         height: 220,
-        backgroundColor: 'rgba(252, 255, 84, 0.8)',
     },
     container: {
         flex: 1,
