@@ -8,8 +8,8 @@ import {
     View,
 } from 'react-native'
 
-import { ContainerFluid } from '@app/components/container'
-import Text, { Header } from '@app/components/text'
+import Container, { ContainerFluid } from '@app/components/container'
+import { Subtext, Header } from '@app/components/text'
 
 import TabBar from './tab-bar'
 import Card from './card'
@@ -114,7 +114,13 @@ function Home() {
             </Animated.View>
             <FlatList
                 ListHeaderComponent={ListHeaderComponent}
-                ListFooterComponent={<></>}
+                ListFooterComponent={
+                    <Container>
+                        <Subtext style={styles.footer}>
+                            You can schedule an appointment through your doctor
+                        </Subtext>
+                    </Container>
+                }
                 ListFooterComponentStyle={{
                     paddingBottom: 20,
                 }}
@@ -160,6 +166,9 @@ const styles = StyleSheet.create({
     },
     tabBar: {
         marginBottom: 20,
+    },
+    footer: {
+        textAlign: 'center',
     },
 })
 
