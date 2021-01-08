@@ -41,10 +41,10 @@ function Tabbar(props) {
                 <Route exact path="/">
                     <PatientInfo userData={props.userData}/>
                 </Route>
-                <Route exact path="/predictions">
+                <Route exact path="/graphs">
                     <Graphs userData={props.userData}/>
                 </Route>
-                <Route exact path="/loans">
+                <Route exact path="/images">
                     <Images userData={props.userData}/>
                 </Route>
             </Switch>
