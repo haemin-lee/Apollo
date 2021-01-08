@@ -96,6 +96,10 @@ function Home() {
         </ContainerFluid>
     )
 
+    const ListEmptyComponent = () => (
+        <Subtext style={styles.empty}>There's nothing to see here...</Subtext>
+    )
+
     const renderItem = ({ item }) => <Card data={item} />
 
     return (
@@ -114,9 +118,10 @@ function Home() {
             </Animated.View>
             <FlatList
                 ListHeaderComponent={ListHeaderComponent}
+                ListEmptyComponent={ListEmptyComponent}
                 ListFooterComponent={
                     <Container>
-                        <Subtext style={styles.footer}>
+                        <Subtext style={styles.textCenter}>
                             You can schedule an appointment through your doctor
                         </Subtext>
                     </Container>
@@ -136,6 +141,7 @@ function Home() {
                     ],
                     { useNativeDriver: false }
                 )}
+                showsVerticalScrollIndicator={false}
                 data={appointments}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
@@ -167,7 +173,11 @@ const styles = StyleSheet.create({
     tabBar: {
         marginBottom: 20,
     },
-    footer: {
+    empty: {
+        textAlign: 'center',
+        marginBottom: 50,
+    },
+    textCenter: {
         textAlign: 'center',
     },
 })
