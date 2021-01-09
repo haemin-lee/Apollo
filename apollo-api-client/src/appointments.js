@@ -2,7 +2,8 @@ const endpoints = require('./endpoint')
 const validate_params = require('./helpers/validate_params')
 
 module.exports = (instance, options = {}) => {
-    const url = (options.url ? options.url : endpoints.ROOT) + '/appointments'
+    const url =
+        (options.url !== false ? options.url : endpoints.ROOT) + '/appointments'
 
     async function get_appointments(options) {
         const res = await instance.get(url)
