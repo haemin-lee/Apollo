@@ -31,9 +31,15 @@ function Home() {
 
     const [data, setData] = useState(activeUser);
 
-    async function get_data() {
+    async function get_appointment_data() {
         const client = get_client()
         const d = await client.appointments.get_appointments()
+        console.log(d);
+    }
+
+    async function get_patient_data() {
+        const client = get_client()
+        const d = await client.patients.get_patients()
         console.log(d);
     }
 
@@ -66,7 +72,8 @@ function Home() {
 
     useEffect(() => {
         // Update the document title using the browser API
-        get_data();
+        get_appointment_data();
+        get_patient_data();
       });
 
     return (
