@@ -9,6 +9,7 @@ import {
 import { createStackNavigator } from '@react-navigation/stack'
 
 import Auth from '../screens/auth'
+import Home from '../screens/home'
 import CheckIn from '../screens/check-in'
 
 import Color from '../theme/color'
@@ -40,6 +41,7 @@ function RootStackNavigator() {
         >
             <Stack.Navigator initialRouteName="Auth" headerMode="none">
                 <Stack.Screen name="Auth" component={Auth} />
+                <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen name="Check In" component={CheckIn} />
             </Stack.Navigator>
         </NavigationContainer>

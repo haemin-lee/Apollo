@@ -29,7 +29,7 @@ function Login({ styles, onLinkPress, onSubmit }) {
                 onChangeText={(t) => setPass(t)}
             />
             <Button style={styles.formItem} onPress={login}>
-                <Subtext>Login</Subtext>
+                <Subtext style={styles.buttonText}>Login</Subtext>
             </Button>
 
             <TouchableOpacity style={styles.textButton} onPress={onLinkPress}>

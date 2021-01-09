@@ -36,7 +36,7 @@ function CreateAccount({ styles, onLinkPress, onSubmit }) {
                 onChangeText={(t) => setPass(t)}
             />
             <Button style={styles.formItem} onPress={createAccount}>
-                <Subtext>Create Account</Subtext>
+                <Subtext style={styles.buttonText}>Create Account</Subtext>
             </Button>
 
             <TouchableOpacity style={styles.textButton} onPress={onLinkPress}>
