@@ -1,7 +1,6 @@
 import React from 'react'
 import {
     Alert,
-    Appearance,
     Image,
     SafeAreaView,
     StyleSheet,

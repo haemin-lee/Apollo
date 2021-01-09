@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
-import { Appearance, StyleSheet, TouchableOpacity, View } from 'react-native'
+import {
+    useColorScheme,
+    StyleSheet,
+    TouchableOpacity,
+    View,
+} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import Container from '@app/components/container'
@@ -14,6 +19,8 @@ function Auth() {
     const [screen, setScreen] = useState(false)
     const navigation = useNavigation()
 
+    const colorScheme = useColorScheme()
+
     const toggleScreen = () => {
         setScreen(!screen)
     }
@@ -27,7 +34,7 @@ function Auth() {
             <View
                 style={{
                     backgroundColor:
-                        Appearance.getColorScheme() === 'light'
+                        colorScheme === 'light'
                             ? Color.light.sunColor
                             : Color.dark.sunColor,
                     ...styles.sun,
