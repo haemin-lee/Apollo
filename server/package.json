@@ -13,6 +13,7 @@
     "license": "ISC",
     "dependencies": {
         "axios": "^0.21.1",
+        "drchrono-api-client": "file:..\\apollo-api-client",
         "express": "^4.17.1",
         "mongoose": "^5.11.8"
     },
