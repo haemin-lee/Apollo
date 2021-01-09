@@ -1,5 +1,5 @@
-const endpoints = require('../endpoint')
-const validate_params = require('../helpers/validate_params')
+const endpoints = require('./endpoint')
+const validate_params = require('./helpers/validate_params')
 
 module.exports = (instance, options = {}) => {
     const url = (options.url ? options.url : endpoints.ROOT) + '/patients'
