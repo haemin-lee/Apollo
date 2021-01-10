@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Tabbar from './home';
 import get_client from '../app/apiConnector';
+// ^^ change this relative path 
 //import { ResponsiveLine } from '@nivo/line'
 
 class User {
