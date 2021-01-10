@@ -104,6 +104,7 @@ function Home() {
                 name: 'Dr Eduardo Saverin',
                 appointment: 'Radiology',
                 address: 'Somewhere Road, CA',
+                notes: appointment.data.notes,
                 scheduled_time: appointment.data.scheduled_time,
                 data: appointment.data,
             }))
