@@ -1,10 +1,11 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Tabbar from './home';
+import get_client from '../app/apiConnector';
 //import { ResponsiveLine } from '@nivo/line'
 
 class User {
@@ -29,6 +30,18 @@ let activeUser = users[0];
 function Home() {
 
     const [data, setData] = useState(activeUser);
+
+    async function get_appointment_data() {
+        const client = get_client()
+        const d = await client.appointments.get_appointments()
+        console.log(d);
+    }
+
+    async function get_patient_data() {
+        const client = get_client()
+        const d = await client.patients.get_patients()
+        console.log(d);
+    }
 
     function changeSelectedUser(i){
         setData(users[i]);
@@ -56,6 +69,12 @@ function Home() {
         }
         return returnObj;
     }
+
+    useEffect(() => {
+        // Update the document title using the browser API
+        get_appointment_data();
+        get_patient_data();
+      });
 
     return (
         <Container>
