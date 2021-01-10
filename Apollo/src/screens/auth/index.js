@@ -1,22 +1,50 @@
-import React from 'react'
-import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react'
+import {
+    Alert,
+    useColorScheme,
+    StyleSheet,
+    TouchableOpacity,
+    View,
+} from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import Container from '@app/components/container'
-import Button from '@app/components/buttons'
-import Text, {
-    Header,
-    Subheader,
-    LinkText,
-    Subtext,
-} from '@app/components/text'
-import TextInput from '@app/components/text-input'
+import { Header, Subheader, Subtext } from '@app/components/text'
 
 import CreateAccount from './create-account'
 import Login from './login'
 
+import Color from '@app/theme/color.js'
+
 function Auth() {
+    const [screen, setScreen] = useState(false)
+    const navigation = useNavigation()
+
+    const colorScheme = useColorScheme()
+
+    const toggleScreen = () => {
+        setScreen(!screen)
+    }
+
+    const onSubmit = () => {
+        navigation.navigate('Home')
+    }
+
+    const onError = (err) => {
+        Alert.alert('Error', 'Invalid credentials')
+    }
+
     return (
-        <SafeAreaView style={styles.container}>
+        <>
+            <View
+                style={{
+                    backgroundColor:
+                        colorScheme === 'light'
+                            ? Color.light.sunColor
+                            : Color.dark.sunColor,
+                    ...styles.sun,
+                }}
+            />
             <Container style={styles.container}>
                 <View style={{ ...styles.promo }}>
                     <Header>Apollo</Header>
@@ -25,26 +53,35 @@ function Auth() {
                     <Subtext>Some Promotional Text Goes Here</Subtext>
                 </View>
 
-                <View>
-                    <TextInput
-                        placeholder="Email/Phone"
-                        style={styles.formItem}
+                {!screen ? (
+                    <Login
+                        styles={styles}
+                        onLinkPress={toggleScreen}
+                        onSubmit={onSubmit}
+                        onError={onError}
                     />
-                    <TextInput placeholder="Password" style={styles.formItem} />
-                    <Button style={styles.formItem}>
-                        <Subtext>Login</Subtext>
-                    </Button>
-
-                    <TouchableOpacity style={styles.textButton}>
-                        <LinkText>or sign up</LinkText>
-                    </TouchableOpacity>
-                </View>
+                ) : (
+                    <CreateAccount
+                        styles={styles}
+                        onLinkPress={toggleScreen}
+                        onSubmit={onSubmit}
+                        onError={onError}
+                    />
+                )}
             </Container>
-        </SafeAreaView>
+        </>
     )
 }
 
 const styles = StyleSheet.create({
+    sun: {
+        position: 'absolute',
+        top: -50,
+        left: -50,
+        borderRadius: 110,
+        width: 220,
+        height: 220,
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -54,6 +91,9 @@ const styles = StyleSheet.create({
     },
     formItem: {
         marginBottom: 10,
+    },
+    buttonText: {
+        color: Color.light.textColor,
     },
     textButton: {
         marginTop: 10,

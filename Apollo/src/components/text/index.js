@@ -1,15 +1,17 @@
 import React from 'react'
-import { Appearance, Text as RNText, StyleSheet } from 'react-native'
+import { useColorScheme, Text as RNText, StyleSheet } from 'react-native'
 
 import Color from '@app/theme/color.js'
 
 function Text(p) {
     const { style, ...props } = p
+    const colorScheme = useColorScheme()
+
     return (
         <RNText
             style={{
                 color:
-                    Appearance.getColorScheme() === 'light'
+                    colorScheme === 'light'
                         ? Color.light.textColor
                         : Color.dark.textColor,
                 ...styles.text,
@@ -24,11 +26,13 @@ function Text(p) {
 
 function Subtext(p) {
     const { style, ...props } = p
+    const colorScheme = useColorScheme()
+
     return (
         <Text
             style={{
                 color:
-                    Appearance.getColorScheme() === 'light'
+                    colorScheme === 'light'
                         ? Color.light.secondaryTextColor
                         : Color.dark.secondaryTextColor,
                 ...styles.subtext,
@@ -41,11 +45,13 @@ function Subtext(p) {
 
 function Header(p) {
     const { style, ...props } = p
+    const colorScheme = useColorScheme()
+
     return (
         <Text
             style={{
                 color:
-                    Appearance.getColorScheme() === 'light'
+                    colorScheme === 'light'
                         ? Color.light.textColor
                         : Color.dark.textColor,
                 ...styles.header,
@@ -58,11 +64,13 @@ function Header(p) {
 
 function Subheader(p) {
     const { style, ...props } = p
+    const colorScheme = useColorScheme()
+
     return (
         <Text
             style={{
                 color:
-                    Appearance.getColorScheme() === 'light'
+                    colorScheme === 'light'
                         ? Color.light.textColor
                         : Color.dark.textColor,
                 ...styles.subheader,
@@ -75,11 +83,13 @@ function Subheader(p) {
 
 function LinkText(p) {
     const { style, ...props } = p
+    const colorScheme = useColorScheme()
+
     return (
         <Text
             style={{
                 color:
-                    Appearance.getColorScheme() === 'light'
+                    colorScheme === 'light'
                         ? Color.light.linkTextColor
                         : Color.dark.linkTextColor,
                 ...style,

@@ -1,10 +1,13 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+
+import Data from './data'
+
+import Text, { Header, Subheader, Subtext } from '@app/components/text'
 
 function CheckIn() {
     return (
         <>
-            <Text>Hi</Text>
+            <Data />
         </>
     )
 }

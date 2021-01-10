@@ -1,8 +1,10 @@
 import express from 'express'
-import users from './users'
+import appointments from './appointments'
+import patients from './patients'
 
 let router = express.Router()
 
-router.use('/users', users)
+router.use('/appointments', appointments)
+router.use('/patients', patients)
 
 export default router
