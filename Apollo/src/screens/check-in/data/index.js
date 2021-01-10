@@ -27,6 +27,13 @@ function Data() {
         const healthKitOptions = {
             permissions: {
                 read: [
+                    Permissions.Steps,
+                    Permissions.StepCount,
+                    Permissions.BloodGlucose,
+                    Permissions.BloodPressureDiastolic,
+                    Permissions.BloodPressureSystolic,
+                    Permissions.HeartRate,
+                    Permissions.SleepAnalysis,
                     Permissions.DateOfBirth,
                     Permissions.Weight,
                     Permissions.Height,
@@ -49,15 +56,25 @@ function Data() {
 
     const getHealthData = async () => {
         await getPermissions()
-        AppleHealthKit.getLatestHeight(null, (err, result) => {
-            console.log(result)
-            // console.log(result.value)
-            Alert.alert(
-                'Retrieved Apple Health Data',
-                `Height: ${result.value}`
-            )
-            // finish()
-        })
+        AppleHealthKit.getDailyStepCountSamples(
+            {
+                startDate: new Date(2020, 1, 1).toISOString(),
+                endDate: new Date().toISOString(),
+            },
+            (err, result) => {
+                console.log(result)
+                Alert.alert('Step Count', 'Yay got data')
+            }
+        )
+        // AppleHealthKit.getLatestHeight(null, (err, result) => {
+        //     console.log(result)
+        //     // console.log(result.value)
+        //     Alert.alert(
+        //         'Retrieved Apple Health Data',
+        //         `Height: ${result.value}`
+        //     )
+        //     // finish()
+        // })
     }
 
     return (

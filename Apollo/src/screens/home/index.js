@@ -10,6 +10,8 @@ import {
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
+import { useStore } from 'react-redux'
+
 import Container, { ContainerFluid } from '@app/components/container'
 import { Subtext, Header } from '@app/components/text'
 
@@ -86,11 +88,16 @@ function Home() {
 
     const navigation = useNavigation()
 
+    const store = useStore()
+
     const scrollY = useRef(new Animated.Value(0)).current
 
     useEffect(() => {
         setUpcomingAppointments(DATA)
         setPastAppointments(DATA.slice(0, 6))
+
+        const user = store.getState().user
+        console.log('[user]', user)
     }, [])
 
     const ListHeaderComponent = () => (

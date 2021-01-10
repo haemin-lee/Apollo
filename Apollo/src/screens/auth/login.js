@@ -16,7 +16,7 @@ function Login({ styles, onLinkPress, onSubmit, onError }) {
             const client = get_client()
             const user = await get_client().patients.login(contact, pass)
             const id = user.data.id
-            onSubmit()
+            onSubmit(user)
         } catch (e) {
             console.log(e)
             onError(e)
