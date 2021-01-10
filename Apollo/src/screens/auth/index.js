@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {
+    Alert,
     useColorScheme,
     StyleSheet,
     TouchableOpacity,
@@ -29,6 +30,10 @@ function Auth() {
         navigation.navigate('Home')
     }
 
+    const onError = (err) => {
+        Alert.alert('Error', 'Invalid credentials')
+    }
+
     return (
         <>
             <View
@@ -53,12 +58,14 @@ function Auth() {
                         styles={styles}
                         onLinkPress={toggleScreen}
                         onSubmit={onSubmit}
+                        onError={onError}
                     />
                 ) : (
                     <CreateAccount
                         styles={styles}
                         onLinkPress={toggleScreen}
                         onSubmit={onSubmit}
+                        onError={onError}
                     />
                 )}
             </Container>
