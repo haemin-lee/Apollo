@@ -1,26 +1,31 @@
 import React from 'react'
-import { Appearance, TextInput as RNTextInput, StyleSheet } from 'react-native'
+import {
+    useColorScheme,
+    TextInput as RNTextInput,
+    StyleSheet,
+} from 'react-native'
 
 import Color from '@app/theme/color.js'
 
 function TextInput(p) {
     const { style, ...props } = p
+    const colorScheme = useColorScheme()
     return (
         <RNTextInput
             style={{
                 color:
-                    Appearance.getColorScheme() === 'light'
+                    colorScheme === 'light'
                         ? Color.light.textColor
                         : Color.dark.textColor,
                 backgroundColor:
-                    Appearance.getColorScheme() === 'light'
+                    colorScheme === 'light'
                         ? Color.light.textInputBackgroundColor
                         : Color.dark.textInputBackgroundColor,
                 ...styles.textInput,
                 ...style,
             }}
             placeholderTextColor={
-                Appearance.getColorScheme() === 'light'
+                colorScheme === 'light'
                     ? Color.light.secondaryTextColor
                     : Color.dark.secondaryTextColor
             }

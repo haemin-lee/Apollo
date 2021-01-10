@@ -1,11 +1,17 @@
 import React from 'react'
-import { Appearance, StyleSheet, TouchableOpacity, View } from 'react-native'
+import {
+    useColorScheme,
+    StyleSheet,
+    TouchableOpacity,
+    View,
+} from 'react-native'
 
 import Text, { Subtext } from '@app/components/text'
 
 import Color from '@app/theme/color.js'
 
 function TabBar(props) {
+    const colorScheme = useColorScheme()
     return (
         <View style={{ ...styles.tabBar, ...props.style }}>
             <TouchableOpacity
@@ -17,13 +23,13 @@ function TabBar(props) {
                     ...(!props.active
                         ? {
                               backgroundColor:
-                                  Appearance.getColorScheme() === 'light'
+                                  colorScheme === 'light'
                                       ? Color.light.activeTabBackgroundColor
                                       : Color.dark.activeTabBackgroundColor,
                           }
                         : {
                               backgroundColor:
-                                  Appearance.getColorScheme() === 'light'
+                                  colorScheme === 'light'
                                       ? Color.light.tabBackgroundColor
                                       : Color.dark.tabBackgroundColor,
                           }),
@@ -36,15 +42,13 @@ function TabBar(props) {
                             ...(!props.active
                                 ? {
                                       color:
-                                          Appearance.getColorScheme() ===
-                                          'light'
+                                          colorScheme === 'light'
                                               ? Color.light.activeTabTextColor
                                               : Color.dark.activeTabTextColor,
                                   }
                                 : {
                                       color:
-                                          Appearance.getColorScheme() ===
-                                          'light'
+                                          colorScheme === 'light'
                                               ? Color.light.secondaryTextColor
                                               : Color.dark.secondaryTextColor,
                                   }),
@@ -65,13 +69,13 @@ function TabBar(props) {
                     ...(props.active
                         ? {
                               backgroundColor:
-                                  Appearance.getColorScheme() === 'light'
+                                  colorScheme === 'light'
                                       ? Color.light.activeTabBackgroundColor
                                       : Color.dark.activeTabBackgroundColor,
                           }
                         : {
                               backgroundColor:
-                                  Appearance.getColorScheme() === 'light'
+                                  colorScheme === 'light'
                                       ? Color.light.tabBackgroundColor
                                       : Color.dark.tabBackgroundColor,
                           }),
@@ -84,15 +88,13 @@ function TabBar(props) {
                             ...(props.active
                                 ? {
                                       color:
-                                          Appearance.getColorScheme() ===
-                                          'light'
+                                          colorScheme === 'light'
                                               ? Color.light.activeTabTextColor
                                               : Color.dark.activeTabTextColor,
                                   }
                                 : {
                                       color:
-                                          Appearance.getColorScheme() ===
-                                          'light'
+                                          colorScheme === 'light'
                                               ? Color.light.secondaryTextColor
                                               : Color.dark.secondaryTextColor,
                                   }),

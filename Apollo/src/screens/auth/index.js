@@ -1,5 +1,11 @@
 import React, { useState } from 'react'
-import { Appearance, StyleSheet, TouchableOpacity, View } from 'react-native'
+import {
+    Alert,
+    useColorScheme,
+    StyleSheet,
+    TouchableOpacity,
+    View,
+} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import Container from '@app/components/container'
@@ -14,6 +20,8 @@ function Auth() {
     const [screen, setScreen] = useState(false)
     const navigation = useNavigation()
 
+    const colorScheme = useColorScheme()
+
     const toggleScreen = () => {
         setScreen(!screen)
     }
@@ -22,12 +30,16 @@ function Auth() {
         navigation.navigate('Home')
     }
 
+    const onError = (err) => {
+        Alert.alert('Error', 'Invalid credentials')
+    }
+
     return (
         <>
             <View
                 style={{
                     backgroundColor:
-                        Appearance.getColorScheme() === 'light'
+                        colorScheme === 'light'
                             ? Color.light.sunColor
                             : Color.dark.sunColor,
                     ...styles.sun,
@@ -46,12 +58,14 @@ function Auth() {
                         styles={styles}
                         onLinkPress={toggleScreen}
                         onSubmit={onSubmit}
+                        onError={onError}
                     />
                 ) : (
                     <CreateAccount
                         styles={styles}
                         onLinkPress={toggleScreen}
                         onSubmit={onSubmit}
+                        onError={onError}
                     />
                 )}
             </Container>

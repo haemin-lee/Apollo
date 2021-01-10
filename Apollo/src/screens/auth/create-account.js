@@ -5,13 +5,26 @@ import Button from '@app/components/buttons'
 import { LinkText, Subtext } from '@app/components/text'
 import TextInput from '@app/components/text-input'
 
-function CreateAccount({ styles, onLinkPress, onSubmit }) {
+import get_client from '@app/api/apollo.js'
+
+function CreateAccount({ styles, onLinkPress, onSubmit, onError }) {
     const [name, setName] = useState('')
     const [contact, setContact] = useState('')
     const [pass, setPass] = useState('')
 
-    const createAccount = () => {
-        onSubmit()
+    const createAccount = async () => {
+        try {
+            const client = get_client()
+            const user = await get_client().patients.create_account(
+                contact,
+                pass
+            )
+            const id = user.data.id
+            onSubmit()
+        } catch (e) {
+            console.log(e)
+            onError(e)
+        }
     }
 
     return (

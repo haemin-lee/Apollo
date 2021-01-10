@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import {
     Animated,
-    Appearance,
+    useColorScheme,
     FlatList,
     SafeAreaView,
     StyleSheet,
@@ -82,6 +82,8 @@ function Home() {
     const [upcomingAppointments, setUpcomingAppointments] = useState([])
     const [pastAppointments, setPastAppointments] = useState([])
 
+    const colorScheme = useColorScheme()
+
     const navigation = useNavigation()
 
     const scrollY = useRef(new Animated.Value(0)).current
@@ -138,7 +140,7 @@ function Home() {
                 style={{
                     ...styles.shadow,
                     backgroundColor:
-                        Appearance.getColorScheme() === 'light'
+                        colorScheme === 'light'
                             ? Color.light.backgroundColor
                             : Color.dark.backgroundColor,
                     shadowOpacity: scrollY.interpolate({

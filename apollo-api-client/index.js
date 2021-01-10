@@ -1,16 +1,14 @@
 const axios = require('axios')
 
-const api_function_names = ['appointments', 'patients']
-
 // Returns an API instance for Apollo
-// Inspired by code from https://github.com/Schmavery/facebook-chat-api/blob/master/index.js
 function get_client(token, options = {}) {
     // use for regular API
     let headers = {
-        'X-Authenticated-User': token,
         Accept: 'application/json',
         'Content-Type': 'application/json',
     }
+
+    if (token) headers['X-Authenticated-User'] = token
 
     const instance = axios.create({
         timeout: 10000,
@@ -18,9 +16,17 @@ function get_client(token, options = {}) {
     })
 
     let api = {}
-    api_function_names.map((name) => {
-        api[name] = require(`./src/${name}`)(instance, options)
-    })
+
+    // Authenticated routes
+    // Removed array to support React Native's Metro bundler
+    if (token) {
+        api.appointments = require('./src/appointments')(instance, options)
+        api.patients = require('./src/patients')(instance, options)
+    }
+    // Unauthenticated routes
+    else {
+        api.patients = require('./src/patients')(instance, options)
+    }
 
     return api
 }

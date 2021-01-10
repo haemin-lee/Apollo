@@ -2468,12 +2468,6 @@
     "normalize-path" "^3.0.0"
     "picomatch" "^2.0.4"
 
-"apollo-api-client@npm:drchrono-api-client@^1.0.0":
-  "resolved" "file:../apollo-api-client"
-  "version" "1.0.0"
-  dependencies:
-    "axios" "^0.21.1"
-
 "aproba@^1.1.1":
   "integrity" "sha512-Y9J6ZjXtoYh8RnXVCMOU/ttDmk1aBjunq9vO0ta5x85WDQiQfUF9sIPBITdbiiIVcBo03Hi3jMxigBtsddlXRw=="
   "resolved" "https://registry.npmjs.org/aproba/-/aproba-1.2.0.tgz"
@@ -4515,7 +4509,7 @@
   "resolved" "https://registry.npmjs.org/dotenv/-/dotenv-8.2.0.tgz"
   "version" "8.2.0"
 
-"drchrono-api-client@file:..\\drchrono-api-client":
+"drchrono-api-client@file:..\\apollo-api-client":
   "resolved" "file:../drchrono-api-client"
   "version" "1.0.0"
   dependencies:

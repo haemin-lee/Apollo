@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    Appearance,
+    useColorScheme,
     StyleSheet,
     Pressable,
     TouchableOpacity,
@@ -27,6 +27,8 @@ const MONTHS = [
 ]
 
 function PastCard(props) {
+    const colorScheme = useColorScheme()
+
     const date = new Date(props.data.scheduled_time)
     // Imagine writing date logic yourself bc you're dumb
     const month = MONTHS[date.getMonth()]
@@ -47,7 +49,7 @@ function PastCard(props) {
                 <View
                     style={{
                         backgroundColor:
-                            Appearance.getColorScheme() === 'light'
+                            colorScheme === 'light'
                                 ? Color.light.cardColor
                                 : Color.dark.cardColor,
                         ...styles.card,
@@ -88,6 +90,8 @@ function PastCard(props) {
 }
 
 function Card(props) {
+    const colorScheme = useColorScheme()
+
     const date = new Date(props.data.scheduled_time)
     // Imagine writing date logic yourself bc you're dumb
     const month = MONTHS[date.getMonth()]
@@ -108,7 +112,7 @@ function Card(props) {
                 <View
                     style={{
                         backgroundColor:
-                            Appearance.getColorScheme() === 'light'
+                            colorScheme === 'light'
                                 ? Color.light.cardColor
                                 : Color.dark.cardColor,
                         ...styles.card,

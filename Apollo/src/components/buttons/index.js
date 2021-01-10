@@ -1,14 +1,15 @@
 import React from 'react'
-import { Appearance, StyleSheet, TouchableOpacity } from 'react-native'
+import { useColorScheme, StyleSheet, TouchableOpacity } from 'react-native'
 
 import Color from '@app/theme/color.js'
 
 function Button(props) {
+    const colorScheme = useColorScheme()
     return (
         <TouchableOpacity
             style={{
                 backgroundColor:
-                    Appearance.getColorScheme() === 'light'
+                    colorScheme === 'light'
                         ? Color.light.accentColor
                         : Color.dark.accentColor,
                 ...styles.button,
@@ -22,15 +23,16 @@ function Button(props) {
 }
 
 function RoundButton(props) {
+    const colorScheme = useColorScheme()
     return (
         <Button
             style={{
                 color:
-                    Appearance.getColorScheme() === 'light'
+                    colorScheme === 'light'
                         ? Color.light.textColor
                         : Color.dark.textColor,
                 backgroundColor:
-                    Appearance.getColorScheme() === 'light'
+                    colorScheme === 'light'
                         ? Color.light.backgroundColor
                         : Color.dark.backgroundColor,
                 ...styles.round,
@@ -44,6 +46,7 @@ function RoundButton(props) {
 }
 
 function IconButton(props) {
+    const colorScheme = useColorScheme()
     return (
         <Button
             style={{ ...styles.icon, ...props.style }}
