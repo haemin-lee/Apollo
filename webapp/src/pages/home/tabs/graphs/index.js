@@ -1,6 +1,7 @@
 // Future feature: import from Excel
 import { useState } from 'react'
 import { ResponsiveLine } from '@nivo/line'
+
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -8,6 +9,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+
+import DatePicker from "react-datepicker"; 
+import "react-datepicker/dist/react-datepicker.css";
+
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,16 +27,46 @@ const useStyles = makeStyles((theme) => ({
   }));
   
 
+
 // Prob better way to do prop mapping
 function Graphs(props) {
 
+    const [startDate, setStartDate] = useState(new Date("2021/01/08"));
+    const [endDate, setEndDate] = useState(new Date("2021/01/10"));
+
+    function dateRange() {
+        
+        return (
+          <>
+            <DatePicker
+              selected={startDate}
+              onChange={date => setStartDate(date)}
+              selectsStart
+              startDate={startDate}
+              endDate={endDate}
+            />
+            <DatePicker
+              selected={endDate}
+              onChange={date => setEndDate(date)}
+              selectsEnd
+              startDate={startDate}
+              endDate={endDate}
+              minDate={startDate}
+            />
+          </>
+        );
+      };
+
 
     const classes = useStyles();
-    const [graphtype, setGraphType] = React.useState('');
+    const [graphtype, setGraphType] = React.useState(0);
   
     const handleChange = (event) => {
       setGraphType(event.target.value);
     };
+
+    const [value, setValue] = React.useState([null, null]);
+
 
     const MyResponsiveLine = ({ data }) => (
         <ResponsiveLine
@@ -95,10 +131,11 @@ function Graphs(props) {
 )
 
     return (
-        <div style={{height:300}}>
 
-        <MyResponsiveLine data={props.userData.data}/>
-    
+        <div>
+        
+        <div>
+
         <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">Graph Type</InputLabel>
         <Select
@@ -107,15 +144,30 @@ function Graphs(props) {
           value={graphtype}
           onChange={handleChange}
         >
-          <MenuItem value={"Step Count"}>Step Count</MenuItem>
-          <MenuItem value={"Heart Rate"}>Heart Rate</MenuItem>
-          <MenuItem value={"Blood Pressure"}>Blood Pressure</MenuItem>
-          <MenuItem value={"Blood Glucose"}>Blood Glucose</MenuItem>
-          <MenuItem value={"Sleep"}>Sleep</MenuItem>
+          <MenuItem value={0}>Step Count</MenuItem>
+          <MenuItem value={1}>Heart Rate</MenuItem>
+          <MenuItem value={2}>Blood Pressure</MenuItem>
+          <MenuItem value={3}>Blood Glucose</MenuItem>
+          <MenuItem value={4}>Sleep</MenuItem>
         </Select>
-      </FormControl>
+        </FormControl>
 
         </div>
+
+        <div>
+        
+        {dateRange()}
+
+        </div>
+
+
+        <div style={{height:300}}>
+
+        <MyResponsiveLine data={props.userData.data[graphtype]}/>
+
+        </div>
+        </div>
+
     );
 }
 

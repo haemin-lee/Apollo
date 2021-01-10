@@ -8,7 +8,7 @@ import Tabbar from './home';
 //import { ResponsiveLine } from '@nivo/line'
 
 class User {
-    constructor(name, age, height, weight, biosex, DOB, BMI, BodyFat, notes, stepData, HeartData, BPData, BGData, SleepData)
+    constructor(name, age, height, weight, biosex, DOB, BMI, BodyFat, notes, StepData, HeartData, BPData, BGData, SleepData)
     {
         this.name = name;
         this.age = age;
@@ -19,11 +19,12 @@ class User {
         this.BMI = BMI;
         this.BodyFat = BodyFat;
         this.notes = notes;
-        this.stepData = stepData;
+        this.StepData = StepData;
         this.HeartData = HeartData;
         this.BPData = BPData;
         this.BGData = BGData;
         this.SleepData = SleepData;
+        this.data = [StepData,HeartData,BPData,BGData,SleepData];
     }
 }
 
@@ -145,7 +146,10 @@ let BaranData = [{
   }];
 
 
-let users = [new User("Jenny", JennyData, 23, 12), new User("Devin", DevinData, 42, 12), new User("Max", MaxData, 32, 12), new User("Baran", BaranData, 12, 21)];
+//constructor(name, age, height, weight, biosex, DOB, BMI, BodyFat, notes, stepData, HeartData, BPData, BGData, SleepData)
+
+let users = [new User("Jenny", 20, 43, 32, "Female", "6/30/2000", 43, 12, "Very cool", JennyData, MaxData, JennyData, MaxData, JennyData), 
+             new User("Devin", 20, 54, 12, "Male", "10/42/2000", 76, 49, "Very epic", DevinData, BaranData, DevinData, BaranData, DevinData)];
 let activeUser = users[0];
 
 // figure styles out later...
