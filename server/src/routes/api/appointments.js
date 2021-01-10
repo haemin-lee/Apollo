@@ -3,8 +3,6 @@ import express from 'express'
 import Appointment from '@app/models/appointment'
 import Document from '@app/models/document'
 
-// import documents from './documents'
-
 let router = express.Router()
 
 router.get('/', async (req, res, next) => {
@@ -20,7 +18,6 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id/documents', async (req, res, next) => {
     const id = req.params.id
-    console.log(id)
     try {
         const documents = await Document.find({
             appointment: id,
