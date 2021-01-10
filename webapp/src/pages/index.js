@@ -10,19 +10,142 @@ import get_client from '../app/apiConnector';
 //import { ResponsiveLine } from '@nivo/line'
 
 class User {
-    constructor(name, data, height, weight)
+    constructor(name, age, height, weight, biosex, DOB, BMI, BodyFat, notes, stepData, HeartData, BPData, BGData, SleepData)
     {
         this.name = name;
-        this.data = data;
+        this.age = age;
         this.height = height;
         this.weight = weight;
+        this.biosex = biosex;
+        this.DOB = DOB;
+        this.BMI = BMI;
+        this.BodyFat = BodyFat;
+        this.notes = notes;
+        this.stepData = stepData;
+        this.HeartData = HeartData;
+        this.BPData = BPData;
+        this.BGData = BGData;
+        this.SleepData = SleepData;
     }
 }
 
-let JennyData = [1, 2, 3, 4, 5];
-let DevinData = [1, 2, 3, 4, 5];
-let MaxData = [1, 2, 3, 4, 5];
-let BaranData = [1, 2, 3, 4, 5];
+let JennyData = [{
+    "id": "Jenny",
+    "data": [
+      {
+        "x": 30,
+        "y": 90
+      },
+      {
+        "x": 60,
+        "y": 120
+      },
+      {
+        "x": 90,
+        "y": 86
+      },
+      {
+        "x": 120,
+        "y": 120
+      },
+      {
+        "x": 150,
+        "y": 99
+      },
+      {
+        "x": 180,
+        "y": 102
+      }
+    ]
+  }];
+let DevinData = [{
+    "id": "Devin",
+    "data": [
+      {
+        "x": 30,
+        "y": 101
+      },
+      {
+        "x": 60,
+        "y": 150
+      },
+      {
+        "x": 90,
+        "y": 70
+      },
+      {
+        "x": 120,
+        "y": 80
+      },
+      {
+        "x": 150,
+        "y": 90
+      },
+      {
+        "x": 180,
+        "y": 102
+      }
+    ]
+  }];
+let MaxData = [{
+    "id": "Max",
+    "data": [
+      {
+        "x": 30,
+        "y": 120
+      },
+      {
+        "x": 60,
+        "y": 140
+      },
+      {
+        "x": 90,
+        "y": 110
+      },
+      {
+        "x": 120,
+        "y": 129
+      },
+      {
+        "x": 150,
+        "y": 102
+      },
+      {
+        "x": 180,
+        "y": 98
+      }
+    ]
+  }];
+let BaranData = [{
+    "id": "Baran",
+    "data": [
+      {
+        "x": 30,
+        "y": 130
+      },
+      {
+        "x": 60,
+        "y": 121
+      },
+      {
+        "x": 90,
+        "y": 117
+      },
+      {
+        "x": 120,
+        "y": 87
+      },
+      {
+        "x": 150,
+        "y": 90
+      },
+      {
+        "x": 180,
+        "y": 113
+      }
+    ]
+  }];
+
 
 let users = [new User("Jenny", JennyData, 23, 12), new User("Devin", DevinData, 42, 12), new User("Max", MaxData, 32, 12), new User("Baran", BaranData, 12, 21)];
 let activeUser = users[0];
