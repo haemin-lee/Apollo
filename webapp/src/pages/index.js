@@ -34,7 +34,8 @@ function Home() {
     async function get_appointment_data() {
         const client = get_client()
         const d = await client.appointments.get_appointments()
-        console.log(d);
+
+        console.log(d[0]["data"]["patient"]);
     }
 
     async function get_patient_data() {
@@ -74,7 +75,8 @@ function Home() {
         // Update the document title using the browser API
         get_appointment_data();
         get_patient_data();
-      });
+    });
+    //}, []);
 
     return (
         <Container>
