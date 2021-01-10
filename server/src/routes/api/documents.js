@@ -6,6 +6,7 @@ let router = express.Router()
 
 router.get('/', async (req, res, next) => {
     const id = req.params.id
+    console.log(id)
     try {
         const documents = await Document.find({
             appointment: id,

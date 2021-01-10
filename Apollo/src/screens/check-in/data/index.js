@@ -7,7 +7,9 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+
+import { useStore } from 'react-redux'
 
 import AppleHealthKit from 'rn-apple-healthkit'
 
@@ -19,8 +21,13 @@ import { RoundButton } from '@app/components/buttons'
 
 import Color from '@app/theme/color.js'
 
+import get_client from '@app/api/apollo.js'
+
 function Data() {
     const navigation = useNavigation()
+    const route = useRoute()
+
+    const store = useStore()
 
     const getPermissions = async () => {
         const Permissions = AppleHealthKit.Constants.Permissions
@@ -51,18 +58,33 @@ function Data() {
     }
 
     const finish = () => {
-        navigation.navigate('Auth')
+        navigation.goBack()
     }
 
     const getHealthData = async () => {
+        const user = store.getState().user
+        const client = get_client(user.data.id)
         await getPermissions()
         AppleHealthKit.getDailyStepCountSamples(
             {
                 startDate: new Date(2020, 1, 1).toISOString(),
                 endDate: new Date().toISOString(),
             },
-            (err, result) => {
-                console.log(result)
+            async (err, result) => {
+                if (err) return Alert.alert('Error', 'Something bad happened')
+                // post data
+                const item = route.params
+                const doc = {
+                    appointment: item.id,
+                    patient: item.data.patient,
+                    name: 'Steps',
+                    data: result,
+                    type: 'LINE_GRAPH',
+                }
+                const res = await client.appointments.post_appointment_document(
+                    item.id,
+                    doc
+                )
                 Alert.alert('Step Count', 'Yay got data')
             }
         )

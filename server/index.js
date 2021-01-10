@@ -12,7 +12,7 @@ const PORT = config.PORT
 
 const app = express()
 
-app.use(express.json())
+app.use(express.json({ limit: '5mb' }))
 
 // set up mongodb
 mongoose.connect(config.db_connection_url, {

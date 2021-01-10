@@ -20,6 +20,8 @@ import Color from '@app/theme/color.js'
 import TabBar from './tab-bar'
 import Card, { PastCard } from './card'
 
+import get_client from '@app/api/apollo.js'
+
 const DATA = [
     {
         id: 0,
@@ -93,11 +95,26 @@ function Home() {
     const scrollY = useRef(new Animated.Value(0)).current
 
     useEffect(() => {
-        setUpcomingAppointments(DATA)
-        setPastAppointments(DATA.slice(0, 6))
+        const getAppointments = async () => {
+            const user = store.getState().user
+            const client = get_client(user.data.id)
+            const appointmentsData = await client.appointments.get_appointments()
+            const appointments = appointmentsData.map((appointment) => ({
+                id: appointment.data.id,
+                name: 'Dr Eduardo Saverin',
+                appointment: 'Radiology',
+                address: 'Somewhere Road, CA',
+                scheduled_time: appointment.data.scheduled_time,
+                data: appointment.data,
+            }))
 
-        const user = store.getState().user
-        console.log('[user]', user)
+            setUpcomingAppointments(appointments)
+        }
+
+        getAppointments()
+
+        // TODO: separate past appointments
+        setPastAppointments(DATA.slice(0, 6))
     }, [])
 
     const ListHeaderComponent = () => (
@@ -134,7 +151,7 @@ function Home() {
             <Card
                 data={item}
                 onPress={() => {
-                    navigation.navigate('Check In')
+                    navigation.navigate('Check In', item)
                 }}
             />
         ) : (

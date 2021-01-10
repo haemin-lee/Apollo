@@ -8,8 +8,8 @@ import TextInput from '@app/components/text-input'
 import get_client from '@app/api/apollo.js'
 
 function Login({ styles, onLinkPress, onSubmit, onError }) {
-    const [contact, setContact] = useState('')
-    const [pass, setPass] = useState('')
+    const [contact, setContact] = useState('test@test.com')
+    const [pass, setPass] = useState('foobar')
 
     const login = async () => {
         try {
