@@ -1,5 +1,5 @@
-[
-  {
+
+let JennyData = [{
     "id": "Jenny",
     "data": [
       {
@@ -27,8 +27,8 @@
         "y": 102
       }
     ]
-  },
-  {
+  }];
+let DevinData = [{
     "id": "Devin",
     "data": [
       {
@@ -56,8 +56,8 @@
         "y": 102
       }
     ]
-  },
-  {
+  }];
+let MaxData = [{
     "id": "Max",
     "data": [
       {
@@ -85,8 +85,8 @@
         "y": 98
       }
     ]
-  },
-  {
+  }];
+let BaranData = [{
     "id": "Baran",
     "data": [
       {
@@ -114,6 +114,4 @@
         "y": 113
       }
     ]
-  }
-  
-]
+  }];

@@ -14,7 +14,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-
+let graphdata = {};
+let ticks = [];
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -26,13 +27,25 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
   
-
-
+  const datesAreOnSameDay = (first, second) => (
+    first.getFullYear() === second.getFullYear() &&
+    first.getMonth() === second.getMonth() &&
+    first.getDate() === second.getDate()
+  )
+    
 // Prob better way to do prop mapping
 function Graphs(props) {
 
-    const [startDate, setStartDate] = useState(new Date("2021/01/08"));
-    const [endDate, setEndDate] = useState(new Date("2021/01/10"));
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  
+  today = mm + '/' + dd + '/' + yyyy;
+
+    const [startDate, setStartDate] = useState(new Date(today));
+    const [endDate, setEndDate] = useState(new Date(today));
 
     function dateRange() {
         
@@ -58,11 +71,83 @@ function Graphs(props) {
       };
 
 
+    function setGraph(){
+      let currTime = props.userData.StepData[0].startDate;
+      let sum = props.userData.StepData[0].value;
+      let newObj = [];
+      
+        for (let j = 1; j < props.userData.StepData.length; j++)
+        {
+        
+        
+
+        if ((!datesAreOnSameDay(new Date(currTime), new Date(props.userData.StepData[j].startDate))))
+          {
+              newObj.push({
+              x: new Date(currTime).toDateString(),
+              y: sum })
+          currTime = props.userData.StepData[j].startDate
+          sum = props.userData.StepData[j].value
+          }
+          else
+            sum += props.userData.StepData[j].value
+        }
+
+      
+
+      let graphObj = [];
+      for (let i = 0; i < newObj.length; i++)
+        {
+
+          if (new Date(newObj[i].x) >= startDate && new Date(newObj[i].x) <= endDate)
+          {
+            graphObj.push(newObj[i])
+          }
+        }
+      
+      
+
+      if (graphObj.length > 8)
+      {
+      ticks = [];
+      let shown1 = 0;
+      let shown2 = Math.floor((graphObj.length - 1) / 4)
+      let shown3 = Math.floor((graphObj.length - 1) / 2)
+      let shown4 = Math.floor((graphObj.length - 1) / 4 * 3)
+      let shown5 = (graphObj.length - 1)
+
+      ticks = [graphObj[shown1].x, graphObj[shown2].x, graphObj[shown3].x, graphObj[shown4].x, graphObj[shown5].x];
+      console.log(ticks);
+      }
+      else
+      {
+        ticks = [];
+        for (let i = 0; i < graphObj.length; i++)
+        {
+          ticks.push(graphObj[i].x)
+        }
+        console.log(ticks)
+      }
+
+      
+    
+      
+      graphdata = [{data: graphObj.reverse()}];
+    }
+
+      
+      
+
     const classes = useStyles();
     const [graphtype, setGraphType] = React.useState(0);
   
     const handleChange = (event) => {
       setGraphType(event.target.value);
+
+      if (event.target.value == 0)
+      {
+        
+      }
     };
 
     const [value, setValue] = React.useState([null, null]);
@@ -82,16 +167,17 @@ function Graphs(props) {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'Minute',
+                legend: 'Date',
                 legendOffset: 36,
-                legendPosition: 'middle'
+                legendPosition: 'middle',
+                tickValues: ticks
             }}
             axisLeft={{
                 orient: 'left',
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'BPM',
+                legend: 'Steps',
                 legendOffset: -40,
                 legendPosition: 'middle'
             }}
@@ -163,7 +249,10 @@ function Graphs(props) {
 
         <div style={{height:300}}>
 
-        <MyResponsiveLine data={props.userData.data[graphtype]}/>
+    
+        <MyResponsiveLine data={graphdata}/>
+        {setGraph()}
+
 
         </div>
         </div>

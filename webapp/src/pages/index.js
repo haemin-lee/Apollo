@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Tabbar from './home';
 import get_client from '../app/apiConnector';
+import DevinStepData from './DevinStepData.json'
 // ^^ change this relative path 
 //import { ResponsiveLine } from '@nivo/line'
 
@@ -30,132 +31,16 @@ class User {
     }
 }
 
-let JennyData = [{
-    "id": "Jenny",
-    "data": [
-      {
-        "x": 30,
-        "y": 90
-      },
-      {
-        "x": 60,
-        "y": 120
-      },
-      {
-        "x": 90,
-        "y": 86
-      },
-      {
-        "x": 120,
-        "y": 120
-      },
-      {
-        "x": 150,
-        "y": 99
-      },
-      {
-        "x": 180,
-        "y": 102
-      }
-    ]
-  }];
-let DevinData = [{
-    "id": "Devin",
-    "data": [
-      {
-        "x": 30,
-        "y": 101
-      },
-      {
-        "x": 60,
-        "y": 150
-      },
-      {
-        "x": 90,
-        "y": 70
-      },
-      {
-        "x": 120,
-        "y": 80
-      },
-      {
-        "x": 150,
-        "y": 90
-      },
-      {
-        "x": 180,
-        "y": 102
-      }
-    ]
-  }];
-let MaxData = [{
-    "id": "Max",
-    "data": [
-      {
-        "x": 30,
-        "y": 120
-      },
-      {
-        "x": 60,
-        "y": 140
-      },
-      {
-        "x": 90,
-        "y": 110
-      },
-      {
-        "x": 120,
-        "y": 129
-      },
-      {
-        "x": 150,
-        "y": 102
-      },
-      {
-        "x": 180,
-        "y": 98
-      }
-    ]
-  }];
-let BaranData = [{
-    "id": "Baran",
-    "data": [
-      {
-        "x": 30,
-        "y": 130
-      },
-      {
-        "x": 60,
-        "y": 121
-      },
-      {
-        "x": 90,
-        "y": 117
-      },
-      {
-        "x": 120,
-        "y": 87
-      },
-      {
-        "x": 150,
-        "y": 90
-      },
-      {
-        "x": 180,
-        "y": 113
-      }
-    ]
-  }];
-
 
 //constructor(name, age, height, weight, biosex, DOB, BMI, BodyFat, notes, stepData, HeartData, BPData, BGData, SleepData)
 
-let users = [new User("Jenny", 20, 43, 32, "Female", "6/30/2000", 43, 12, "Very cool", JennyData, MaxData, JennyData, MaxData, JennyData), 
-             new User("Devin", 20, 54, 12, "Male", "10/42/2000", 76, 49, "Very epic", DevinData, BaranData, DevinData, BaranData, DevinData)];
-let activeUser = users[0];
-
 // figure styles out later...
 function Home() {
+
+    let users = [new User("Jenny", 20, 43, 32, "Female", "6/30/2000", 43, 12, "Very cool", DevinStepData, DevinStepData, DevinStepData, DevinStepData, DevinStepData), 
+                 new User("Devin", 20, 54, 12, "Male", "10/2/2000", 76, 49, "Very epic", DevinStepData, DevinStepData, DevinStepData, DevinStepData, DevinStepData)];
+    let activeUser = users[0];
+
 
     const [data, setData] = useState(activeUser);
 
@@ -198,10 +83,13 @@ function Home() {
         return returnObj;
     }
 
+    
+
     useEffect(() => {
         // Update the document title using the browser API
         get_appointment_data();
         get_patient_data();
+
       });
 
     return (
