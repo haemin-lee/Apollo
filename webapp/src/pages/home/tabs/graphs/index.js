@@ -1,56 +1,3 @@
-<<<<<<< HEAD
-import { useState } from 'react'
-let example_data = [
-    {
-        name: 'Congress Bill',
-    },
-    {
-        name: 'Some Fancy Bill 2',
-    },
-]
-
-function Bill(props) {
-    return (
-        <div className="row">
-            <div className="col-8">
-                <p>{props.name}</p>
-            </div>
-            <div className="col-4">
-                <p>
-                    <a href="#">Translate</a>
-                </p>
-            </div>
-        </div>
-    )
-}
-
-function Pill(props) {
-    return (
-        <div className="d-flex ml-3 mr-3">
-            <div className="loan-pill">{props.children}</div>
-        </div>
-    )
-}
-
-function Graphs(props) {
-    const [bills, setBills] = useState(example_data)
-    return (
-        <>
-            <h4>Your Information</h4>
-            <div className="row">
-                <Pill># of workers: {30}</Pill>
-                <Pill>Location: {'LA, CA'}</Pill>
-                <Pill>Revenue: {'look annually'}</Pill>
-            </div>
-            {bills.map((bill) => {
-                return <Bill name={bill.name} />
-            })}
-        </>
-    )
-}
-
-export default Graphs
-=======
 // Future feature: import from Excel
 import { useState } from 'react'
 import { ResponsiveLine } from '@nivo/line'
@@ -315,4 +262,3 @@ function Graphs(props) {
 
 export default Graphs
 
->>>>>>> 80426730e0ccc1ae8a7add6c99f4cde3c280d837
