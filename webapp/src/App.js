@@ -138,7 +138,7 @@ function App() {
                         <Route path="/">
                             <div className="hero">
                                 <TopNav />
-                                <Splash />
+                                <Home />
                             </div>
                         </Route>
                     )}
