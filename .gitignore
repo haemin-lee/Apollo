@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 node_modules
 .env
 google-key.json
 .watchmanconfig
 .eslintcache
+=======
+node_modules
+.env
+google-key.json
+.watchmanconfig
+.eslintcache
+>>>>>>> 80426730e0ccc1ae8a7add6c99f4cde3c280d837
