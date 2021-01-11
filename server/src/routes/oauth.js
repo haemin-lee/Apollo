@@ -26,6 +26,8 @@ router.get('/token', async (req, res, next) => {
 
         res.json(data)
     } catch (err) {
+        console.log("bitch");
+        console.log(err);
         next(err)
     }
 })
