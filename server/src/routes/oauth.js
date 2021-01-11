@@ -19,7 +19,7 @@ router.get('/token', async (req, res, next) => {
     }
 
     const headers = {
-        'Content-Type': 'application/x-www-urlencoded;charset=utf-8',
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
     }
 
     try {
@@ -36,6 +36,7 @@ router.get('/token', async (req, res, next) => {
 
         res.json(data)
     } catch (err) {
+        console.log(err)
         next(err)
     }
 })
