@@ -13,6 +13,8 @@ import Text, { Header, Subtext } from '@app/components/text'
 import Container from '@app/components/container'
 import { RoundButton } from '@app/components/buttons'
 
+import LottieView from 'lottie-react-native'
+
 import { launchImageLibrary } from 'react-native-image-picker'
 
 import Color from '@app/theme/color.js'
@@ -60,6 +62,16 @@ function Photos() {
     return (
         <SafeAreaView style={styles.safeAreaView}>
             <Container style={styles.container}>
+                <LottieView
+                    source={require('./photo.json')}
+                    autoPlay={true}
+                    loop={true}
+                    style={{
+                        width: 300,
+                        height: 300,
+                        alignSelf: 'center',
+                    }}
+                />
                 <Header>Photos</Header>
                 <Subtext style={styles.promo}>
                     Adding some images might help the doctor diagnose your
