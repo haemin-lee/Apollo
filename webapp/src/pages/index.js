@@ -7,7 +7,10 @@ import Col from 'react-bootstrap/Col';
 import Tabbar from './home';
 import get_client from '../app/apiConnector';
 import DevinStepData from './DevinStepData.json'
+<<<<<<< HEAD
 // ^^ change this relative path 
+=======
+>>>>>>> 76972c5aa5bd81c19276ce9531a88300e9bfbec5
 //import { ResponsiveLine } from '@nivo/line'
 
 class User {
@@ -31,22 +34,32 @@ class User {
     }
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 76972c5aa5bd81c19276ce9531a88300e9bfbec5
 //constructor(name, age, height, weight, biosex, DOB, BMI, BodyFat, notes, stepData, HeartData, BPData, BGData, SleepData)
 
 // figure styles out later...
 function Home() {
+<<<<<<< HEAD
 
     let users = [new User("Jenny", 20, 43, 32, "Female", "6/30/2000", 43, 12, "Very cool", DevinStepData, DevinStepData, DevinStepData, DevinStepData, DevinStepData), 
                  new User("Devin", 20, 54, 12, "Male", "10/2/2000", 76, 49, "Very epic", DevinStepData, DevinStepData, DevinStepData, DevinStepData, DevinStepData)];
     let activeUser = users[0];
 
 
+=======
+    let users = [new User("Jenny", 20, 43, 32, "Female", "6/30/2000", 43, 12, "Very cool", DevinStepData, DevinStepData, DevinStepData, DevinStepData, DevinStepData), 
+    new User("Devin", 20, 54, 12, "Male", "10/2/2000", 76, 49, "Very epic", DevinStepData, DevinStepData, DevinStepData, DevinStepData, DevinStepData)];
+    let activeUser = users[0];
+>>>>>>> 76972c5aa5bd81c19276ce9531a88300e9bfbec5
     const [data, setData] = useState(activeUser);
 
     async function get_appointment_data() {
         const client = get_client()
         const d = await client.appointments.get_appointments()
+<<<<<<< HEAD
         console.log(d);
     }
 
@@ -60,6 +73,20 @@ function Home() {
         
         const client = get_client()
         const d = await client.appointments.get_appointment_documents(id)
+=======
+    }
+
+    async function get_appointment_document(id) {
+        
+        const client = get_client()
+        const d = await client.appointments.get_appointment_documents(id)
+        console.log(d);
+    }
+
+    async function get_patient_data() {
+        const client = get_client()
+        const d = await client.patients.get_patients()
+>>>>>>> 76972c5aa5bd81c19276ce9531a88300e9bfbec5
         console.log(d);
     }
 
@@ -90,15 +117,23 @@ function Home() {
         return returnObj;
     }
 
+<<<<<<< HEAD
     
 
+=======
+>>>>>>> 76972c5aa5bd81c19276ce9531a88300e9bfbec5
     useEffect(() => {
         // Update the document title using the browser API
         const id = "163994148";
         get_appointment_data();
         get_patient_data();
         get_appointment_document(id);
+<<<<<<< HEAD
       });
+=======
+    });
+    //}, []);
+>>>>>>> 76972c5aa5bd81c19276ce9531a88300e9bfbec5
 
     return (
         <Container>
