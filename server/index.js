@@ -19,6 +19,8 @@ mongoose.connect(config.db_connection_url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
+    user: config.db_username,
+    pass: config.db_password,
 })
 
 // Handle OAuth

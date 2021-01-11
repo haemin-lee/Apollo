@@ -1,4 +1,11 @@
-import { BrowserRouter as Router, Switch, Route, Link, useHistory, useLocation, } from 'react-router-dom'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useHistory,
+    useLocation,
+} from 'react-router-dom'
 import { Navbar, Nav } from 'react-bootstrap'
 import Home from './pages'
 import Splash from './pages/splash'
@@ -18,32 +25,32 @@ function TopNav(props) {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 {!props.user ? (
-                        <Nav className="ml-auto">
-                            <Nav.Link href="https://drchrono.com/o/authorize/?redirect_uri=http://localhost:3000/login&response_type=code&client_id=dkzdPUi9XUYshx0batJXVE4zm8enBvFqlZCR0G2s">
-                                <p
-                                    style={{
-                                        float: 'left',
-                                        marginTop: 10,
-                                        color: 'black',
-                                    }}
-                                >
-                                    Sign in
-                                </p>
-                            </Nav.Link>
-                        </Nav>
-                    ) : (
-                        <Nav className="ml-auto">
-                            <Nav.Link
-                                href="/"
-                                onClick={(e) => {
-                                    localStorage.clear()
-                                    dispatch(logout_user())
+                    <Nav className="ml-auto">
+                        <Nav.Link href="https://drchrono.com/o/authorize/?redirect_uri=http://localhost:3000/login&response_type=code&client_id=dkzdPUi9XUYshx0batJXVE4zm8enBvFqlZCR0G2s">
+                            <p
+                                style={{
+                                    float: 'left',
+                                    marginTop: 10,
+                                    color: 'black',
                                 }}
                             >
-                                Logout {props.user.firstName}
-                            </Nav.Link>
-                        </Nav>
-                    )}
+                                Sign in
+                            </p>
+                        </Nav.Link>
+                    </Nav>
+                ) : (
+                    <Nav className="ml-auto">
+                        <Nav.Link
+                            href="/"
+                            onClick={(e) => {
+                                localStorage.clear()
+                                dispatch(logout_user())
+                            }}
+                        >
+                            Logout {props.user.firstName}
+                        </Nav.Link>
+                    </Nav>
+                )}
             </Navbar.Collapse>
         </Navbar>
     )
@@ -94,9 +101,7 @@ function Login() {
     )
 }
 
-
 function App() {
-
     const store = useStore()
     const dispatch = useDispatch()
     const [user, setUser] = useState(null)
@@ -118,7 +123,6 @@ function App() {
             unsubscribe()
         }
     }, [dispatch, store])
-
 
     return (
         <>
@@ -142,7 +146,6 @@ function App() {
                             </div>
                         </Route>
                     )}
-                    
                 </Switch>
             </Router>
         </>
@@ -158,3 +161,4 @@ function AppContainer() {
 }
 
 export default AppContainer
+

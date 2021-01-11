@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
-import { useStore } from 'react-redux'
+import { useDispatch, useStore } from 'react-redux'
 
 import Container, { ContainerFluid } from '@app/components/container'
 import { Subtext, Header } from '@app/components/text'
@@ -19,6 +19,8 @@ import Color from '@app/theme/color.js'
 
 import TabBar from './tab-bar'
 import Card, { PastCard } from './card'
+
+import { setAppointment } from '@app/redux/check-in.js'
 
 import get_client from '@app/api/apollo.js'
 
@@ -89,6 +91,7 @@ function Home() {
     const colorScheme = useColorScheme()
 
     const navigation = useNavigation()
+    const dispatch = useDispatch()
 
     const store = useStore()
 
@@ -152,7 +155,8 @@ function Home() {
             <Card
                 data={item}
                 onPress={() => {
-                    navigation.navigate('Check In', item)
+                    dispatch(setAppointment(item))
+                    navigation.navigate('Check In')
                 }}
             />
         ) : (
