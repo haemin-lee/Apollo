@@ -15,7 +15,9 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-        const patient = await Patient.findById(req.params.id)
+        const patient = await Patient.findOne({
+            'data.id': req.params.id,
+        })
         res.json(patient)
     } catch (e) {
         next(e)

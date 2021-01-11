@@ -34,8 +34,6 @@ function Home() {
     async function get_appointment_data() {
         const client = get_client()
         const d = await client.appointments.get_appointments()
-
-        console.log(d[0]["data"]["patient"]);
     }
 
     async function get_patient_data() {
