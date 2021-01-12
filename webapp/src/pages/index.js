@@ -51,6 +51,13 @@ function Home() {
         console.log(d);
     }
 
+    async function get_appointment_document(id) {
+        
+        const client = get_client()
+        const d = await client.appointments.get_appointment_documents(id)
+        console.log(d);
+    }
+
     async function get_patient_data() {
         const client = get_client()
         const d = await client.patients.get_patients()
@@ -86,7 +93,7 @@ function Home() {
 
     useEffect(() => {
         // Update the document title using the browser API
-        const id = "163994148";
+        const id = "164057523";
         get_appointment_data();
         get_patient_data();
         get_appointment_document(id);
