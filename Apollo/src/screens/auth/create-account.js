@@ -20,7 +20,7 @@ function CreateAccount({ styles, onLinkPress, onSubmit, onError }) {
                 pass
             )
             const id = user.data.id
-            onSubmit()
+            onSubmit(user)
         } catch (e) {
             console.log(e)
             onError(e)

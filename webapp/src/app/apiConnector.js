@@ -4,7 +4,7 @@ export default function get_client() {
     //const user = JSON.parse(localStorage.getItem('user'))
     //const access_token = user.access_token
 
-    const access_token =  "a";
+    const access_token =  "s";
 
     return gc(access_token, {url: new String("/api")})
 }

@@ -10,6 +10,8 @@ import {
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
+import { useDispatch, useStore } from 'react-redux'
+
 import Container, { ContainerFluid } from '@app/components/container'
 import { Subtext, Header } from '@app/components/text'
 
@@ -17,6 +19,10 @@ import Color from '@app/theme/color.js'
 
 import TabBar from './tab-bar'
 import Card, { PastCard } from './card'
+
+import { setAppointment } from '@app/redux/check-in.js'
+
+import get_client from '@app/api/apollo.js'
 
 const DATA = [
     {
@@ -85,11 +91,33 @@ function Home() {
     const colorScheme = useColorScheme()
 
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+
+    const store = useStore()
 
     const scrollY = useRef(new Animated.Value(0)).current
 
     useEffect(() => {
-        setUpcomingAppointments(DATA)
+        const getAppointments = async () => {
+            const user = store.getState().user
+            const client = get_client(user.data.id)
+            const appointmentsData = await client.appointments.get_appointments()
+            const appointments = appointmentsData.map((appointment) => ({
+                id: appointment.data.id,
+                name: 'Dr Eduardo Saverin',
+                appointment: 'Radiology',
+                address: 'Somewhere Road, CA',
+                notes: appointment.data.notes,
+                scheduled_time: appointment.data.scheduled_time,
+                data: appointment.data,
+            }))
+
+            setUpcomingAppointments(appointments)
+        }
+
+        getAppointments()
+
+        // TODO: separate past appointments
         setPastAppointments(DATA.slice(0, 6))
     }, [])
 
@@ -127,6 +155,7 @@ function Home() {
             <Card
                 data={item}
                 onPress={() => {
+                    dispatch(setAppointment(item))
                     navigation.navigate('Check In')
                 }}
             />

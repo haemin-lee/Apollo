@@ -14,11 +14,16 @@ import { Header, Subheader, Subtext } from '@app/components/text'
 import CreateAccount from './create-account'
 import Login from './login'
 
+import { useDispatch } from 'react-redux'
+import { login } from '@app/redux/users.js'
+
 import Color from '@app/theme/color.js'
 
 function Auth() {
     const [screen, setScreen] = useState(false)
+
     const navigation = useNavigation()
+    const dispatch = useDispatch()
 
     const colorScheme = useColorScheme()
 
@@ -26,7 +31,8 @@ function Auth() {
         setScreen(!screen)
     }
 
-    const onSubmit = () => {
+    const onSubmit = (user) => {
+        dispatch(login(user))
         navigation.navigate('Home')
     }
 

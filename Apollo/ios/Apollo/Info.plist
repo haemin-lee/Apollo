@@ -94,5 +94,7 @@
         <string>Read and understand health data.</string>
         <key>NSHealthUpdateUsageDescription</key>
         <string>Share workout data with other apps.</string>
+        <key>NSPhotoLibraryUsageDescription</key>
+        <string>Share images with your doctor.</string>
 </dict>
 </plist>

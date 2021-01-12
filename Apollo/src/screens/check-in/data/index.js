@@ -7,7 +7,9 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+
+import { useStore } from 'react-redux'
 
 import AppleHealthKit from 'rn-apple-healthkit'
 
@@ -19,14 +21,26 @@ import { RoundButton } from '@app/components/buttons'
 
 import Color from '@app/theme/color.js'
 
+import get_client from '@app/api/apollo.js'
+
 function Data() {
     const navigation = useNavigation()
+    const route = useRoute()
+
+    const store = useStore()
 
     const getPermissions = async () => {
         const Permissions = AppleHealthKit.Constants.Permissions
         const healthKitOptions = {
             permissions: {
                 read: [
+                    Permissions.Steps,
+                    Permissions.StepCount,
+                    Permissions.BloodGlucose,
+                    Permissions.BloodPressureDiastolic,
+                    Permissions.BloodPressureSystolic,
+                    Permissions.HeartRate,
+                    Permissions.SleepAnalysis,
                     Permissions.DateOfBirth,
                     Permissions.Weight,
                     Permissions.Height,
@@ -44,20 +58,48 @@ function Data() {
     }
 
     const finish = () => {
-        navigation.navigate('Auth')
+        navigation.navigate('1')
+        // navigation.goBack()
     }
 
     const getHealthData = async () => {
+        const user = store.getState().user
+        const client = get_client(user.data.id)
         await getPermissions()
-        AppleHealthKit.getLatestHeight(null, (err, result) => {
-            console.log(result)
-            // console.log(result.value)
-            Alert.alert(
-                'Retrieved Apple Health Data',
-                `Height: ${result.value}`
-            )
-            // finish()
-        })
+        AppleHealthKit.getDailyStepCountSamples(
+            {
+                startDate: new Date(2020, 1, 1).toISOString(),
+                endDate: new Date().toISOString(),
+            },
+            async (err, result) => {
+                if (err) return Alert.alert('Error', 'Something bad happened')
+                // post data
+                const item = store.getState().checkIn
+                console.log(item)
+
+                const doc = {
+                    appointment: item.id,
+                    patient: item.data.patient,
+                    name: 'Steps',
+                    data: result,
+                    type: 'LINE_GRAPH',
+                }
+                const res = await client.appointments.post_appointment_document(
+                    item.id,
+                    doc
+                )
+                Alert.alert('Step Count', 'Yay got data')
+            }
+        )
+        // AppleHealthKit.getLatestHeight(null, (err, result) => {
+        //     console.log(result)
+        //     // console.log(result.value)
+        //     Alert.alert(
+        //         'Retrieved Apple Health Data',
+        //         `Height: ${result.value}`
+        //     )
+        //     // finish()
+        // })
     }
 
     return (
