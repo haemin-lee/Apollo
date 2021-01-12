@@ -117,7 +117,6 @@ function Graphs(props) {
       let shown5 = (graphObj.length - 1)
 
       ticks = [graphObj[shown1].x, graphObj[shown2].x, graphObj[shown3].x, graphObj[shown4].x, graphObj[shown5].x];
-      console.log(ticks);
       }
       else
       {
@@ -126,13 +125,12 @@ function Graphs(props) {
         {
           ticks.push(graphObj[i].x)
         }
-        console.log(ticks)
       }
 
       
     
       
-      graphdata = [{data: graphObj.reverse()}];
+      graphdata = [{"id": props.userData.name, "data": graphObj.reverse()}];
     }
 
       
@@ -160,6 +158,7 @@ function Graphs(props) {
             xScale={{ type: 'point' }}
             yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
             yFormat=" >-.2f"
+            colors={{"scheme":"accent"}}
             axisTop={null}
             axisRight={null}
             axisBottom={{

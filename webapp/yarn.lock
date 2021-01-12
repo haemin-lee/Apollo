@@ -2661,11 +2661,7 @@
     "normalize-path" "^3.0.0"
     "picomatch" "^2.0.4"
 
-<<<<<<< HEAD
 "apollo-api-client@file:..\\apollo-api-client":
-=======
-"apollo-api-client@file:../apollo-api-client":
->>>>>>> 80426730e0ccc1ae8a7add6c99f4cde3c280d837
   "resolved" "file:../apollo-api-client"
   "version" "1.0.0"
   dependencies:
@@ -10002,11 +9998,7 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-<<<<<<< HEAD
-"react-dom@*", "react-dom@^^0.14 || ^15.0 || ^16.0", "react-dom@^16.8.0 || ^17.0.0", "react-dom@^16.8.6", "react-dom@^17.0.1", "react-dom@>=16.3.0", "react-dom@>=16.6.0", "react-dom@>=16.8.0":
-=======
-"react-dom@^17.0.1":
->>>>>>> 80426730e0ccc1ae8a7add6c99f4cde3c280d837
+"react-dom@^16.8.6", "react-dom@^17.0.1":
   "integrity" "sha512-6eV150oJZ9U2t9svnsspTMrWNyHc6chX0KzDeAOXftRa8bNeOKTTfCJ7KorIwenkHd2xqVTBTCZd79yk/lx/Ug=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.1.tgz"
   "version" "17.0.1"
@@ -10060,7 +10052,6 @@
   "resolved" "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz"
   "version" "3.0.4"
 
-<<<<<<< HEAD
 "react-loader-spinner@^3.1.14":
   "integrity" "sha512-7V+upnW+RVA/O94LIB/EQLK2uaz/TpZBHG5uNXlOXgvxvALxlxVYeEDmus5Oex2C58fiwrsRvSyu/4VRmLbZ9Q=="
   "resolved" "https://registry.npmjs.org/react-loader-spinner/-/react-loader-spinner-3.1.14.tgz"
@@ -10068,7 +10059,7 @@
   dependencies:
     "babel-runtime" "^6.26.0"
     "prop-types" "^15.7.2"
-=======
+
 "react-motion@^0.5.2":
   "integrity" "sha512-9q3YAvHoUiWlP3cK0v+w1N5Z23HXMj4IF4YuvjvWegWqNPfLXsOBE/V7UvQGpXxHFKRQQcNcVQE31g9SB/6qgQ=="
   "resolved" "https://registry.npmjs.org/react-motion/-/react-motion-0.5.2.tgz"
@@ -10082,7 +10073,6 @@
   "integrity" "sha512-8ltIY3bC7oGhj2nPAvWOGi+xGFybPNhJM0V1H8hY/whNcXgmDeaeoCMPPd8VatrpTsUWjb/vGzrmu6SrXVty3A=="
   "resolved" "https://registry.npmjs.org/react-onclickoutside/-/react-onclickoutside-6.9.0.tgz"
   "version" "6.9.0"
->>>>>>> 80426730e0ccc1ae8a7add6c99f4cde3c280d837
 
 "react-overlays@^4.1.0":
   "integrity" "sha512-WtJifh081e6M24KnvTQoNjQEpz7HoLxqt8TwZM7LOYIkYJ8i/Ly1Xi7RVte87ZVnmqQ4PFaFiNHZhSINPSpdBQ=="
@@ -10258,11 +10248,7 @@
   dependencies:
     "prop-types" "^15.5.10"
 
-<<<<<<< HEAD
-"react@*", "react@^0.14 || ^15.0 || ^16.0", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.8.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^16.8.6", "react@^17.0.1", "react@>=0.12.0", "react@>=0.14.0", "react@>=15", "react@>=15.0.0", "react@>=16.3.0", "react@>=16.3.2", "react@>=16.6.0", "react@>=16.8.0", "react@17.0.1":
-=======
-"react@^17.0.1":
->>>>>>> 80426730e0ccc1ae8a7add6c99f4cde3c280d837
+"react@^16.8.6", "react@^17.0.1":
   "integrity" "sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.1.tgz"
   "version" "17.0.1"
@@ -10475,7 +10461,6 @@
     "indent-string" "^4.0.0"
     "strip-indent" "^3.0.0"
 
-<<<<<<< HEAD
 "reduce-reducers@^0.4.3":
   "integrity" "sha512-+CNMnI8QhgVMtAt54uQs3kUxC3Sybpa7Y63HR14uGLgI9/QR5ggHvpxwhGGe3wmx5V91YwqQIblN9k5lspAmGw=="
   "resolved" "https://registry.npmjs.org/reduce-reducers/-/reduce-reducers-0.4.3.tgz"
@@ -10492,10 +10477,7 @@
     "reduce-reducers" "^0.4.3"
     "to-camel-case" "^1.0.0"
 
-"redux@^2.0.0 || ^3.0.0 || ^4.0.0-0", "redux@^4.0.5":
-=======
 "redux@^4.0.5":
->>>>>>> 80426730e0ccc1ae8a7add6c99f4cde3c280d837
   "integrity" "sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w=="
   "resolved" "https://registry.npmjs.org/redux/-/redux-4.0.5.tgz"
   "version" "4.0.5"
