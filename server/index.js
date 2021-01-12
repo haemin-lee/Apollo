@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import path from 'path'
+import compression from 'compression'
 
 import config from '@app/config'
 
@@ -13,6 +14,7 @@ const PORT = config.PORT
 const app = express()
 
 app.use(express.json({ limit: '10mb' }))
+app.use(compression())
 
 // set up mongodb
 mongoose.connect(config.db_connection_url, {
