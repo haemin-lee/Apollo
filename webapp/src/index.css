@@ -81,3 +81,18 @@ p {
     color: rgba(0, 0, 0, 0.5);
 }
 
+.nav-pills .nav-link.active {
+    background: #e5e5e5;
+    color: #000;
+    font-weight: 600;
+}
+
+.nav-pills .nav-link {
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 0;
+    margin-right: 5px;
+    color: #000;
+    padding: 10px 20px 10px 20px;
+    font-weight: 400;
+}
+
