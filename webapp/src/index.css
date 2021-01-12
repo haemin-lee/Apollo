@@ -1,3 +1,16 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+}
+
 .loan-pill {
     padding: 15px 10px;
     border: black solid 1px;
@@ -7,11 +20,18 @@
 }
 
 .bg-dark {
-    background-color: #000000!important;
+    background-color: #000000 !important;
 }
 
 .navbar-light .navbar-brand {
     color: rgb(255 255 255 / 90%);
+}
+
+.loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 h1 {
@@ -22,3 +42,42 @@ h2 {
     font-family: Poppins;
     font-weight: 300;
 }
+
+p {
+    font-family: Poppins;
+    font-weight: 400;
+}
+
+.header {
+    font-weight: 700;
+}
+
+.patient-card {
+    cursor: pointer;
+    background: rgba(196, 196, 196, 0.1);
+    margin-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    transition: 0.2s ease all;
+}
+
+.patient-card:hover {
+    transition: 0.2s ease all;
+    background: rgba(196, 196, 196, 0.35);
+}
+
+.patient-card.active {
+    background: rgba(196, 196, 196, 0.35);
+}
+
+.patient-card p {
+    line-height: 0.75;
+}
+.patient-card p:not(:first-of-type) {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.subtext {
+    color: rgba(0, 0, 0, 0.5);
+}
+

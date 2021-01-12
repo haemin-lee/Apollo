@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react'
-import Button from '@material-ui/core/Button'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Tabbar from './home'
 import get_client from '../app/apiConnector'
-//import { ResponsiveLine } from '@nivo/line'
 
 class User {
     constructor(
@@ -55,8 +50,6 @@ class User {
         ]
     }
 }
-
-//constructor(name, age, height, weight, biosex, DOB, BMI, BodyFat, notes, stepData, HeartData, BPData, BGData, SleepData)
 
 // figure styles out later...
 function Home() {
@@ -209,28 +202,24 @@ function Home() {
         console.log(i)
     }
 
-    function getName(i) {
-        return (
-            <div>
-                <Button
-                    color="primary"
-                    onClick={() => {
-                        changeSelectedUser(i)
-                    }}
+    function renderPatientCards() {
+        return users.map((user, i) => (
+            <div
+                className={`row patient-card ${
+                    data.name === user.name ? 'active' : ''
+                }`}
+            >
+                <div
+                    className="col patient-card-info"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => changeSelectedUser(i)}
                 >
-                    {users[i].name}
-                </Button>
+                    <p>{user.name}</p>
+                    <p>{user.appointment || 'Cardiology'}</p>
+                    <p>{user.time || '10:45 AM'}</p>
+                </div>
             </div>
-        )
-    }
-
-    function returnNameList() {
-        var returnObj = []
-        var i = 0
-        for (i = 0; i < users.length; i++) {
-            returnObj.push(getName(i))
-        }
-        return returnObj
+        ))
     }
 
     useEffect(() => {
@@ -242,23 +231,24 @@ function Home() {
     }, [])
 
     return (
-        <Container>
-            <Row>
-                <h1>Welcome to Apollo</h1>
-            </Row>
-            <Row style={{ height: 30 }}></Row>
-            <Row>
-                <div style={{ outline: '1px solid gray' }}>
-                    <Col>
-                        <h3>Select a patient</h3>
-                        {returnNameList()}
-                    </Col>
+        <div className="container">
+            <div className="row">
+                <div className="col-3">
+                    <h4
+                        className="header"
+                        style={{
+                            marginBottom: 15,
+                        }}
+                    >
+                        Patients
+                    </h4>
+                    {renderPatientCards()}
                 </div>
-                <Col>
+                <div className="col-9">
                     <Tabbar userData={data} />
-                </Col>
-            </Row>
-        </Container>
+                </div>
+            </div>
+        </div>
     )
 }
 
