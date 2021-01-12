@@ -284,7 +284,8 @@ function Data() {
                             </Header>
                             <Subtext>
                                 Using Apollo with the Apple Health app empowers
-                                you to copy the Apple interface guidelines
+                                your doctor with more relevant health data to
+                                provide you better care and service
                             </Subtext>
                         </View>
                         <RoundButton

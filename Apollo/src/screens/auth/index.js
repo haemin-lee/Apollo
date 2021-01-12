@@ -56,7 +56,10 @@ function Auth() {
                     <Header>Apollo</Header>
                     <Subheader>Your Medical Companion</Subheader>
 
-                    <Subtext>Some Promotional Text Goes Here</Subtext>
+                    <Subtext>
+                        A smart assistant that helps stay connected with your
+                        doctor
+                    </Subtext>
                 </View>
 
                 {!screen ? (
