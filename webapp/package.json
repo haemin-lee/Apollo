@@ -28,6 +28,7 @@
         "react-typist": "^2.0.5",
         "redux": "^4.0.5",
         "redux-actions": "^2.6.5",
+        "vanta": "^0.5.21",
         "web-vitals": "^0.2.4"
     },
     "scripts": {

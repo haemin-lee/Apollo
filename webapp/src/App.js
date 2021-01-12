@@ -20,39 +20,51 @@ import { get_token } from 'drchrono-api-client'
 function TopNav(props) {
     const dispatch = useDispatch()
     return (
-        <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="/">Apollo</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                {!props.user ? (
-                    <Nav className="ml-auto">
-                        <Nav.Link href="https://drchrono.com/o/authorize/?redirect_uri=http://localhost:3000/login&response_type=code&client_id=dkzdPUi9XUYshx0batJXVE4zm8enBvFqlZCR0G2s">
-                            <p
-                                style={{
-                                    float: 'left',
-                                    marginTop: 10,
-                                    color: 'black',
+        //<div className="navbar navbar-expand-lg navbar-light navbar-transparent">
+        <div>
+            <Navbar bg="dark" expand="lg" style={{height:30}}>
+                <Navbar.Brand href="/">Apollo</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    {!props.user ? (
+                        <Nav className="ml-auto">
+                            <Nav.Link href="https://drchrono.com/o/authorize/?redirect_uri=http://localhost:3000/login&response_type=code&client_id=dkzdPUi9XUYshx0batJXVE4zm8enBvFqlZCR0G2s">
+                                <p
+                                    style={{
+                                        float: 'left',
+                                        marginTop: 10,
+                                        color: 'white',
+                                    }}
+                                >
+                                    Sign in
+                                </p>
+                            </Nav.Link>
+                        </Nav>
+                    ) : (
+                        <Nav className="ml-auto">
+                            <Nav.Link
+                                href="/"
+                                onClick={(e) => {
+                                    localStorage.clear()
+                                    dispatch(logout_user())
                                 }}
                             >
-                                Sign in
-                            </p>
-                        </Nav.Link>
-                    </Nav>
-                ) : (
-                    <Nav className="ml-auto">
-                        <Nav.Link
-                            href="/"
-                            onClick={(e) => {
-                                localStorage.clear()
-                                dispatch(logout_user())
-                            }}
-                        >
-                            Logout {props.user.firstName}
-                        </Nav.Link>
-                    </Nav>
-                )}
-            </Navbar.Collapse>
-        </Navbar>
+                                <p
+                                    style={{
+                                        float: 'left',
+                                        marginTop: 10,
+                                        color: 'white',
+                                    }}
+                                >
+                                    Logout {props.user.firstName}
+                                </p>
+                            </Nav.Link>
+                        </Nav>
+                    )}
+                </Navbar.Collapse>
+            </Navbar>
+        </div>
+    
     )
 }
 
@@ -142,7 +154,7 @@ function App() {
                         <Route path="/">
                             <div className="hero">
                                 <TopNav />
-                                <Home />
+                                <Splash />
                             </div>
                         </Route>
                     )}

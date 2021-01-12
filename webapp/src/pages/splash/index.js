@@ -1,42 +1,43 @@
 import './splashScreen.css'
+import { useEffect, useState, useRef  } from 'react'
+import BIRDS from 'vanta/dist/vanta.net.min.js'
 import { Row, Container, Col } from 'react-bootstrap'
 
 function Splash() {
+    const [vantaEffect, setVantaEffect] = useState(0);
+    const myRef = useRef(null);
+    useEffect(() => {
+        if (!vantaEffect) {
+        setVantaEffect(BIRDS({
+            el: myRef.current,
+            color:"#89cff0", 
+            backgroundColor:"black"
+        }))
+        }
+        return () => {
+        if (vantaEffect) vantaEffect.destroy()
+        }
+    }, [vantaEffect])
+
     return (
-        <div className="container">
-            <Container>
-                <Row>
-                    <Col>
-                        <Row style={{ height: 200 }}></Row>
-                        <Row>
-                            <div className="text">
-                                <h1 style={{ fontSize: 40, textAlign: 'left' }}>
-                                    Welcome to
-                                </h1>
-                                <h1
-                                    style={{
-                                        fontSize: 80,
-                                        color: '#FC94AF',
-                                        textAlign: 'left',
-                                    }}
-                                >
-                                    Apollo
-                                </h1>
-                                <div style={{ height: 40 }}></div>
-                                
-                            </div>
-                        </Row>
-                    </Col>
-                    <Col>
-                        <Row style={{ height: 100 }}></Row>
-                        <Row>
-                            <h2>Add a photo</h2>
-                        </Row>
-                    </Col>
-                </Row>
+        <div ref={myRef} style={{height: "100%", width: "100%"}}>
+            <Container style={{margin:"auto", paddingTop:300}}>
+                 <div className="col-6">
+                    <h2 style={{ color: "#d3d3d3", fontSize: 30}}>
+                            welcome to
+                    </h2>
+                    <div style={{height:10}}></div>
+                    <h1 style={{ color:"white", fontSize: 70}}>
+                        apollo
+                    </h1>
+                    <div style={{height:10}}></div>
+                    <h2 style={{margin:"auto", textAlign:"left", color: "#d3d3d3", fontSize:30}}> 
+                        apollo is your smart assistant that will help you schedule your appointments and let you stay connected with your doctor.
+                    </h2>
+                 </div>
             </Container>
         </div>
-    )
+    );
 }
 
 export default Splash

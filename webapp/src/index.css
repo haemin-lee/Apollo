@@ -5,3 +5,20 @@
     align-items: center;
     justify-content: center;
 }
+
+.bg-dark {
+    background-color: #000000!important;
+}
+
+.navbar-light .navbar-brand {
+    color: rgb(255 255 255 / 90%);
+}
+
+h1 {
+    font-family: Poppins;
+}
+
+h2 {
+    font-family: Poppins;
+    font-weight: 300;
+}

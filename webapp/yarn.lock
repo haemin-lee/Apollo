@@ -2663,7 +2663,6 @@
 
 "apollo-api-client@file:..\\apollo-api-client":
   "resolved" "file:../apollo-api-client"
-  "version" "1.0.0"
   dependencies:
     "axios" "^0.21.1"
 
@@ -4823,7 +4822,6 @@
 
 "drchrono-api-client@file:..\\drchrono-api-client":
   "resolved" "file:../drchrono-api-client"
-  "version" "1.0.0"
   dependencies:
     "axios" "^0.21.1"
 
@@ -9998,7 +9996,7 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-"react-dom@^16.8.6", "react-dom@^17.0.1":
+"react-dom@^17.0.1":
   "integrity" "sha512-6eV150oJZ9U2t9svnsspTMrWNyHc6chX0KzDeAOXftRa8bNeOKTTfCJ7KorIwenkHd2xqVTBTCZd79yk/lx/Ug=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.1.tgz"
   "version" "17.0.1"
@@ -10248,7 +10246,7 @@
   dependencies:
     "prop-types" "^15.5.10"
 
-"react@^16.8.6", "react@^17.0.1":
+"react@^17.0.1":
   "integrity" "sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.1.tgz"
   "version" "17.0.1"
@@ -12359,6 +12357,11 @@
   "integrity" "sha512-NOJ6JZCAWr0zlxZt+xqCHNTEKOsrks2HQd4MqhP1qy4z1SkbEP467eNx6TgDKXMvUOb+OENfJCZwM+16n7fRfw=="
   "resolved" "https://registry.npmjs.org/value-equal/-/value-equal-1.0.1.tgz"
   "version" "1.0.1"
+
+"vanta@^0.5.21":
+  "integrity" "sha512-UYW6rYXVl8klFbQrhmgDMZ7SCys9hKROIuTlq5M+v6j346BPu1wqBwVRQPHiYsuooWkUYY6HSXV/9HrJBSuo6g=="
+  "resolved" "https://registry.npmjs.org/vanta/-/vanta-0.5.21.tgz"
+  "version" "0.5.21"
 
 "vary@~1.1.2":
   "integrity" "sha1-IpnwLG3tMNSllhsLn3RSShj2NPw="
