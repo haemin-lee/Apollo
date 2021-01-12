@@ -1,5 +1,5 @@
 import React from 'react'
-import { Appearance } from 'react-native'
+import { useColorScheme } from 'react-native'
 
 import {
     NavigationContainer,
@@ -10,7 +10,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import Auth from '../screens/auth'
 import Home from '../screens/home'
-import CheckIn from '../screens/check-in'
+import CheckInNavigator from './CheckInNavigator'
 
 import Color from '../theme/color'
 
@@ -33,16 +33,16 @@ const darkTheme = {
 }
 
 function RootStackNavigator() {
+    const colorScheme = useColorScheme()
+
     return (
         <NavigationContainer
-            theme={
-                Appearance.getColorScheme() === 'light' ? lightTheme : darkTheme
-            }
+            theme={colorScheme === 'light' ? lightTheme : darkTheme}
         >
             <Stack.Navigator initialRouteName="Auth" headerMode="none">
                 <Stack.Screen name="Auth" component={Auth} />
                 <Stack.Screen name="Home" component={Home} />
-                <Stack.Screen name="Check In" component={CheckIn} />
+                <Stack.Screen name="Check In" component={CheckInNavigator} />
             </Stack.Navigator>
         </NavigationContainer>
     )

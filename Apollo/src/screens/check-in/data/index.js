@@ -58,7 +58,8 @@ function Data() {
     }
 
     const finish = () => {
-        navigation.goBack()
+        navigation.navigate('1')
+        // navigation.goBack()
     }
 
     const getHealthData = async () => {
@@ -73,7 +74,9 @@ function Data() {
             async (err, result) => {
                 if (err) return Alert.alert('Error', 'Something bad happened')
                 // post data
-                const item = route.params
+                const item = store.getState().checkIn
+                console.log(item)
+
                 const doc = {
                     appointment: item.id,
                     patient: item.data.patient,

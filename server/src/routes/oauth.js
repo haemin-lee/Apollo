@@ -1,5 +1,6 @@
 import express from 'express'
 import axios from 'axios'
+import qs from 'qs'
 
 import config from '@app/config'
 
@@ -17,8 +18,17 @@ router.get('/token', async (req, res, next) => {
         client_secret: config.drchrono_client_secret,
     }
 
+    const headers = {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+    }
+
     try {
-        const { data } = await axios.post(config.drchrono_authorize_path, body)
+        const { data } = await axios({
+            method: 'POST',
+            url: config.drchrono_authorize_path,
+            data: qs.stringify(body),
+            headers: headers,
+        })
 
         // TODO: save in db to refresh tokens
         // const accessToken = data.access_token
@@ -26,6 +36,7 @@ router.get('/token', async (req, res, next) => {
 
         res.json(data)
     } catch (err) {
+        console.log(err)
         next(err)
     }
 })
