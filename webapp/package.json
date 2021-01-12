@@ -5,6 +5,7 @@
     "proxy": "http://localhost:8000",
     "dependencies": {
         "@material-ui/core": "^4.11.2",
+        "@material-ui/icons": "^4.11.2",
         "@material-ui/lab": "^4.0.0-alpha.57",
         "@material/button": "^9.0.0",
         "@nivo/core": "^0.67.0",
@@ -15,6 +16,7 @@
         "apollo-api-client": "file:..\\apollo-api-client",
         "bootstrap": "^4.5.3",
         "drchrono-api-client": "file:..\\drchrono-api-client",
+        "material-ui-search-bar": "^1.0.0",
         "react": "^17.0.1",
         "react-bootstrap": "^1.4.0",
         "react-bootstrap-buttons": "^1.0.0",

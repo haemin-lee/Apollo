@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Tabbar from './home';
 import get_client from '../app/apiConnector';
+import SearchBar from "material-ui-search-bar";
 //import { ResponsiveLine } from '@nivo/line'
 
 class User {
@@ -35,21 +36,14 @@ class User {
 
 // figure styles out later...
 function Home() {
-<<<<<<< HEAD
-    let users = [
-                new User("Jenny", 20, 43, 32, "Female", "6/30/2000", 43, 12, "Very cool", DevinStepData, DevinStepData, DevinStepData, DevinStepData, DevinStepData), 
-                new User("Devin", 20, 54, 12, "Male", "10/2/2000", 76, 49, "Very epic", DevinStepData, DevinStepData, DevinStepData, DevinStepData, DevinStepData)
-            ];
-=======
 
     let users = [new User("Jenny", 1232131, 20, 43, 32, "Female", "6/30/2000", 43, 12, "Very cool",{},{},{},{},{},"","","",""), 
                  new User("Devin", 1232131, 20, 54, 12, "Male", "10/2/2000", 76, 49, "Very epic",{},{},{},{},{},"","","","")];
->>>>>>> 8dc52c13635b5c77fe36ccc91415b0aa98ad5c8c
     let activeUser = users[0];
-
 
     const [data, setData] = useState(activeUser);
     const [userarr, setUsers] = useState(users);
+    const [searchResult, setSearchResult] = useState("");
 
     async function get_appointment_data() {
         const client = get_client()
@@ -67,11 +61,6 @@ function Home() {
         const client = get_client()
         const d = await client.appointments.get_appointment_documents(id)
 
-<<<<<<< HEAD
-    async function get_patient_data() {
-        const client = get_client()
-        const d = await client.patients.get_patients()
-=======
         let imagenum = 0;
         var idexist = false;
         var usersindex = users.length;
@@ -141,7 +130,6 @@ function Home() {
         setUsers(copy);
 
         console.log(users)
->>>>>>> 8dc52c13635b5c77fe36ccc91415b0aa98ad5c8c
     }
 
     function changeSelectedUser(i){
@@ -154,21 +142,41 @@ function Home() {
         return (
             <div>
                 <Button color="primary" onClick={() => { changeSelectedUser(i) }}>
-                    {users[i].name}
+                    {userarr[i].name}
                 </Button>
             </div>
         );
     }
 
-    function returnNameList()
+    function returnNameList(inputArray)
     {
         var returnObj = [];
         var i = 0;
-        for(i = 0; i < users.length; i++)
+        for(i = 0; i < inputArray.length; i++)
         {
             returnObj.push(getName(i));
         }
         return returnObj;
+    }
+
+    function doSomethingWith(literalName)
+    {
+        console.log(literalName);
+        var i = 0;
+        let tempUserArray = userarr;
+        for(i = 0; i < userarr.length; i++)
+        {
+            console.log(tempUserArray[i].name)
+            if(tempUserArray[i].name === literalName)
+            {
+                console.log("young sheck wes")
+                var tempUser = tempUserArray[i];
+                tempUserArray.splice(i, 1); 
+                tempUserArray.unshift(tempUser);
+                console.log(tempUserArray)
+            }
+        }
+        setUsers([...tempUserArray]);
     }
 
     useEffect(() => {
@@ -191,7 +199,12 @@ function Home() {
                         <h3>
                             Select a patient
                         </h3>
-                        {returnNameList()}
+                        <SearchBar
+                            value={searchResult}
+                            onChange={(newValue) => setSearchResult(newValue)}
+                            onRequestSearch={() => doSomethingWith(searchResult)}
+                        />
+                        {returnNameList(userarr)}
                     </Col>
                 </div>
                 <Col>
