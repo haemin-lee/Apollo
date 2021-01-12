@@ -9,9 +9,10 @@ import get_client from '../app/apiConnector';
 //import { ResponsiveLine } from '@nivo/line'
 
 class User {
-    constructor(name, age, height, weight, biosex, DOB, BMI, BodyFat, notes, StepData, HeartData, BPData, BGData, SleepData)
+    constructor(name, id, age, height, weight, biosex, DOB, BMI, BodyFat, notes, StepData, HeartData, BPData, BGData, SleepData, Image1, Image2, Image3)
     {
         this.name = name;
+        this.id = id;
         this.age = age;
         this.height = height;
         this.weight = weight;
@@ -25,7 +26,8 @@ class User {
         this.BPData = BPData;
         this.BGData = BGData;
         this.SleepData = SleepData;
-        this.data = [StepData,HeartData,BPData,BGData,SleepData];
+        this.data = [StepData,HeartData,BPData,BGData,SleepData,Image1, Image2, Image3];
+        
     }
 }
 
@@ -34,13 +36,13 @@ class User {
 // figure styles out later...
 function Home() {
 
-    let users = [new User("Jenny", 20, 43, 32, "Female", "6/30/2000", 43, 12, "Very cool",{},{},{},{},{}), 
-                 new User("Devin", 20, 54, 12, "Male", "10/2/2000", 76, 49, "Very epic",{},{},{},{},{})];
+    let users = [new User("Jenny", 1232131, 20, 43, 32, "Female", "6/30/2000", 43, 12, "Very cool",{},{},{},{},{},"","","",""), 
+                 new User("Devin", 1232131, 20, 54, 12, "Male", "10/2/2000", 76, 49, "Very epic",{},{},{},{},{},"","","","")];
     let activeUser = users[0];
 
 
     const [data, setData] = useState(activeUser);
-    const [userarr, setUser] = useState(users);
+    const [userarr, setUsers] = useState(users);
 
     async function get_appointment_data() {
         const client = get_client()
@@ -58,18 +60,75 @@ function Home() {
         const client = get_client()
         const d = await client.appointments.get_appointment_documents(id)
 
-        var copy = users
+        let imagenum = 0;
+        var idexist = false;
+        var usersindex = users.length;
 
         for(let i = 0; i < users.length; i++)
         {
-            users[i].StepData = d[0].data;
-            users[i].HeartData = d[0].data;
-            users[i].BPData = d[0].data;
-            users[i].BgData = d[0].data;
-            users[i].SleepData = d[0].data;
+            if (d[0].patient === users[i].id)
+            {
+                idexist = true;
+                usersindex = i;
+            }
         }
 
-        setUser(copy);
+        if(!idexist)
+        {
+            users.push(new User("Penis", d[0].patient, 20, 54, 12, "Male", "10/2/9000", 76, 49, "Very poggers",{},{},{},{},{},"","","",""))
+            activeUser = users[users.length-1];
+        }
+
+        var copy = users
+
+        for(let i = 0; i < d.length; i++)
+        {
+            if(d[i].type === "LINE_GRAPH")
+            {
+                if(d[i].name === "Steps")
+                {
+                    copy[usersindex].StepData = d[i].data;
+                }
+                if(d[i].name === "Heart")
+                {
+                    copy[usersindex].HeartData = d[i].data;
+                }
+                if(d[i].name === "BP")
+                {
+                    copy[usersindex].BPData = d[i].data;
+                }
+                if(d[i].name === "BG")
+                {
+                    copy[usersindex].BGData = d[i].data;
+                }
+                if(d[i].name === "Sleep")
+                {
+                    copy[usersindex].SleepData = d[i].data;
+                }
+            }
+            if(d[i].type === "IMAGE")
+            {
+                if (imagenum === 0)
+                {
+                    copy[usersindex].Image1 = d[i].data;
+                }
+                if (imagenum === 1)
+                {
+                    copy[usersindex].Image2 = d[i].data;
+                }
+                if (imagenum === 2)
+                {
+                    copy[usersindex].Image3 = d[i].data;
+                }
+                imagenum++;
+            }
+
+        }
+
+        
+        setUsers(copy);
+
+        console.log(users)
     }
 
     function changeSelectedUser(i){
