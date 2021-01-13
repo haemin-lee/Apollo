@@ -18,14 +18,14 @@ import "react-datepicker/dist/react-datepicker.css";
 let xaxis = "";
 let yaxis = "";
 
-let graphdata = {};
+//let graphdata = {};
 let stepgraphdata = {};
 let heartgraphdata = {};
 let BPgraphdata = {};
 let BGgraphdata = {};
 let sleepgraphdata = {};
 
-let ticks = [];
+//let ticks = [];
 let stepticks = [];
 let heartticks = [];
 let BPticks = [];
@@ -64,7 +64,8 @@ function Graphs(props) {
 
     const [startDate, setStartDate] = useState(new Date(today));
     const [endDate, setEndDate] = useState(new Date(today));
-
+    const [graphdata, setGraphData] = useState({});
+    const [ticks, setTicks] = useState([]);
     function dateRange() {
         
         return (
@@ -99,7 +100,8 @@ function Graphs(props) {
     function setStepGraph(){
       xaxis = "Steps"
       yaxis = "Date"
-
+      console.log("shut up");
+      console.log(props.userData);
       let currTime = props.userData.StepData[0].startDate;
       let sum = props.userData.StepData[0].value;
       let newObj = [];
@@ -156,7 +158,6 @@ function Graphs(props) {
       }
       
       stepgraphdata = [{"id": props.userData.name, "data": stepgraphObj.reverse()}]; 
-
     }
 
 
@@ -191,30 +192,25 @@ function Graphs(props) {
             
         }
 
-      
-
       let heartgraphObj = [];
       for (let i = 0; i < newObj.length; i++)
+      {
+        if (new Date(newObj[i].x) >= startDate && new Date(newObj[i].x) <= endDate)
         {
-
-          if (new Date(newObj[i].x) >= startDate && new Date(newObj[i].x) <= endDate)
-          {
-            heartgraphObj.push(newObj[i])
-          }
+          heartgraphObj.push(newObj[i])
         }
-      
-      
+      }
 
       if (heartgraphObj.length > 8)
       {
-      ticks = [];
-      let shown1 = 0;
-      let shown2 = Math.floor((heartgraphObj.length - 1) / 4)
-      let shown3 = Math.floor((heartgraphObj.length - 1) / 2)
-      let shown4 = Math.floor((heartgraphObj.length - 1) / 4 * 3)
-      let shown5 = (heartgraphObj.length - 1)
+        ticks = [];
+        let shown1 = 0;
+        let shown2 = Math.floor((heartgraphObj.length - 1) / 4)
+        let shown3 = Math.floor((heartgraphObj.length - 1) / 2)
+        let shown4 = Math.floor((heartgraphObj.length - 1) / 4 * 3)
+        let shown5 = (heartgraphObj.length - 1)
 
-      heartticks = [heartgraphObj[shown1].x, heartgraphObj[shown2].x, heartgraphObj[shown3].x, heartgraphObj[shown4].x, heartgraphObj[shown5].x];
+        heartticks = [heartgraphObj[shown1].x, heartgraphObj[shown2].x, heartgraphObj[shown3].x, heartgraphObj[shown4].x, heartgraphObj[shown5].x];
       }
       else
       {
@@ -224,7 +220,6 @@ function Graphs(props) {
           heartticks.push(heartgraphObj[i].x)
         }
       }
-      
       heartgraphdata = [{"id": props.userData.name, "data": heartgraphObj.reverse()}]; 
     }
 
@@ -241,9 +236,6 @@ function Graphs(props) {
       
         for (let j = 1; j < props.userData.BPData.length; j++)
         {
-        
-        
-
         if ((!datesAreOnSameDay(new Date(currTime), new Date(props.userData.BPData[j].startDate))))
           {
               newObj.push({
@@ -281,14 +273,14 @@ function Graphs(props) {
 
       if (BPgraphObj.length > 8)
       {
-      BPticks = [];
-      let shown1 = 0;
-      let shown2 = Math.floor((BPgraphObj.length - 1) / 4)
-      let shown3 = Math.floor((BPgraphObj.length - 1) / 2)
-      let shown4 = Math.floor((BPgraphObj.length - 1) / 4 * 3)
-      let shown5 = (BPgraphObj.length - 1)
+        BPticks = [];
+        let shown1 = 0;
+        let shown2 = Math.floor((BPgraphObj.length - 1) / 4)
+        let shown3 = Math.floor((BPgraphObj.length - 1) / 2)
+        let shown4 = Math.floor((BPgraphObj.length - 1) / 4 * 3)
+        let shown5 = (BPgraphObj.length - 1)
 
-      ticks = [BPgraphObj[shown1].x, BPgraphObj[shown2].x, BPgraphObj[shown3].x, BPgraphObj[shown4].x, BPgraphObj[shown5].x];
+        ticks = [BPgraphObj[shown1].x, BPgraphObj[shown2].x, BPgraphObj[shown3].x, BPgraphObj[shown4].x, BPgraphObj[shown5].x];
       }
       else
       {
@@ -298,7 +290,6 @@ function Graphs(props) {
           BPticks.push(BPgraphObj[i].x)
         }
       }
-      
       BPgraphdata = [{"id": props.userData.name, "data": BPgraphObj.reverse()}]; 
     }
 
@@ -537,48 +528,45 @@ function Graphs(props) {
 />
 )
 
-
+    function potentiallyReturnGraph(data)
+    {
+      if(data === null || data === ""){
+        return <div>wait</div>;
+      }
+      else
+      {
+        return <MyResponsiveLine data={data}/>;
+      }
+    }
     return (
 
         <div>
-        
-        <div>
+          <div>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="demo-simple-select-label">Graph Type</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={graphtype}
+                onChange={handleChange}
+              >
+                <MenuItem value={0}>Step Count</MenuItem>
+                <MenuItem value={1}>Heart Rate</MenuItem>
+                <MenuItem value={2}>Blood Pressure</MenuItem>
+                <MenuItem value={3}>Blood Glucose</MenuItem>
+                <MenuItem value={4}>Sleep</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
 
-        <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Graph Type</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={graphtype}
-          onChange={handleChange}
-        >
-          <MenuItem value={0}>Step Count</MenuItem>
-          <MenuItem value={1}>Heart Rate</MenuItem>
-          <MenuItem value={2}>Blood Pressure</MenuItem>
-          <MenuItem value={3}>Blood Glucose</MenuItem>
-          <MenuItem value={4}>Sleep</MenuItem>
-        </Select>
-        </FormControl>
+          <div>
+            {dateRange()}
+          </div>
 
+          <div style={{height:300}}>
+            {potentiallyReturnGraph(graphdata)}
+          </div>
         </div>
-
-        <div>
-        
-        {dateRange()}
-
-        </div>
-
-
-        <div style={{height:300}}>
-
-
-        <MyResponsiveLine data={graphdata}/>
-        
-
-
-        </div>
-        </div>
-
     );
 }
 

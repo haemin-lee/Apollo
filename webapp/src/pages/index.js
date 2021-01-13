@@ -64,15 +64,9 @@ function Home() {
                  new User("Devin", 1232131, 20, 54, 12, "Male", "10/2/2000", 76, 49, "Very epic",{},{},{},{},{},"","","","")];
     let activeUser = users[0];
 
-<<<<<<< HEAD
     const [data, setData] = useState(activeUser);
     const [userarr, setUsers] = useState(users);
     const [searchResult, setSearchResult] = useState("");
-=======
-
-    const [data, setData] = useState(activeUser);
-    const [userarr, setUsers] = useState(users);
->>>>>>> 6ada333143be38386b5d45b5d94b5f47dacc6c83
 
     async function get_appointment_data() {
         const client = get_client()
@@ -88,7 +82,6 @@ function Home() {
     async function get_appointment_document(id) {
         const client = get_client()
         const d = await client.appointments.get_appointment_documents(id)
-<<<<<<< HEAD
         //console.log(d);
     }
 
@@ -103,21 +96,6 @@ function Home() {
             if (d[0].patient === users[i].id) {
                 idexist = true
                 usersindex = i
-=======
-        
-        console.log(d)
-
-        let imagenum = 0;
-        var idexist = false;
-        var usersindex = users.length;
-
-        for(let i = 0; i < users.length; i++)
-        {
-            if (d[0].patient === users[i].id)
-            {
-                idexist = true;
-                usersindex = i;
->>>>>>> 6ada333143be38386b5d45b5d94b5f47dacc6c83
             }
         }
 
@@ -190,7 +168,8 @@ function Home() {
                 imagenum++
             }
         }
-
+        console.log("die")
+        console.log(copy);
         setUsers(copy)
     }
 
