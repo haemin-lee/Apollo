@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     
 // Prob better way to do prop mapping
 function Graphs(props) {
-
+  
   const [refresh, setRefresh] = useState(0)
 
   useEffect(() => {
@@ -312,7 +312,7 @@ function Graphs(props) {
 
       if (BPgraphObjsys.length > 8)
       {
-      BPticks = [];
+      ticks = [];
       let shown1 = 0;
       let shown2 = Math.floor((BPgraphObjsys.length - 1) / 4)
       let shown3 = Math.floor((BPgraphObjsys.length - 1) / 2)
@@ -323,20 +323,14 @@ function Graphs(props) {
       }
       else
       {
-        BPticks = [];
+        ticks = [];
         for (let i = 0; i < BPgraphObjsys.length; i++)
         {
-          BPticks.push(BPgraphObjsys[i].x)
+          ticks.push(BPgraphObjsys[i].x)
         }
       }
       
       props.userData.presetgraph = [{"id": props.userData.name + " systolic", "data": BPgraphObjsys.reverse()}, {"id": props.userData.name + " diastolic", "data": BPgraphObjdiast.reverse()}]; 
-
-      console.log(props.userData.BPData)
-      console.log(BPgraphObjsys)
-      console.log(BPgraphObjdiast)
-
-      ticks = BPticks;
       xaxis = "Avg Blood Pressure"
       yaxis = "Date"
     }
@@ -387,7 +381,7 @@ function Graphs(props) {
 
       if (BGgraphObj.length > 8)
       {
-      BGticks = [];
+      ticks = [];
       let shown1 = 0;
       let shown2 = Math.floor((BGgraphObj.length - 1) / 4)
       let shown3 = Math.floor((BGgraphObj.length - 1) / 2)
@@ -398,15 +392,14 @@ function Graphs(props) {
       }
       else
       {
-        BGticks = [];
+        ticks = [];
         for (let i = 0; i < BGgraphObj.length; i++)
         {
-          BGticks.push(BGgraphObj[i].x)
+          ticks.push(BGgraphObj[i].x)
         }
       }
       
       props.userData.presetgraph = [{"id": props.userData.name, "data": BGgraphObj.reverse()}]; 
-      ticks = BGticks;
       xaxis = "Avg Blood Glucose"
       yaxis = "Date"
     }
