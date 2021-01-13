@@ -16,6 +16,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 let graphdata = {};
 let ticks = [];
+let xaxis = "";
+let yaxis = "";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -71,7 +73,7 @@ function Graphs(props) {
       };
 
 
-    function setGraph(){
+    function setStepGraph(){
       let currTime = props.userData.StepData[0].startDate;
       let sum = props.userData.StepData[0].value;
       let newObj = [];
@@ -95,45 +97,162 @@ function Graphs(props) {
 
       
 
-      let graphObj = [];
+      let stepgraphObj = [];
       for (let i = 0; i < newObj.length; i++)
         {
 
           if (new Date(newObj[i].x) >= startDate && new Date(newObj[i].x) <= endDate)
           {
-            graphObj.push(newObj[i])
+            stepgraphObj.push(newObj[i])
           }
         }
       
       
 
-      if (graphObj.length > 8)
+      if (stepgraphObj.length > 8)
       {
       ticks = [];
       let shown1 = 0;
-      let shown2 = Math.floor((graphObj.length - 1) / 4)
-      let shown3 = Math.floor((graphObj.length - 1) / 2)
-      let shown4 = Math.floor((graphObj.length - 1) / 4 * 3)
-      let shown5 = (graphObj.length - 1)
+      let shown2 = Math.floor((stepgraphObj.length - 1) / 4)
+      let shown3 = Math.floor((stepgraphObj.length - 1) / 2)
+      let shown4 = Math.floor((stepgraphObj.length - 1) / 4 * 3)
+      let shown5 = (stepgraphObj.length - 1)
 
-      ticks = [graphObj[shown1].x, graphObj[shown2].x, graphObj[shown3].x, graphObj[shown4].x, graphObj[shown5].x];
+      ticks = [stepgraphObj[shown1].x, stepgraphObj[shown2].x, stepgraphObj[shown3].x, stepgraphObj[shown4].x, stepgraphObj[shown5].x];
       }
       else
       {
         ticks = [];
-        for (let i = 0; i < graphObj.length; i++)
+        for (let i = 0; i < stepgraphObj.length; i++)
         {
-          ticks.push(graphObj[i].x)
+          ticks.push(stepgraphObj[i].x)
         }
       }
+      
+      graphdata = [{"id": props.userData.name, "data": stepgraphObj.reverse()}]; 
+    }
+
+
+    function setHeartGraph(){
+      let currTime = props.userData.HeartData[0].startDate;
+      let sum = props.userData.HeartData[0].value;
+      let newObj = [];
+      
+        for (let j = 1; j < props.userData.HeartData.length; j++)
+        {
+        
+        
+
+        if ((!datesAreOnSameDay(new Date(currTime), new Date(props.userData.HeartData[j].startDate))))
+          {
+              newObj.push({
+              x: new Date(currTime).toDateString(),
+              y: sum })
+          currTime = props.userData.HeartData[j].startDate
+          sum = props.userData.HeartData[j].value
+          }
+          else
+            sum += props.userData.HeartData[j].value
+        }
 
       
-    
+
+      let heartgraphObj = [];
+      for (let i = 0; i < newObj.length; i++)
+        {
+
+          if (new Date(newObj[i].x) >= startDate && new Date(newObj[i].x) <= endDate)
+          {
+            heartgraphObj.push(newObj[i])
+          }
+        }
       
-      graphdata = [{"id": props.userData.name, "data": graphObj.reverse()}];
+      
+
+      if (heartgraphObj.length > 8)
+      {
+      ticks = [];
+      let shown1 = 0;
+      let shown2 = Math.floor((heartgraphObj.length - 1) / 4)
+      let shown3 = Math.floor((heartgraphObj.length - 1) / 2)
+      let shown4 = Math.floor((heartgraphObj.length - 1) / 4 * 3)
+      let shown5 = (heartgraphObj.length - 1)
+
+      ticks = [heartgraphObj[shown1].x, heartgraphObj[shown2].x, heartgraphObj[shown3].x, heartgraphObj[shown4].x, heartgraphObj[shown5].x];
+      }
+      else
+      {
+        ticks = [];
+        for (let i = 0; i < heartgraphObj.length; i++)
+        {
+          ticks.push(heartgraphObj[i].x)
+        }
+      }
+      
+      graphdata = [{"id": props.userData.name, "data": heartgraphObj.reverse()}]; 
     }
 
       
+    function setBPGraph(){
+      let currTime = props.userData.BPData[0].startDate;
+      let sum = props.userData.BPData[0].value;
+      let newObj = [];
+      
+        for (let j = 1; j < props.userData.BPData.length; j++)
+        {
+        
+        
+
+        if ((!datesAreOnSameDay(new Date(currTime), new Date(props.userData.BPData[j].startDate))))
+          {
+              newObj.push({
+              x: new Date(currTime).toDateString(),
+              y: sum })
+          currTime = props.userData.BPData[j].startDate
+          sum = props.userData.BPData[j].value
+          }
+          else
+            sum += props.userData.BPData[j].value
+        }
+
+      
+
+      let BPgraphObj = [];
+      for (let i = 0; i < newObj.length; i++)
+        {
+
+          if (new Date(newObj[i].x) >= startDate && new Date(newObj[i].x) <= endDate)
+          {
+            BPgraphObj.push(newObj[i])
+          }
+        }
+      
+      
+
+      if (BPgraphObj.length > 8)
+      {
+      ticks = [];
+      let shown1 = 0;
+      let shown2 = Math.floor((BPgraphObj.length - 1) / 4)
+      let shown3 = Math.floor((BPgraphObj.length - 1) / 2)
+      let shown4 = Math.floor((BPgraphObj.length - 1) / 4 * 3)
+      let shown5 = (heartgraphObj.length - 1)
+
+      ticks = [BPgraphObj[shown1].x, BPgraphObj[shown2].x, BPgraphObj[shown3].x, BPgraphObj[shown4].x, BPgraphObj[shown5].x];
+      }
+      else
+      {
+        ticks = [];
+        for (let i = 0; i < BPgraphObj.length; i++)
+        {
+          ticks.push(BPgraphObj[i].x)
+        }
+      }
+      
+      graphdata = [{"id": props.userData.name, "data": BPgraphObj.reverse()}]; 
+    }
+
+
       
 
     const classes = useStyles();
@@ -144,7 +263,23 @@ function Graphs(props) {
 
       if (event.target.value == 0)
       {
-        
+        {setStepGraph()}
+      }
+      if (event.target.value == 1)
+      {
+        {setHeartGraph()}
+      }
+      if (event.target.value == 2)
+      {
+        {setBPGraph()}
+      }
+      if (event.target.value == 3)
+      {
+        {setBGGraph()}
+      }
+      if (event.target.value == 4)
+      {
+        {setSleepGraph()}
       }
     };
 
@@ -248,9 +383,9 @@ function Graphs(props) {
 
         <div style={{height:300}}>
 
-    
+      
         <MyResponsiveLine data={graphdata}/>
-        {setGraph()}
+        
 
 
         </div>

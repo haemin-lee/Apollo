@@ -13,16 +13,16 @@ function PatientInfo(props) {
             </div>
             <div>
             <h3>Basic Info</h3> 
-            <h4>height: {props.userData.age} inches</h4>
-            <h4>height: {props.userData.DOB} inches</h4>
-            <h4>height: {props.userData.biosex} inches</h4>
+            <h4>Age: {props.userData.age} years old</h4>
+            <h4>DOB: {props.userData.DOB}</h4>
+            <h4>Biological Sex: {props.userData.biosex}</h4>
             </div>  
             <div>
             <h3>Measurements</h3> 
-            <h4>height: {props.userData.height} inches</h4>
-            <h4>weight: {props.userData.weight} pounds</h4> 
-            <h4>weight: {props.userData.BMI} pounds</h4> 
-            <h4>weight: {props.userData.BodyFat} pounds</h4> 
+            <h4>Height: {props.userData.height} inches</h4>
+            <h4>Weight: {props.userData.weight} pounds</h4> 
+            <h4>BMI: {props.userData.BMI}</h4> 
+            <h4>Body Fat: {props.userData.BodyFat}%</h4> 
             </div>  
             <div>
             <h3>Notes</h3> 
