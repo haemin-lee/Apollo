@@ -73,6 +73,18 @@ function Home() {
     const [userarr, setUsers] = useState(users);
     const [searchResult, setSearchResult] = useState("");
 
+    function correlatePatientsWithAppointments(){
+        for(i in patients)
+        {
+            var id = patients[i].id;
+            for(j in appointments)
+            {
+                if(appointments[j].data.patient === id)
+                {;}
+            }
+        }
+    }
+
     async function get_appointment_data() {
     const client = get_client()
     const d = await client.appointments.get_appointments();
