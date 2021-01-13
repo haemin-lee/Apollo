@@ -2663,6 +2663,7 @@
 
 "apollo-api-client@file:..\\apollo-api-client":
   "resolved" "file:../apollo-api-client"
+  "version" "1.0.0"
   dependencies:
     "axios" "^0.21.1"
 
@@ -4822,6 +4823,7 @@
 
 "drchrono-api-client@file:..\\drchrono-api-client":
   "resolved" "file:../drchrono-api-client"
+  "version" "1.0.0"
   dependencies:
     "axios" "^0.21.1"
 

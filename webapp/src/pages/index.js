@@ -35,16 +35,9 @@ class User {
 
 // figure styles out later...
 function Home() {
-<<<<<<< HEAD
-    let users = [
-                new User("Jenny", 20, 43, 32, "Female", "6/30/2000", 43, 12, "Very cool", DevinStepData, DevinStepData, DevinStepData, DevinStepData, DevinStepData), 
-                new User("Devin", 20, 54, 12, "Male", "10/2/2000", 76, 49, "Very epic", DevinStepData, DevinStepData, DevinStepData, DevinStepData, DevinStepData)
-            ];
-=======
 
     let users = [new User("Jenny", 1232131, 20, 43, 32, "Female", "6/30/2000", 43, 12, "Very cool",{},{},{},{},{},"","","",""), 
                  new User("Devin", 1232131, 20, 54, 12, "Male", "10/2/2000", 76, 49, "Very epic",{},{},{},{},{},"","","","")];
->>>>>>> 8dc52c13635b5c77fe36ccc91415b0aa98ad5c8c
     let activeUser = users[0];
 
 
@@ -67,11 +60,6 @@ function Home() {
         const client = get_client()
         const d = await client.appointments.get_appointment_documents(id)
 
-<<<<<<< HEAD
-    async function get_patient_data() {
-        const client = get_client()
-        const d = await client.patients.get_patients()
-=======
         let imagenum = 0;
         var idexist = false;
         var usersindex = users.length;
@@ -141,7 +129,6 @@ function Home() {
         setUsers(copy);
 
         console.log(users)
->>>>>>> 8dc52c13635b5c77fe36ccc91415b0aa98ad5c8c
     }
 
     function changeSelectedUser(i){
