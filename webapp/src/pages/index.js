@@ -217,24 +217,6 @@ function Home() {
     }, [])
 
     return (
-        <Container>
-            <Row>
-            <h1>Welcome to Apollo</h1>
-            </Row>
-            <Row style={{height:30}}></Row>
-            <Row>
-                <div style={{outline: "1px solid gray"}}>
-                    <Col>
-                        <h3>
-                            Select a patient
-                        </h3>
-                        <SearchBar
-                            value={searchResult}
-                            onChange={(newValue) => setSearchResult(newValue)}
-                            onRequestSearch={() => doSomethingWith(searchResult)}
-                        />
-                        {returnNameList(userarr)}
-                    </Col>
         <div className="container">
             <div className="row">
                 <div className="col-3">
@@ -246,6 +228,11 @@ function Home() {
                     >
                         Patients
                     </h4>
+                    <SearchBar
+                            value={searchResult}
+                            onChange={(newValue) => setSearchResult(newValue)}
+                            onRequestSearch={() => doSomethingWith(searchResult)}
+                        />
                     {renderPatientCards()}
                 </div>
                 <div className="col-9">
