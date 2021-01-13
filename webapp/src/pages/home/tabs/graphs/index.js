@@ -78,8 +78,6 @@ function Graphs(props) {
     const [startDate, setStartDate] = useState(new Date(onemobefore));
     const [endDate, setEndDate] = useState(new Date(today));
 
-    console.log(startDate)
-    console.log(endDate)
 
     function dateRange() {
         
@@ -259,7 +257,8 @@ function Graphs(props) {
       let sumsys = props.userData.BPData[0].bloodPressureSystolicValue;
       let sumdiast = props.userData.BPData[0].bloodPressureDiastolicValue;
       let perday = 1;
-      let newObj = [];
+      let newObjsys = [];
+      let newObjdiast = [];
       
         for (let j = 1; j < props.userData.BPData.length; j++)
         {
@@ -268,10 +267,10 @@ function Graphs(props) {
 
         if ((!datesAreOnSameDay(new Date(currTime), new Date(props.userData.BPData[j].startDate))))
           {
-              newObj.push({
+              newObjsys.push({
               x: new Date(currTime).toDateString(),
               y: sumsys / perday })
-              newObj.push({
+              newObjdiast.push({
               x: new Date(currTime).toDateString(),
               y: sumdiast / perday })
           currTime = props.userData.BPData[j].startDate
@@ -289,39 +288,54 @@ function Graphs(props) {
 
       
 
-      let BPgraphObj = [];
-      for (let i = 0; i < newObj.length; i++)
+      let BPgraphObjsys = [];
+      let BPgraphObjdiast = [];
+      for (let i = 0; i < newObjsys.length; i++)
         {
 
-          if (new Date(newObj[i].x) >= startDate && new Date(newObj[i].x) <= endDate)
+          if (new Date(newObjsys[i].x) >= startDate && new Date(newObjsys[i].x) <= endDate)
           {
-            BPgraphObj.push(newObj[i])
+            BPgraphObjsys.push(newObjsys[i])
           }
         }
+
+      for (let i = 0; i < newObjdiast.length; i++)
+      {
+
+        if (new Date(newObjdiast[i].x) >= startDate && new Date(newObjdiast[i].x) <= endDate)
+        {
+          BPgraphObjdiast.push(newObjdiast[i])
+        }
+      }
       
       
 
-      if (BPgraphObj.length > 8)
+      if (BPgraphObjsys.length > 8)
       {
       BPticks = [];
       let shown1 = 0;
-      let shown2 = Math.floor((BPgraphObj.length - 1) / 4)
-      let shown3 = Math.floor((BPgraphObj.length - 1) / 2)
-      let shown4 = Math.floor((BPgraphObj.length - 1) / 4 * 3)
-      let shown5 = (BPgraphObj.length - 1)
+      let shown2 = Math.floor((BPgraphObjsys.length - 1) / 4)
+      let shown3 = Math.floor((BPgraphObjsys.length - 1) / 2)
+      let shown4 = Math.floor((BPgraphObjsys.length - 1) / 4 * 3)
+      let shown5 = (BPgraphObjsys.length - 1)
 
-      ticks = [BPgraphObj[shown1].x, BPgraphObj[shown2].x, BPgraphObj[shown3].x, BPgraphObj[shown4].x, BPgraphObj[shown5].x];
+      ticks = [BPgraphObjsys[shown1].x, BPgraphObjsys[shown2].x, BPgraphObjsys[shown3].x, BPgraphObjsys[shown4].x, BPgraphObjsys[shown5].x];
       }
       else
       {
         BPticks = [];
-        for (let i = 0; i < BPgraphObj.length; i++)
+        for (let i = 0; i < BPgraphObjsys.length; i++)
         {
-          BPticks.push(BPgraphObj[i].x)
+          BPticks.push(BPgraphObjsys[i].x)
         }
       }
       
-      props.userData.presetgraph = [{"id": props.userData.name, "data": BPgraphObj.reverse()}]; 
+      props.userData.presetgraph = [{"id": props.userData.name + " systolic", "data": BPgraphObjsys.reverse()}, {"id": props.userData.name + " diastolic", "data": BPgraphObjdiast.reverse()}]; 
+
+      console.log(props.userData.BPData)
+      console.log(BPgraphObjsys)
+      console.log(BPgraphObjdiast)
+
       ticks = BPticks;
       xaxis = "Avg Blood Pressure"
       yaxis = "Date"
@@ -508,7 +522,7 @@ function Graphs(props) {
             data={data}
             margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
             xScale={{ type: 'point' }}
-            yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
+            yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: false, reverse: false }}
             yFormat=" >-.2f"
             colors={{"scheme":"accent"}}
             axisTop={null}
@@ -567,7 +581,6 @@ function Graphs(props) {
 />
 )
 
-console.log(props.userData.presetgraph)
 
     return (
 
