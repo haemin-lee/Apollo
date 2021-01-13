@@ -1,5 +1,5 @@
 // Future feature: import from Excel
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ResponsiveLine } from '@nivo/line'
 
 import React from 'react';
@@ -14,8 +14,26 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
+
+let xaxis = "";
+let yaxis = "";
+
 let graphdata = {};
+let stepgraphdata = {};
+let heartgraphdata = {};
+let BPgraphdata = {};
+let BGgraphdata = {};
+let sleepgraphdata = {};
+
 let ticks = [];
+let stepticks = [];
+let heartticks = [];
+let BPticks = [];
+let BGticks = [];
+let sleepticks = [];
+
+let isloaded = false;
+
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -71,7 +89,17 @@ function Graphs(props) {
       };
 
 
-    function setGraph(){
+    
+    {setStepGraph()}
+    {setHeartGraph()}
+    {setBPGraph()}
+    {setBGGraph()}
+    {setSleepGraph()}
+
+    function setStepGraph(){
+      xaxis = "Steps"
+      yaxis = "Date"
+
       let currTime = props.userData.StepData[0].startDate;
       let sum = props.userData.StepData[0].value;
       let newObj = [];
@@ -95,45 +123,318 @@ function Graphs(props) {
 
       
 
-      let graphObj = [];
+      let stepgraphObj = [];
       for (let i = 0; i < newObj.length; i++)
         {
 
           if (new Date(newObj[i].x) >= startDate && new Date(newObj[i].x) <= endDate)
           {
-            graphObj.push(newObj[i])
+            stepgraphObj.push(newObj[i])
           }
         }
       
       
 
-      if (graphObj.length > 8)
+      if (stepgraphObj.length > 8)
       {
-      ticks = [];
+      stepticks = [];
       let shown1 = 0;
-      let shown2 = Math.floor((graphObj.length - 1) / 4)
-      let shown3 = Math.floor((graphObj.length - 1) / 2)
-      let shown4 = Math.floor((graphObj.length - 1) / 4 * 3)
-      let shown5 = (graphObj.length - 1)
+      let shown2 = Math.floor((stepgraphObj.length - 1) / 4)
+      let shown3 = Math.floor((stepgraphObj.length - 1) / 2)
+      let shown4 = Math.floor((stepgraphObj.length - 1) / 4 * 3)
+      let shown5 = (stepgraphObj.length - 1)
 
-      ticks = [graphObj[shown1].x, graphObj[shown2].x, graphObj[shown3].x, graphObj[shown4].x, graphObj[shown5].x];
+      stepticks = [stepgraphObj[shown1].x, stepgraphObj[shown2].x, stepgraphObj[shown3].x, stepgraphObj[shown4].x, stepgraphObj[shown5].x];
       }
       else
       {
-        ticks = [];
-        for (let i = 0; i < graphObj.length; i++)
+        stepticks = [];
+        for (let i = 0; i < stepgraphObj.length; i++)
         {
-          ticks.push(graphObj[i].x)
+          stepticks.push(stepgraphObj[i].x)
         }
       }
+      
+      stepgraphdata = [{"id": props.userData.name, "data": stepgraphObj.reverse()}]; 
+
+    }
+
+
+    function setHeartGraph(){
+      xaxis = "Avg Heart Rate"
+      yaxis = "Date"
+
+      let currTime = props.userData.HeartData[0].startDate;
+      let sum = props.userData.HeartData[0].value;
+      let perday = 0;
+      let newObj = [];
+      
+        for (let j = 1; j < props.userData.HeartData.length; j++)
+        {
+        
+        
+
+        if ((!datesAreOnSameDay(new Date(currTime), new Date(props.userData.HeartData[j].startDate))))
+          {
+              newObj.push({
+              x: new Date(currTime).toDateString(),
+              y: sum/perday })
+          currTime = props.userData.HeartData[j].startDate
+          sum = props.userData.HeartData[j].value
+          perday = 0
+          }
+          else
+          {
+            sum += props.userData.HeartData[j].value
+            perday++
+          }
+            
+        }
 
       
-    
+
+      let heartgraphObj = [];
+      for (let i = 0; i < newObj.length; i++)
+        {
+
+          if (new Date(newObj[i].x) >= startDate && new Date(newObj[i].x) <= endDate)
+          {
+            heartgraphObj.push(newObj[i])
+          }
+        }
       
-      graphdata = [{"id": props.userData.name, "data": graphObj.reverse()}];
+      
+
+      if (heartgraphObj.length > 8)
+      {
+      ticks = [];
+      let shown1 = 0;
+      let shown2 = Math.floor((heartgraphObj.length - 1) / 4)
+      let shown3 = Math.floor((heartgraphObj.length - 1) / 2)
+      let shown4 = Math.floor((heartgraphObj.length - 1) / 4 * 3)
+      let shown5 = (heartgraphObj.length - 1)
+
+      heartticks = [heartgraphObj[shown1].x, heartgraphObj[shown2].x, heartgraphObj[shown3].x, heartgraphObj[shown4].x, heartgraphObj[shown5].x];
+      }
+      else
+      {
+        heartticks = [];
+        for (let i = 0; i < heartgraphObj.length; i++)
+        {
+          heartticks.push(heartgraphObj[i].x)
+        }
+      }
+      
+      heartgraphdata = [{"id": props.userData.name, "data": heartgraphObj.reverse()}]; 
     }
 
       
+    function setBPGraph(){
+      xaxis = "Avg Blood Pressure"
+      yaxis = "Date"
+
+      let currTime = props.userData.BPData[0].startDate;
+      let sumsys = props.userData.BPData[0].bloodPressureSystolicValue;
+      let sumdiast = props.userData.BPData[0].bloodPressureDiastolicValue;
+      let perday = 0;
+      let newObj = [];
+      
+        for (let j = 1; j < props.userData.BPData.length; j++)
+        {
+        
+        
+
+        if ((!datesAreOnSameDay(new Date(currTime), new Date(props.userData.BPData[j].startDate))))
+          {
+              newObj.push({
+              x: new Date(currTime).toDateString(),
+              y: sumsys / perday })
+              newObj.push({
+              x: new Date(currTime).toDateString(),
+              y: sumdiast / perday })
+          currTime = props.userData.BPData[j].startDate
+          sumsys = props.userData.BPData[j].bloodPressureSystolicValue
+          sumdiast = props.userData.BPData[j].bloodPressureDiastolicValue
+          perday = 0
+          }
+          else
+          {
+            sumsys += props.userData.BPData[j].bloodPressureDiastolicValue
+            sumdiast += props.userData.BPData[j].bloodPressureDiastolicValue
+            perday++
+          }
+        }
+
+      
+
+      let BPgraphObj = [];
+      for (let i = 0; i < newObj.length; i++)
+        {
+
+          if (new Date(newObj[i].x) >= startDate && new Date(newObj[i].x) <= endDate)
+          {
+            BPgraphObj.push(newObj[i])
+          }
+        }
+      
+      
+
+      if (BPgraphObj.length > 8)
+      {
+      BPticks = [];
+      let shown1 = 0;
+      let shown2 = Math.floor((BPgraphObj.length - 1) / 4)
+      let shown3 = Math.floor((BPgraphObj.length - 1) / 2)
+      let shown4 = Math.floor((BPgraphObj.length - 1) / 4 * 3)
+      let shown5 = (BPgraphObj.length - 1)
+
+      ticks = [BPgraphObj[shown1].x, BPgraphObj[shown2].x, BPgraphObj[shown3].x, BPgraphObj[shown4].x, BPgraphObj[shown5].x];
+      }
+      else
+      {
+        BPticks = [];
+        for (let i = 0; i < BPgraphObj.length; i++)
+        {
+          BPticks.push(BPgraphObj[i].x)
+        }
+      }
+      
+      BPgraphdata = [{"id": props.userData.name, "data": BPgraphObj.reverse()}]; 
+    }
+
+
+    function setBGGraph(){
+      xaxis = "Avg Blood Glucose"
+      yaxis = "Date"
+
+      let currTime = props.userData.BGData[0].startDate;
+      let sum = props.userData.BGData[0].value;
+      let perday = 0;
+      let newObj = [];
+      
+        for (let j = 1; j < props.userData.BGData.length; j++)
+        {
+        
+        
+
+        if ((!datesAreOnSameDay(new Date(currTime), new Date(props.userData.BGData[j].startDate))))
+          {
+              newObj.push({
+              x: new Date(currTime).toDateString(),
+              y: sum/perday })
+          currTime = props.userData.BGData[j].startDate
+          sum = props.userData.BGData[j].value
+          perday = 0
+          }
+          else
+          {
+            sum += props.userData.BGData[j].value
+            perday++
+          }
+            
+        }
+
+      
+
+      let BGgraphObj = [];
+      for (let i = 0; i < newObj.length; i++)
+        {
+
+          if (new Date(newObj[i].x) >= startDate && new Date(newObj[i].x) <= endDate)
+          {
+            BGgraphObj.push(newObj[i])
+          }
+        }
+      
+      
+
+      if (BGgraphObj.length > 8)
+      {
+      BGticks = [];
+      let shown1 = 0;
+      let shown2 = Math.floor((BGgraphObj.length - 1) / 4)
+      let shown3 = Math.floor((BGgraphObj.length - 1) / 2)
+      let shown4 = Math.floor((BGgraphObj.length - 1) / 4 * 3)
+      let shown5 = (BGgraphObj.length - 1)
+
+      ticks = [BGgraphObj[shown1].x, BGgraphObj[shown2].x, BGgraphObj[shown3].x, BGgraphObj[shown4].x, BGgraphObj[shown5].x];
+      }
+      else
+      {
+        BGticks = [];
+        for (let i = 0; i < BGgraphObj.length; i++)
+        {
+          BGticks.push(BGgraphObj[i].x)
+        }
+      }
+      
+      BGgraphdata = [{"id": props.userData.name, "data": BGgraphObj.reverse()}]; 
+    }
+
+
+    function setSleepGraph(){
+      xaxis = "Minutes of Sleep"
+      yaxis = "Date"
+
+      let currTime = props.userData.SleepData[0].startDate;
+      let sum = props.userData.SleepData[0].value;
+      let newObj = [];
+      
+        for (let j = 1; j < props.userData.SleepData.length; j++)
+        {
+        
+        
+
+        if ((!datesAreOnSameDay(new Date(currTime), new Date(props.userData.SleepData[j].startDate))))
+          {
+              newObj.push({
+              x: new Date(currTime).toDateString(),
+              y: sum })
+          currTime = props.userData.SleepData[j].startDate
+          sum = ((new Date(props.userData.SleepData[j].endDate).getMinutes()) - (new Date(props.userData.SleepData[j].startDate).getMinutes())) + 60*((new Date(props.userData.SleepData[j].endDate).getHours()) - (new Date(props.userData.SleepData[j].startDate).getHours()))
+          }
+          else
+            sum += ((new Date(props.userData.SleepData[j].endDate).getMinutes()) - (new Date(props.userData.SleepData[j].startDate).getMinutes())) + 60*((new Date(props.userData.SleepData[j].endDate).getHours()) - (new Date(props.userData.SleepData[j].startDate).getHours()))
+        }
+
+      
+
+      let sleepgraphObj = [];
+      for (let i = 0; i < newObj.length; i++)
+        {
+
+          if (new Date(newObj[i].x) >= startDate && new Date(newObj[i].x) <= endDate)
+          {
+            sleepgraphObj.push(newObj[i])
+          }
+        }
+      
+      
+
+      if (sleepgraphObj.length > 8)
+      {
+      sleepticks = [];
+      let shown1 = 0;
+      let shown2 = Math.floor((sleepgraphObj.length - 1) / 4)
+      let shown3 = Math.floor((sleepgraphObj.length - 1) / 2)
+      let shown4 = Math.floor((sleepgraphObj.length - 1) / 4 * 3)
+      let shown5 = (sleepgraphObj.length - 1)
+
+      ticks = [sleepgraphObj[shown1].x, sleepgraphObj[shown2].x, sleepgraphObj[shown3].x, sleepgraphObj[shown4].x, sleepgraphObj[shown5].x];
+      }
+      else
+      {
+        sleepticks = [];
+        for (let i = 0; i < sleepgraphObj.length; i++)
+        {
+          sleepticks.push(sleepgraphObj[i].x)
+        }
+      }
+      
+      sleepgraphdata = [{"id": props.userData.name, "data": sleepgraphObj.reverse()}]; 
+    }
+
+
       
 
     const classes = useStyles();
@@ -144,7 +445,28 @@ function Graphs(props) {
 
       if (event.target.value == 0)
       {
-        
+        ticks = stepticks;
+        graphdata = stepgraphdata;
+      }
+      if (event.target.value == 1)
+      {
+        ticks = heartticks;
+        graphdata = heartgraphdata;
+      }
+      if (event.target.value == 2)
+      {
+        ticks = BPticks;
+        graphdata = BPgraphdata;
+      }
+      if (event.target.value == 3)
+      {
+        ticks = BGticks;
+        graphdata = BGgraphdata;
+      }
+      if (event.target.value == 4)
+      {
+        ticks = sleepticks;
+        graphdata = sleepgraphdata;
       }
     };
 
@@ -166,7 +488,7 @@ function Graphs(props) {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'Date',
+                legend: xaxis,
                 legendOffset: 36,
                 legendPosition: 'middle',
                 tickValues: ticks
@@ -176,7 +498,7 @@ function Graphs(props) {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'Steps',
+                legend: yaxis,
                 legendOffset: -40,
                 legendPosition: 'middle'
             }}
@@ -215,6 +537,7 @@ function Graphs(props) {
 />
 )
 
+
     return (
 
         <div>
@@ -248,9 +571,9 @@ function Graphs(props) {
 
         <div style={{height:300}}>
 
-    
+
         <MyResponsiveLine data={graphdata}/>
-        {setGraph()}
+        
 
 
         </div>

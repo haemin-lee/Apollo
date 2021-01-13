@@ -64,9 +64,15 @@ function Home() {
                  new User("Devin", 1232131, 20, 54, 12, "Male", "10/2/2000", 76, 49, "Very epic",{},{},{},{},{},"","","","")];
     let activeUser = users[0];
 
+<<<<<<< HEAD
     const [data, setData] = useState(activeUser);
     const [userarr, setUsers] = useState(users);
     const [searchResult, setSearchResult] = useState("");
+=======
+
+    const [data, setData] = useState(activeUser);
+    const [userarr, setUsers] = useState(users);
+>>>>>>> 6ada333143be38386b5d45b5d94b5f47dacc6c83
 
     async function get_appointment_data() {
         const client = get_client()
@@ -82,6 +88,7 @@ function Home() {
     async function get_appointment_document(id) {
         const client = get_client()
         const d = await client.appointments.get_appointment_documents(id)
+<<<<<<< HEAD
         //console.log(d);
     }
 
@@ -96,6 +103,21 @@ function Home() {
             if (d[0].patient === users[i].id) {
                 idexist = true
                 usersindex = i
+=======
+        
+        console.log(d)
+
+        let imagenum = 0;
+        var idexist = false;
+        var usersindex = users.length;
+
+        for(let i = 0; i < users.length; i++)
+        {
+            if (d[0].patient === users[i].id)
+            {
+                idexist = true;
+                usersindex = i;
+>>>>>>> 6ada333143be38386b5d45b5d94b5f47dacc6c83
             }
         }
 
@@ -124,6 +146,7 @@ function Home() {
                 )
             )
             activeUser = users[users.length - 1]
+            console.log(activeUser)
         }
 
         var copy = users
@@ -132,29 +155,37 @@ function Home() {
             if (d[i].type === 'LINE_GRAPH') {
                 if (d[i].name === 'Steps') {
                     copy[usersindex].StepData = d[i].data
+                    copy[usersindex].data[0] = d[i].data
                 }
-                if (d[i].name === 'Heart') {
+                if (d[i].name === 'Heart Rate') {
                     copy[usersindex].HeartData = d[i].data
+                    copy[usersindex].data[1] = d[i].data
                 }
-                if (d[i].name === 'BP') {
+                if (d[i].name === 'Blood Pressure') {
                     copy[usersindex].BPData = d[i].data
+                    copy[usersindex].data[2] = d[i].data
                 }
-                if (d[i].name === 'BG') {
+                if (d[i].name === 'Blood Glucose') {
                     copy[usersindex].BGData = d[i].data
+                    copy[usersindex].data[3] = d[i].data
                 }
                 if (d[i].name === 'Sleep') {
                     copy[usersindex].SleepData = d[i].data
+                    copy[usersindex].data[4] = d[i].data
                 }
             }
             if (d[i].type === 'IMAGE') {
                 if (imagenum === 0) {
                     copy[usersindex].Image1 = d[i].data
+                    copy[usersindex].data[5] = d[i].data
                 }
                 if (imagenum === 1) {
                     copy[usersindex].Image2 = d[i].data
+                    copy[usersindex].data[6] = d[i].data
                 }
                 if (imagenum === 2) {
                     copy[usersindex].Image3 = d[i].data
+                    copy[usersindex].data[7] = d[i].data
                 }
                 imagenum++
             }
@@ -242,5 +273,6 @@ function Home() {
         </div>
     )
 }
+
 
 export default Home
