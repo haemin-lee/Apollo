@@ -59,47 +59,211 @@ function Data() {
 
     const finish = () => {
         navigation.navigate('1')
-        // navigation.goBack()
+    }
+
+    const getStepData = (options = {}) => {
+        return new Promise((resolve) => {
+            AppleHealthKit.getDailyStepCountSamples(
+                {
+                    startDate: new Date(2020, 1, 1).toISOString(),
+                    endDate: new Date().toISOString(),
+                },
+                async (err, result) => {
+                    if (err)
+                        return Alert.alert('Error', 'Something bad happened')
+                    // post data
+                    const user = store.getState().user
+                    const client = get_client(user.data.id)
+                    const item = store.getState().checkIn
+                    console.log(item)
+
+                    const doc = {
+                        appointment: item.id,
+                        patient: item.data.patient,
+                        name: 'Steps',
+                        data: result,
+                        type: 'LINE_GRAPH',
+                    }
+                    const res = await client.appointments.post_appointment_document(
+                        item.id,
+                        doc
+                    )
+
+                    if (options._debug) {
+                        console.log(result)
+                        Alert.alert('Step Count', 'Yay got data')
+                    }
+
+                    resolve(res)
+                }
+            )
+        })
+    }
+
+    const getHeartRateData = (options = {}) => {
+        return new Promise((resolve) => {
+            AppleHealthKit.getHeartRateSamples(
+                {
+                    startDate: new Date(2020, 1, 1).toISOString(),
+                    endDate: new Date().toISOString(),
+                },
+                async (err, result) => {
+                    if (err)
+                        return Alert.alert('Error', 'Something bad happened')
+                    // post data
+                    const user = store.getState().user
+                    const client = get_client(user.data.id)
+                    const item = store.getState().checkIn
+
+                    const doc = {
+                        appointment: item.id,
+                        patient: item.data.patient,
+                        name: 'Heart Rate',
+                        data: result,
+                        type: 'LINE_GRAPH',
+                    }
+                    const res = await client.appointments.post_appointment_document(
+                        item.id,
+                        doc
+                    )
+
+                    if (options._debug) {
+                        console.log(result)
+                        Alert.alert('Heart Rate', 'Yay got data')
+                    }
+                    resolve(res)
+                }
+            )
+        })
+    }
+
+    const getBloodPressureData = (options = {}) => {
+        return new Promise((resolve) => {
+            AppleHealthKit.getBloodPressureSamples(
+                {
+                    startDate: new Date(2020, 1, 1).toISOString(),
+                    endDate: new Date().toISOString(),
+                },
+                async (err, result) => {
+                    if (err)
+                        return Alert.alert('Error', 'Something bad happened')
+                    // post data
+                    const user = store.getState().user
+                    const client = get_client(user.data.id)
+                    const item = store.getState().checkIn
+                    console.log(item)
+
+                    const doc = {
+                        appointment: item.id,
+                        patient: item.data.patient,
+                        name: 'Blood Pressure',
+                        data: result,
+                        type: 'LINE_GRAPH',
+                    }
+                    const res = await client.appointments.post_appointment_document(
+                        item.id,
+                        doc
+                    )
+                    if (options._debug) {
+                        console.log(result)
+                        Alert.alert('Blood Pressure', 'Yay got data')
+                    }
+                    resolve(res)
+                }
+            )
+        })
+    }
+
+    const getBloodGlucoseData = (options = {}) => {
+        return new Promise((resolve) => {
+            AppleHealthKit.getBloodGlucoseSamples(
+                {
+                    startDate: new Date(2020, 1, 1).toISOString(),
+                    endDate: new Date().toISOString(),
+                },
+                async (err, result) => {
+                    if (err)
+                        return Alert.alert('Error', 'Something bad happened')
+                    // post data
+                    const user = store.getState().user
+                    const client = get_client(user.data.id)
+                    const item = store.getState().checkIn
+                    console.log(item)
+
+                    const doc = {
+                        appointment: item.id,
+                        patient: item.data.patient,
+                        name: 'Blood Glucose',
+                        data: result,
+                        type: 'LINE_GRAPH',
+                    }
+                    const res = await client.appointments.post_appointment_document(
+                        item.id,
+                        doc
+                    )
+                    if (options._debug) {
+                        console.log(result)
+                        Alert.alert('Blood Pressure', 'Yay got data')
+                    }
+                    resolve(res)
+                }
+            )
+        })
+    }
+
+    const getSleepData = (options = {}) => {
+        return new Promise((resolve) => {
+            AppleHealthKit.getSleepSamples(
+                {
+                    startDate: new Date(2020, 1, 1).toISOString(),
+                    endDate: new Date().toISOString(),
+                },
+                async (err, result) => {
+                    if (err)
+                        return Alert.alert('Error', 'Something bad happened')
+                    // post data
+                    const user = store.getState().user
+                    const client = get_client(user.data.id)
+                    const item = store.getState().checkIn
+                    console.log(item)
+
+                    const doc = {
+                        appointment: item.id,
+                        patient: item.data.patient,
+                        name: 'Sleep',
+                        data: result,
+                        type: 'LINE_GRAPH',
+                    }
+                    const res = await client.appointments.post_appointment_document(
+                        item.id,
+                        doc
+                    )
+                    if (options._debug) {
+                        console.log(result)
+                        Alert.alert('Sleep', 'Yay got data')
+                    }
+                    resolve(res)
+                }
+            )
+        })
     }
 
     const getHealthData = async () => {
-        const user = store.getState().user
-        const client = get_client(user.data.id)
         await getPermissions()
-        AppleHealthKit.getDailyStepCountSamples(
-            {
-                startDate: new Date(2020, 1, 1).toISOString(),
-                endDate: new Date().toISOString(),
-            },
-            async (err, result) => {
-                if (err) return Alert.alert('Error', 'Something bad happened')
-                // post data
-                const item = store.getState().checkIn
-                console.log(item)
+        const options = {
+            _debug: false,
+        }
 
-                const doc = {
-                    appointment: item.id,
-                    patient: item.data.patient,
-                    name: 'Steps',
-                    data: result,
-                    type: 'LINE_GRAPH',
-                }
-                const res = await client.appointments.post_appointment_document(
-                    item.id,
-                    doc
-                )
-                Alert.alert('Step Count', 'Yay got data')
-            }
+        await getStepData(options)
+        await getHeartRateData(options)
+        await getBloodPressureData(options)
+        await getBloodGlucoseData(options)
+        await getSleepData(options)
+        Alert.alert(
+            'Data Transferred',
+            'Your doctor now has access to your most current Apple Health Data'
         )
-        // AppleHealthKit.getLatestHeight(null, (err, result) => {
-        //     console.log(result)
-        //     // console.log(result.value)
-        //     Alert.alert(
-        //         'Retrieved Apple Health Data',
-        //         `Height: ${result.value}`
-        //     )
-        //     // finish()
-        // })
+        finish()
     }
 
     return (
@@ -120,7 +284,8 @@ function Data() {
                             </Header>
                             <Subtext>
                                 Using Apollo with the Apple Health app empowers
-                                you to copy the Apple interface guidelines
+                                your doctor with more relevant health data to
+                                provide you better care and service
                             </Subtext>
                         </View>
                         <RoundButton
