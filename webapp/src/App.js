@@ -2,7 +2,6 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link,
     useHistory,
     useLocation,
 } from 'react-router-dom'
@@ -20,51 +19,56 @@ import { get_token } from 'drchrono-api-client'
 function TopNav(props) {
     const dispatch = useDispatch()
     return (
-        //<div className="navbar navbar-expand-lg navbar-light navbar-transparent">
-        <div>
-            <Navbar bg="dark" expand="lg" style={{height:30}}>
-                <Navbar.Brand href="/">Apollo</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    {!props.user ? (
-                        <Nav className="ml-auto">
-                            <Nav.Link href="https://drchrono.com/o/authorize/?redirect_uri=http://localhost:3000/login&response_type=code&client_id=dkzdPUi9XUYshx0batJXVE4zm8enBvFqlZCR0G2s">
-                                <p
-                                    style={{
-                                        float: 'left',
-                                        marginTop: 10,
-                                        color: 'white',
-                                    }}
-                                >
-                                    Sign in
-                                </p>
-                            </Nav.Link>
-                        </Nav>
-                    ) : (
-                        <Nav className="ml-auto">
-                            <Nav.Link
-                                href="/"
-                                onClick={(e) => {
-                                    localStorage.clear()
-                                    dispatch(logout_user())
+        <div className="navbar navbar-expand-lg navbar-light navbar-transparent">
+            <Navbar.Brand href="/">
+                <p
+                    style={{
+                        fontFamily: 'Poppins',
+                        color: !props.user ? 'white' : '#343a40',
+                    }}
+                >
+                    Apollo
+                </p>
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                {!props.user ? (
+                    <Nav className="ml-auto">
+                        <Nav.Link href="https://drchrono.com/o/authorize/?redirect_uri=http://localhost:3000/login&response_type=code&client_id=dkzdPUi9XUYshx0batJXVE4zm8enBvFqlZCR0G2s">
+                            <p
+                                style={{
+                                    fontFamily: 'Poppins',
+                                    marginTop: 10,
+                                    color: !props.user ? 'white' : '#343a40',
                                 }}
                             >
-                                <p
-                                    style={{
-                                        float: 'left',
-                                        marginTop: 10,
-                                        color: 'white',
-                                    }}
-                                >
-                                    Logout {props.user.firstName}
-                                </p>
-                            </Nav.Link>
-                        </Nav>
-                    )}
-                </Navbar.Collapse>
-            </Navbar>
+                                Sign in
+                            </p>
+                        </Nav.Link>
+                    </Nav>
+                ) : (
+                    <Nav className="ml-auto">
+                        <Nav.Link
+                            href="/"
+                            onClick={(e) => {
+                                localStorage.clear()
+                                dispatch(logout_user())
+                            }}
+                        >
+                            <p
+                                style={{
+                                    fontFamily: 'Poppins',
+                                    marginTop: 10,
+                                    color: !props.user ? 'white' : '#343a40',
+                                }}
+                            >
+                                Logout {props.user.firstName}
+                            </p>
+                        </Nav.Link>
+                    </Nav>
+                )}
+            </Navbar.Collapse>
         </div>
-    
     )
 }
 
@@ -173,4 +177,3 @@ function AppContainer() {
 }
 
 export default AppContainer
-
