@@ -21,7 +21,8 @@ class User {
         SleepData,
         Image1,
         Image2,
-        Image3
+        Image3,
+        presetgraph
     ) {
         this.name = name
         this.id = id
@@ -48,6 +49,35 @@ class User {
             Image2,
             Image3,
         ]
+        this.presetgraph = [{
+            "id": "CHOOSE DATA",
+            "data": [
+              {
+                "x": 1,
+                "y": 1
+              },
+              {
+                "x": 2,
+                "y": 2
+              },
+              {
+                "x": 3,
+                "y": 3
+              },
+              {
+                "x": 4,
+                "y": 4
+              },
+              {
+                "x": 5,
+                "y": 5
+              },
+              {
+                "x": 6,
+                "y": 6
+              }
+            ]
+          }];
     }
 }
 

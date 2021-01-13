@@ -18,7 +18,6 @@ import "react-datepicker/dist/react-datepicker.css";
 let xaxis = "";
 let yaxis = "";
 
-let graphdata = {};
 let stepgraphdata = {};
 let heartgraphdata = {};
 let BPgraphdata = {};
@@ -54,6 +53,17 @@ const useStyles = makeStyles((theme) => ({
 // Prob better way to do prop mapping
 function Graphs(props) {
 
+  const [refresh, setRefresh] = useState(0)
+
+  useEffect(() => {
+    setTimeout(()=>{
+      ticks = stepticks;
+      props.userData.presetgraph = stepgraphdata;
+      xaxis = "Steps"
+      yaxis = "Date"
+      setRefresh(!refresh);
+      }, 50)
+}, [])
 
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -61,9 +71,15 @@ function Graphs(props) {
   var yyyy = today.getFullYear();
   
   today = mm + '/' + dd + '/' + yyyy;
+  var onemobefore = new Date(today) 
+  onemobefore.setMonth(onemobefore.getMonth()-1)
 
-    const [startDate, setStartDate] = useState(new Date(today));
+
+    const [startDate, setStartDate] = useState(new Date(onemobefore));
     const [endDate, setEndDate] = useState(new Date(today));
+
+    console.log(startDate)
+    console.log(endDate)
 
     function dateRange() {
         
@@ -71,14 +87,32 @@ function Graphs(props) {
           <>
             <DatePicker
               selected={startDate}
-              onChange={date => setStartDate(date)}
+              onChange={date => {
+                setStartDate(date)
+                setStepGraph()
+                setHeartGraph()
+                setBPGraph()
+                setBGGraph()
+                setSleepGraph()
+                setGraph(graphtype)
+              }
+            }
               selectsStart
               startDate={startDate}
               endDate={endDate}
             />
             <DatePicker
               selected={endDate}
-              onChange={date => setEndDate(date)}
+              onChange={date => {
+                setEndDate(date)
+                setStepGraph()
+                setHeartGraph()
+                setBPGraph()
+                setBGGraph()
+                setSleepGraph()
+                setGraph(graphtype)
+              }
+            }
               selectsEnd
               startDate={startDate}
               endDate={endDate}
@@ -90,15 +124,14 @@ function Graphs(props) {
 
 
     
-    {setStepGraph()}
-    {setHeartGraph()}
-    {setBPGraph()}
-    {setBGGraph()}
-    {setSleepGraph()}
+    setStepGraph()
+    setHeartGraph()
+    setBPGraph()
+    setBGGraph()
+    setSleepGraph()
 
     function setStepGraph(){
-      xaxis = "Steps"
-      yaxis = "Date"
+      
 
       let currTime = props.userData.StepData[0].startDate;
       let sum = props.userData.StepData[0].value;
@@ -161,12 +194,11 @@ function Graphs(props) {
 
 
     function setHeartGraph(){
-      xaxis = "Avg Heart Rate"
-      yaxis = "Date"
+      
 
       let currTime = props.userData.HeartData[0].startDate;
       let sum = props.userData.HeartData[0].value;
-      let perday = 0;
+      let perday = 1;
       let newObj = [];
       
         for (let j = 1; j < props.userData.HeartData.length; j++)
@@ -181,7 +213,7 @@ function Graphs(props) {
               y: sum/perday })
           currTime = props.userData.HeartData[j].startDate
           sum = props.userData.HeartData[j].value
-          perday = 0
+          perday = 1
           }
           else
           {
@@ -230,13 +262,12 @@ function Graphs(props) {
 
       
     function setBPGraph(){
-      xaxis = "Avg Blood Pressure"
-      yaxis = "Date"
+      
 
       let currTime = props.userData.BPData[0].startDate;
       let sumsys = props.userData.BPData[0].bloodPressureSystolicValue;
       let sumdiast = props.userData.BPData[0].bloodPressureDiastolicValue;
-      let perday = 0;
+      let perday = 1;
       let newObj = [];
       
         for (let j = 1; j < props.userData.BPData.length; j++)
@@ -255,7 +286,7 @@ function Graphs(props) {
           currTime = props.userData.BPData[j].startDate
           sumsys = props.userData.BPData[j].bloodPressureSystolicValue
           sumdiast = props.userData.BPData[j].bloodPressureDiastolicValue
-          perday = 0
+          perday = 1
           }
           else
           {
@@ -304,12 +335,10 @@ function Graphs(props) {
 
 
     function setBGGraph(){
-      xaxis = "Avg Blood Glucose"
-      yaxis = "Date"
 
       let currTime = props.userData.BGData[0].startDate;
       let sum = props.userData.BGData[0].value;
-      let perday = 0;
+      let perday = 1;
       let newObj = [];
       
         for (let j = 1; j < props.userData.BGData.length; j++)
@@ -324,7 +353,7 @@ function Graphs(props) {
               y: sum/perday })
           currTime = props.userData.BGData[j].startDate
           sum = props.userData.BGData[j].value
-          perday = 0
+          perday = 1
           }
           else
           {
@@ -373,11 +402,9 @@ function Graphs(props) {
 
 
     function setSleepGraph(){
-      xaxis = "Minutes of Sleep"
-      yaxis = "Date"
 
       let currTime = props.userData.SleepData[0].startDate;
-      let sum = props.userData.SleepData[0].value;
+      let sum = ((new Date(props.userData.SleepData[0].endDate).getMinutes()) - (new Date(props.userData.SleepData[0].startDate).getMinutes())) + 60*((new Date(props.userData.SleepData[0].endDate).getHours()) - (new Date(props.userData.SleepData[0].startDate).getHours()));
       let newObj = [];
       
         for (let j = 1; j < props.userData.SleepData.length; j++)
@@ -435,39 +462,77 @@ function Graphs(props) {
     }
 
 
+    
       
 
     const classes = useStyles();
     const [graphtype, setGraphType] = React.useState(0);
   
+
+    function setGraph(val)
+    {
+      if (val == 0)
+      {
+        props.userData.presetgraph = stepgraphdata;
+      }
+      if (val  == 1)
+      {
+        props.userData.presetgraph = heartgraphdata;
+      }
+      if (val  == 2)
+      {
+        props.userData.presetgraph = BPgraphdata;
+      }
+      if (val  == 3)
+      {
+        props.userData.presetgraph = BGgraphdata;
+      }
+      if (val  == 4)
+      {
+        props.userData.presetgraph = sleepgraphdata;
+      }
+
+    }
+
     const handleChange = (event) => {
-      setGraphType(event.target.value);
 
       if (event.target.value == 0)
       {
+        setStepGraph()
         ticks = stepticks;
-        graphdata = stepgraphdata;
+        xaxis = "Steps"
+        yaxis = "Date"
       }
       if (event.target.value == 1)
       {
+        setHeartGraph()
         ticks = heartticks;
-        graphdata = heartgraphdata;
+        xaxis = "Avg Heart Rate"
+        yaxis = "Date"
       }
       if (event.target.value == 2)
       {
+        setBPGraph()
         ticks = BPticks;
-        graphdata = BPgraphdata;
+        xaxis = "Avg Blood Pressure"
+        yaxis = "Date"
       }
       if (event.target.value == 3)
       {
+        setBGGraph()
         ticks = BGticks;
-        graphdata = BGgraphdata;
+        xaxis = "Avg Blood Glucose"
+        yaxis = "Date"
       }
       if (event.target.value == 4)
       {
+        setSleepGraph()
         ticks = sleepticks;
-        graphdata = sleepgraphdata;
+        xaxis = "Minutes of Sleep"
+        yaxis = "Date"
       }
+      setGraph(event.target.value)
+      setGraphType(event.target.value)
     };
 
     const [value, setValue] = React.useState([null, null]);
@@ -488,7 +553,7 @@ function Graphs(props) {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: xaxis,
+                legend: yaxis,
                 legendOffset: 36,
                 legendPosition: 'middle',
                 tickValues: ticks
@@ -498,7 +563,7 @@ function Graphs(props) {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: yaxis,
+                legend: xaxis,
                 legendOffset: -40,
                 legendPosition: 'middle'
             }}
@@ -537,6 +602,7 @@ function Graphs(props) {
 />
 )
 
+console.log(props.userData.presetgraph)
 
     return (
 
@@ -572,7 +638,8 @@ function Graphs(props) {
         <div style={{height:300}}>
 
 
-        <MyResponsiveLine data={graphdata}/>
+      
+        <MyResponsiveLine data={props.userData.presetgraph}/>
         
 
 
