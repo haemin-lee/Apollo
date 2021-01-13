@@ -74,13 +74,15 @@ function Home() {
     }
 
     async function get_patient_data() {
-        const client = get_client()
-        const d = await client.patients.get_patients()
+        const client = get_client();
+        const d = await client.patients.get_patients();
+        console.log(d);
     }
 
     async function get_appointment_document(id) {
         const client = get_client()
         const d = await client.appointments.get_appointment_documents(id)
+        //console.log(d);
     }
 
     async function get_patient_data() {
@@ -159,13 +161,11 @@ function Home() {
         }
 
         setUsers(copy)
-
-        console.log(users)
     }
 
     function changeSelectedUser(i) {
         setData(userarr[i])
-        console.log(i)
+
     }
 
     function renderPatientCards() {

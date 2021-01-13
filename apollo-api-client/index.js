@@ -11,7 +11,7 @@ function get_client(token, options = {}) {
     if (token) headers['X-Authenticated-User'] = token
 
     const instance = axios.create({
-        timeout: 10000,
+        timeout: 0,
         headers: headers,
     })
 
