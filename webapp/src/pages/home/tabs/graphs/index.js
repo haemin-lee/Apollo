@@ -31,7 +31,7 @@ let BPticks = [];
 let BGticks = [];
 let sleepticks = [];
 
-let isloaded = false;
+let graphtypevar = 0;
 
 
 const useStyles = makeStyles((theme) => ({
@@ -89,12 +89,7 @@ function Graphs(props) {
               selected={startDate}
               onChange={date => {
                 setStartDate(date)
-                setStepGraph()
-                setHeartGraph()
-                setBPGraph()
-                setBGGraph()
-                setSleepGraph()
-                setGraph(graphtype)
+                setGraph(graphtypevar)
               }
             }
               selectsStart
@@ -105,12 +100,7 @@ function Graphs(props) {
               selected={endDate}
               onChange={date => {
                 setEndDate(date)
-                setStepGraph()
-                setHeartGraph()
-                setBPGraph()
-                setBGGraph()
-                setSleepGraph()
-                setGraph(graphtype)
+                setGraph(graphtypevar)
               }
             }
               selectsEnd
@@ -124,11 +114,7 @@ function Graphs(props) {
 
 
     
-    setStepGraph()
-    setHeartGraph()
-    setBPGraph()
-    setBGGraph()
-    setSleepGraph()
+    setGraph(graphtypevar)
 
     function setStepGraph(){
       
@@ -188,8 +174,10 @@ function Graphs(props) {
         }
       }
       
-      stepgraphdata = [{"id": props.userData.name, "data": stepgraphObj.reverse()}]; 
-
+      props.userData.presetgraph = [{"id": props.userData.name, "data": stepgraphObj.reverse()}]; 
+      ticks = stepticks;
+      xaxis = "Steps"
+      yaxis = "Date"
     }
 
 
@@ -257,7 +245,10 @@ function Graphs(props) {
         }
       }
       
-      heartgraphdata = [{"id": props.userData.name, "data": heartgraphObj.reverse()}]; 
+      props.userData.presetgraph = [{"id": props.userData.name, "data": heartgraphObj.reverse()}]; 
+      ticks = heartticks;
+      xaxis = "Avg Heart Rate"
+      yaxis = "Date"
     }
 
       
@@ -330,7 +321,10 @@ function Graphs(props) {
         }
       }
       
-      BPgraphdata = [{"id": props.userData.name, "data": BPgraphObj.reverse()}]; 
+      props.userData.presetgraph = [{"id": props.userData.name, "data": BPgraphObj.reverse()}]; 
+      ticks = BPticks;
+      xaxis = "Avg Blood Pressure"
+      yaxis = "Date"
     }
 
 
@@ -397,7 +391,10 @@ function Graphs(props) {
         }
       }
       
-      BGgraphdata = [{"id": props.userData.name, "data": BGgraphObj.reverse()}]; 
+      props.userData.presetgraph = [{"id": props.userData.name, "data": BGgraphObj.reverse()}]; 
+      ticks = BGticks;
+      xaxis = "Avg Blood Glucose"
+      yaxis = "Date"
     }
 
 
@@ -458,7 +455,10 @@ function Graphs(props) {
         }
       }
       
-      sleepgraphdata = [{"id": props.userData.name, "data": sleepgraphObj.reverse()}]; 
+      props.userData.presetgraph = [{"id": props.userData.name, "data": sleepgraphObj.reverse()}]; 
+      ticks = sleepticks;
+      xaxis = "Minutes of Sleep"
+      yaxis = "Date"
     }
 
 
@@ -473,64 +473,29 @@ function Graphs(props) {
     {
       if (val == 0)
       {
-        props.userData.presetgraph = stepgraphdata;
+        setStepGraph()
       }
       if (val  == 1)
       {
-        props.userData.presetgraph = heartgraphdata;
+        setHeartGraph()
       }
       if (val  == 2)
       {
-        props.userData.presetgraph = BPgraphdata;
+        setBPGraph()
       }
       if (val  == 3)
       {
-        props.userData.presetgraph = BGgraphdata;
+        setBGGraph()
       }
       if (val  == 4)
       {
-        props.userData.presetgraph = sleepgraphdata;
+        setSleepGraph()
       }
 
     }
 
     const handleChange = (event) => {
-
-      if (event.target.value == 0)
-      {
-        setStepGraph()
-        ticks = stepticks;
-        xaxis = "Steps"
-        yaxis = "Date"
-      }
-      if (event.target.value == 1)
-      {
-        setHeartGraph()
-        ticks = heartticks;
-        xaxis = "Avg Heart Rate"
-        yaxis = "Date"
-      }
-      if (event.target.value == 2)
-      {
-        setBPGraph()
-        ticks = BPticks;
-        xaxis = "Avg Blood Pressure"
-        yaxis = "Date"
-      }
-      if (event.target.value == 3)
-      {
-        setBGGraph()
-        ticks = BGticks;
-        xaxis = "Avg Blood Glucose"
-        yaxis = "Date"
-      }
-      if (event.target.value == 4)
-      {
-        setSleepGraph()
-        ticks = sleepticks;
-        xaxis = "Minutes of Sleep"
-        yaxis = "Date"
-      }
+      graphtypevar = event.target.value
       setGraph(event.target.value)
       setGraphType(event.target.value)
     };
