@@ -38,6 +38,10 @@ const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
       minWidth: 120,
+      typography: {
+        fontFamily: "Poppins"
+      },
+
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
@@ -75,9 +79,16 @@ function Graphs(props) {
   onemobefore.setMonth(onemobefore.getMonth()-1)
 
 
+  
     const [startDate, setStartDate] = useState(new Date(onemobefore));
     const [endDate, setEndDate] = useState(new Date(today));
 
+
+    const ExampleCustomInput = ({ value, onClick }) => (
+      <button class = "example-custom-input" onClick={onClick}>
+        {value}
+      </button>
+    );
 
     function dateRange() {
         
@@ -90,10 +101,14 @@ function Graphs(props) {
                 setGraph(graphtypevar)
               }
             }
+              customInput={<ExampleCustomInput />}
               selectsStart
               startDate={startDate}
               endDate={endDate}
             />
+            <>
+            <h7>-</h7>
+            </>
             <DatePicker
               selected={endDate}
               onChange={date => {
@@ -101,6 +116,7 @@ function Graphs(props) {
                 setGraph(graphtypevar)
               }
             }
+              customInput={<ExampleCustomInput />}
               selectsEnd
               startDate={startDate}
               endDate={endDate}
@@ -536,7 +552,7 @@ function Graphs(props) {
                 tickPadding: 5,
                 tickRotation: 0,
                 legend: xaxis,
-                legendOffset: -40,
+                legendOffset: -45,
                 legendPosition: 'middle'
             }}
             pointSize={10}
@@ -576,47 +592,51 @@ function Graphs(props) {
 
 
     return (
-
-        <div>
+      <>
+        <div className = "row">
         
-        <div>
+          <div className = "col-6">
 
-        <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Graph Type</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={graphtype}
-          onChange={handleChange}
-        >
-          <MenuItem value={0}>Step Count</MenuItem>
-          <MenuItem value={1}>Heart Rate</MenuItem>
-          <MenuItem value={2}>Blood Pressure</MenuItem>
-          <MenuItem value={3}>Blood Glucose</MenuItem>
-          <MenuItem value={4}>Sleep</MenuItem>
-        </Select>
-        </FormControl>
+            <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-label">Graph Type</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={graphtype}
+              onChange={handleChange}
+            >
+              <MenuItem value={0}>Step Count</MenuItem>
+              <MenuItem value={1}>Heart Rate</MenuItem>
+              <MenuItem value={2}>Blood Pressure</MenuItem>
+              <MenuItem value={3}>Blood Glucose</MenuItem>
+              <MenuItem value={4}>Sleep</MenuItem>
+            </Select>
+            </FormControl>
+
+          </div>
+
+          <div className = "col-6">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi-calendar" viewBox="0 0 16 16">
+              <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+            </svg>
+            {dateRange()}
+
+          </div>
+
+          <div>
+            
+          </div>
 
         </div>
-
-        <div>
         
-        {dateRange()}
-
-        </div>
-
-
         <div style={{height:300}}>
 
-
-      
         <MyResponsiveLine data={props.userData.presetgraph}/>
+
+        </div>        
         
-
-
-        </div>
-        </div>
-
+      </>
     );
 }
 
