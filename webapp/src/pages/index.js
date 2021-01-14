@@ -165,13 +165,9 @@ function Home() {
     const d = await client.appointments.get_appointments();
     appointments = d;
 
-    var k = 0;
-    for(k = 0; k < d.length; d++)
-    {
-        patient_id_for_documents.push(d[k].drchrono_id);
-    }
+
     console.log("appointnents");
-    console.log(d);
+    console.log(appointments);
     }
 
     async function get_patient_data() {

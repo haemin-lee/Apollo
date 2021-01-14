@@ -15,6 +15,7 @@
         "@testing-library/user-event": "^12.1.10",
         "apollo-api-client": "file:..\\apollo-api-client",
         "bootstrap": "^4.5.3",
+        "bootstrap-icons": "^1.3.0",
         "drchrono-api-client": "file:..\\drchrono-api-client",
         "material-ui-search-bar": "^1.0.0",
         "react": "^17.0.1",
