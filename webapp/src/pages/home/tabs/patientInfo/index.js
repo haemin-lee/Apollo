@@ -46,7 +46,7 @@ function PatientInfo(props) {
                         <h4>Appointment Time: {props.userData.scheduledAppointmentTime}</h4>
                         <h4>Duration: {props.userData.duration} minutes</h4>
                         <h4>Reason: {props.userData.reason}</h4>
-                        <h4>Reoccuring: {props.userData.reoccurring}</h4>
+                        <h4>Reoccuring: {props.userData.reoccuring}</h4>
                         <h4>Status: {props.userData.status}</h4>
                     </div>
                     <div className='col-2'></div>
