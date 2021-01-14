@@ -319,7 +319,7 @@ function Home() {
                     onClick={() => changeSelectedUser(i)}
                 >
                     <p>{user.name}</p>
-                    <p>{user.date || '6/30/2021'}</p>
+                    <p>{user.scheduledAppointmentDate || '6/30/2021'}</p>
                     <p>{user.time || '10:45 AM'}</p>
                 </div>
             </div>
