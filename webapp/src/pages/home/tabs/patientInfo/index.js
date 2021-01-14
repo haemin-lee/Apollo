@@ -1,6 +1,8 @@
 // Future feature: import from Excel
+import { motionDefaultProps } from '@nivo/core';
 import { useState } from 'react'
 import { Row, Col, Container } from 'react-bootstrap';
+import Avatar from '@material-ui/core/Avatar';
 
 // Prob better way to do prop mapping
 function PatientInfo(props) {
@@ -18,49 +20,46 @@ function PatientInfo(props) {
                         <h2 className = "patientname">{props.userData.name}</h2>
                     </div>
                     <div className='col-4'>
-                        {/*<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />*/}
+                        <Avatar alt={props.userData.name} src={props.userData.photo} style={{height: '75px', width: '75px'}} />
                     </div>
                 </Row>
                 <Row>
-                    <div style={{height:40}}></div>
+                    <div style={{height:20}}></div>
                 </Row>
                 <Row >
                     <Col className = "basicinfo">
-                        <div className='col-4'>
                             <h3>Basic Information</h3>
                             <h4>Age: {props.userData.age} years old</h4>
                             <h4>Biological Sex: {props.userData.biosex}</h4>
-                            <h4>Date of Birth: {props.userData.DOB}</h4>
-                        </div>
+                            <h4>Date of Birth: {props.userData.DOB}</h4>   
                     </Col>
-                    <Col>
-                        <div className='col-2'></div>
-                        <div className='col-4'>
+                    <div style={{width:20}}></div>
+                    <Col className = "contactinfo">
                             <h3>Contact Information</h3>
                             <h4>Patient ID: {props.userData.id}</h4>
                             <h4>Email: {props.userData.email}</h4>
                             <h4>Home Phone: {props.userData.homePhone}</h4>
-                        </div>
                     </Col>
                 </Row>
                 <Row>
-                    <div style={{height:40}}></div>
+                    <div style={{height:20}}></div>
                 </Row>
                 <Row>
-                    <div className='col-4'>
-                        <h3>Appointment</h3>
-                        <h4>Appointment Date: {props.userData.scheduledAppointmentDate}</h4>
-                        <h4>Appointment Time: {props.userData.scheduledAppointmentTime}</h4>
-                        <h4>Duration: {props.userData.duration} minutes</h4>
-                        <h4>Reason: {props.userData.reason}</h4>
-                        <h4>Reoccuring: {props.userData.reoccurring}</h4>
-                        <h4>Status: {props.userData.status}</h4>
-                    </div>
-                    <div className='col-2'></div>
-                    <div className='col-4'>
-                        <h3>Notes</h3>
-                        <h4>{props.userData.notes}</h4>
-                    </div>
+                    <Col className = "appointment">
+                            <h3>Appointment</h3>
+                            <h4>Appointment Date: {props.userData.scheduledAppointmentDate}</h4>
+                            <h4>Appointment Time: {props.userData.scheduledAppointmentTime}</h4>
+                            <h4>Duration: {props.userData.duration} minutes</h4>
+                            <h4>Reason: {props.userData.reason}</h4>
+                            <h4>Reoccuring: {props.userData.reoccurring}</h4>
+                            <h4>Status: {props.userData.status}</h4>
+                    </Col>
+                    <div style={{width:20}}></div>
+                    <Col className = "notescol">
+                            <h3>Notes</h3>
+                            <h4>{props.userData.notes}</h4>
+
+                    </Col>
                 </Row>
             </Container>
           {/*   <div>
