@@ -43,6 +43,15 @@ h2 {
     font-weight: 300;
 }
 
+h3 {
+    font-family: Poppins;
+    font-weight: 300;
+}
+h4 {
+    font-family: Poppins;
+    font-weight: 300;
+}
+
 p {
     font-family: Poppins;
     font-weight: 400;
@@ -95,4 +104,5 @@ p {
     padding: 10px 20px 10px 20px;
     font-weight: 400;
 }
+
 

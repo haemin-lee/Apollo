@@ -18,7 +18,6 @@ import "react-datepicker/dist/react-datepicker.css";
 let xaxis = "";
 let yaxis = "";
 
-let graphdata = {};
 let stepgraphdata = {};
 let heartgraphdata = {};
 let BPgraphdata = {};
@@ -85,6 +84,7 @@ function Graphs(props) {
         return (
           <>
             <DatePicker
+              calendarIcon="Calendar"
               selected={startDate}
               onChange={date => {
                 setStartDate(date)
@@ -210,25 +210,30 @@ function Graphs(props) {
             
         }
 
+      
+
       let heartgraphObj = [];
       for (let i = 0; i < newObj.length; i++)
-      {
-        if (new Date(newObj[i].x) >= startDate && new Date(newObj[i].x) <= endDate)
         {
-          heartgraphObj.push(newObj[i])
+
+          if (new Date(newObj[i].x) >= startDate && new Date(newObj[i].x) <= endDate)
+          {
+            heartgraphObj.push(newObj[i])
+          }
         }
-      }
+      
+      
 
       if (heartgraphObj.length > 8)
       {
-        ticks = [];
-        let shown1 = 0;
-        let shown2 = Math.floor((heartgraphObj.length - 1) / 4)
-        let shown3 = Math.floor((heartgraphObj.length - 1) / 2)
-        let shown4 = Math.floor((heartgraphObj.length - 1) / 4 * 3)
-        let shown5 = (heartgraphObj.length - 1)
+      ticks = [];
+      let shown1 = 0;
+      let shown2 = Math.floor((heartgraphObj.length - 1) / 4)
+      let shown3 = Math.floor((heartgraphObj.length - 1) / 2)
+      let shown4 = Math.floor((heartgraphObj.length - 1) / 4 * 3)
+      let shown5 = (heartgraphObj.length - 1)
 
-        heartticks = [heartgraphObj[shown1].x, heartgraphObj[shown2].x, heartgraphObj[shown3].x, heartgraphObj[shown4].x, heartgraphObj[shown5].x];
+      heartticks = [heartgraphObj[shown1].x, heartgraphObj[shown2].x, heartgraphObj[shown3].x, heartgraphObj[shown4].x, heartgraphObj[shown5].x];
       }
       else
       {
@@ -258,6 +263,9 @@ function Graphs(props) {
       
         for (let j = 1; j < props.userData.BPData.length; j++)
         {
+        
+        
+
         if ((!datesAreOnSameDay(new Date(currTime), new Date(props.userData.BPData[j].startDate))))
           {
               newObjsys.push({
@@ -567,57 +575,34 @@ function Graphs(props) {
 />
 )
 
-    function potentiallyReturnGraph(data)
-    {
-      if(data === null || data === ""){
-        return <div>wait</div>;
-      }
-      else
-      {
-        return <MyResponsiveLine data={data}/>;
-      }
-    }
-    return (
 
+    return (
         <div>
           <div>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">Graph Type</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={graphtype}
-                onChange={handleChange}
-              >
-                <MenuItem value={0}>Step Count</MenuItem>
-                <MenuItem value={1}>Heart Rate</MenuItem>
-                <MenuItem value={2}>Blood Pressure</MenuItem>
-                <MenuItem value={3}>Blood Glucose</MenuItem>
-                <MenuItem value={4}>Sleep</MenuItem>
-              </Select>
-            </FormControl>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-label">Graph Type</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={graphtype}
+              onChange={handleChange}
+            >
+              <MenuItem value={0}>Step Count</MenuItem>
+              <MenuItem value={1}>Heart Rate</MenuItem>
+              <MenuItem value={2}>Blood Pressure</MenuItem>
+              <MenuItem value={3}>Blood Glucose</MenuItem>
+              <MenuItem value={4}>Sleep</MenuItem>
+            </Select>
+          </FormControl>
           </div>
-
           <div>
             {dateRange()}
           </div>
-
-          <div style={{height:300}}>
-            {potentiallyReturnGraph(graphdata)}
-          </div>
-
-          <div>
-            {dateRange()}
-          </div>
-
-
           <div style={{height:300}}>
             <MyResponsiveLine data={props.userData.presetgraph}/>
           </div>
         </div>
-
     );
 }
 
 export default Graphs
-

@@ -13,12 +13,10 @@ class User {
         name,
         id,
         age,
-        height,
-        weight,
         biosex,
         DOB,
-        BMI,
-        BodyFat,
+        email,
+        homePhone,
         notes,
         StepData,
         HeartData,
@@ -27,17 +25,21 @@ class User {
         SleepData,
         Image1,
         Image2,
-        Image3
+        Image3, 
+        scheduledAppointmentDate,
+        scheduledAppointmentTime, 
+        duration, 
+        reason, 
+        reoccuring, 
+        status
     ) {
         this.name = name
         this.id = id
         this.age = age
-        this.height = height
-        this.weight = weight
         this.biosex = biosex
         this.DOB = DOB
-        this.BMI = BMI
-        this.BodyFat = BodyFat
+        this.email = email
+        this.homePhone = homePhone
         this.notes = notes
         this.StepData = StepData
         this.HeartData = HeartData
@@ -54,16 +56,29 @@ class User {
             Image2,
             Image3,
         ]
+        this.scheduledAppointmentDate = scheduledAppointmentDate
+        this.scheduledAppointmentTime = scheduledAppointmentTime
+        this.duration = duration
+        this.reason = reason
+        this.reoccuring = reoccuring
+        this.status = status
+        this.appointment = [
+            scheduledAppointmentDate,
+            scheduledAppointmentTime, 
+            duration, 
+            reason, 
+            reoccuring, 
+            status
+        ]
     }
 }
 
 let appointments = [];
 let patients = [];
-
+let patient_id_for_documents = [];
 
 // figure styles out later...
 function Home() {
-
     let users = [new User("Jenny", 1232131, 20, 43, 32, "Female", "6/30/2000", 43, 12, "Very cool",{},{},{},{},{},"","","",""), 
     new User("Devin", 1232131, 20, 54, 12, "Male", "10/2/2000", 76, 49, "Very epic",{},{},{},{},{},"","","","")];
     let activeUser = users[0];
@@ -73,22 +88,88 @@ function Home() {
     const [userarr, setUsers] = useState(users);
     const [searchResult, setSearchResult] = useState("");
 
-    function correlatePatientsWithAppointments(){
-        for(i in patients)
-        {
-            var id = patients[i].id;
-            for(j in appointments)
-            {
-                if(appointments[j].data.patient === id)
-                {;}
-            }
-        }
+    function getFormattedDate(datetemp) {
+        var date = new Date(datetemp);
+        var year = date.getFullYear();
+      
+        var month = (1 + date.getMonth()).toString();
+        month = month.length > 1 ? month : '0' + month;
+      
+        var day = date.getDate().toString();
+        day = day.length > 1 ? day : '0' + day;
+        
+        return month + '/' + day + '/' + year;
     }
+
+    function getFormattedTime(timetemp) {
+        var date = new Date(timetemp);
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
+
+    function correlatePatientsWithAppointments(){
+        var i, j;
+        users = [];
+        for(i = 0; i < patients.length; i++)
+        {
+            var id = patients[i].data.id;
+            for(j = 0; j < appointments.length; j++)
+            {
+                if(id === appointments[j].data.patient)
+                {
+                    var formattedDOB = getFormattedDate(patients[i].data.date_of_birth);
+                    var appointment_date = getFormattedDate(patients[i].data.date_of_birth);
+                    var appointment_time = getFormattedTime(patients[i].data.date_of_birth);
+                    var reoccuring_appointment_temp = Boolean.toString(appointments[j].data.reoccuring_appointment);
+                    var totalName = patients[i].data.first_name + " " +  patients[i].data.last_name;
+                    let newUserTemp = new User(
+                                        totalName, 
+                                        id, 
+                                        "nullrn", 
+                                        patients[i].data.gender, 
+                                        formattedDOB, 
+                                        patients[i].data.email, 
+                                        patients[i].data.home_phone,
+                                        appointments[j].data.notes, 
+                                        {},
+                                        {},
+                                        {},
+                                        {},
+                                        {},
+                                        "",
+                                        "",
+                                        "",
+                                        appointment_date,
+                                        appointment_time, 
+                                        appointments[j].data.duration, 
+                                        appointments[j].data.reason, 
+                                        reoccuring_appointment_temp, 
+                                        appointments[j].data.status);
+                    users.push(newUserTemp);
+                    break;
+                }
+            }
+           
+        }
+        console.log(users);
+    } 
 
     async function get_appointment_data() {
     const client = get_client()
     const d = await client.appointments.get_appointments();
     appointments = d;
+
+    var k = 0;
+    for(k = 0; k < d.length; d++)
+    {
+        patient_id_for_documents.push(d[k].drchrono_id);
+    }
     console.log("appointnents");
     console.log(d);
     }
@@ -99,6 +180,9 @@ function Home() {
     patients = d;
     console.log("patietns");
     console.log(d);
+
+    correlatePatientsWithAppointments();
+    console.log(users);
     }
 
     async function get_appointment_document(id) {
@@ -122,7 +206,7 @@ function Home() {
         if (!idexist) {
             users.push(
                 new User(
-                    'Penis',
+                    'not Penis',
                     d[0].patient,
                     20,
                     54,
@@ -195,11 +279,12 @@ function Home() {
         }
 
         setUsers([...copy])
-        console.log("dying");
-        console.log(copy)
+        setData(copy[0])
     }
 
     function changeSelectedUser(i) {
+        console.log("crochet")
+        console.log(userarr[i])
         setData(userarr[i])
         console.log(i)
     }
@@ -246,7 +331,7 @@ function Home() {
 
     useEffect(() => {
         // Update the document title using the browser API
-        const id = '164057523'
+        const id = '164393747'
         get_appointment_data()
         get_patient_data()
         get_appointment_document(id)
