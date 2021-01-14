@@ -5,6 +5,7 @@ import { useState } from 'react'
 // Prob better way to do prop mapping
 function PatientInfo(props) {
 
+
 //constructor(name, id, age, height, weight, biosex, DOB, BMI, BodyFat, notes, StepData, HeartData, BPData, BGData, SleepData, Image1, Image2, Image3)
     return (
         <div>

@@ -1,14 +1,17 @@
 html,
 body {
     height: 100%;
+    font-family: Poppins;
 }
 
 body {
     height: 100%;
+    font-family: Poppins;
 }
 
 #root {
     height: 100%;
+    font-family: Poppins;
 }
 
 .loan-pill {
@@ -118,4 +121,19 @@ p {
     font-size: 20px;
     background: #efefef;
     text-align: center;
+}
+
+.example-custom-input{
+    background: rgba(255, 255, 255, 0.35);
+    color: rgba(0, 0, 0, 1);
+    font-family: Poppins;
+    border: none
+}
+
+.MuiInputBase-input {
+    font-family: Poppins !important
+  }
+
+.MuiFormLabel-root {
+    font-family: Poppins !important
 }
