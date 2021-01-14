@@ -10,6 +10,7 @@ import SearchBar from "material-ui-search-bar";
 
 class User {
     constructor(
+        photo,
         name,
         id,
         age,
@@ -33,6 +34,7 @@ class User {
         reoccuring, 
         status
     ) {
+        this.photo= photo
         this.name = name
         this.id = id
         this.age = age
@@ -116,6 +118,11 @@ function Home() {
     function correlatePatientsWithAppointments(){
         var i, j;
         users = [];
+        for(j = 0; j < appointments.length; j++)
+        {
+            var patient_id_string = appointments[j].drchrono_id.toString();
+            patient_id_for_documents.push(patient_id_string);
+        }
         for(i = 0; i < patients.length; i++)
         {
             var id = patients[i].data.id;
@@ -129,6 +136,7 @@ function Home() {
                     var reoccuring_appointment_temp = Boolean.toString(appointments[j].data.reoccuring_appointment);
                     var totalName = patients[i].data.first_name + " " +  patients[i].data.last_name;
                     let newUserTemp = new User(
+                                        patients[i].data.patient_photo,
                                         totalName, 
                                         id, 
                                         "nullrn", 
@@ -171,14 +179,16 @@ function Home() {
     }
 
     async function get_patient_data() {
-    const client = get_client()
-    const d = await client.patients.get_patients();
-    patients = d;
-    console.log("patietns");
-    console.log(d);
+        const client = get_client()
+        const d = await client.patients.get_patients();
+        patients = d;
+        console.log("patietns");
+        console.log(d);
 
-    correlatePatientsWithAppointments();
-    console.log(users);
+        correlatePatientsWithAppointments();
+        console.log("i objectively need to not be styupid");
+        
+        console.log(patient_id_for_documents);
     }
 
     async function get_appointment_document(id) {
@@ -327,10 +337,21 @@ function Home() {
 
     useEffect(() => {
         // Update the document title using the browser API
-        const id = '164393747'
-        get_appointment_data()
-        get_patient_data()
-        get_appointment_document(id)
+        //const id = '164393747'
+        
+        async function getData()
+        {
+            await get_appointment_data();
+            await get_patient_data();
+            let m = 0;
+            for(m = 0; m < patient_id_for_documents.length; m++)
+            {
+                console.log("iterating rn");
+                await get_appointment_document(patient_id_for_documents[m]);
+            }
+        }
+        getData();
+        
     }, [])
 
     return (
