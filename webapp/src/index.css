@@ -109,6 +109,29 @@ p {
 }
 
 
+
+.each-slide > div {
+    /*
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-position: center;
+    */
+    display: block;
+    margin: 0 auto;
+    background-size: cover;
+    height: 1000px;
+    
+
+}
+  
+.each-slide span {
+    padding: 20px;
+    font-size: 20px;
+    background: #efefef;
+    text-align: center;
+}
+
 .example-custom-input{
     background: rgba(255, 255, 255, 0.35);
     color: rgba(0, 0, 0, 1);
