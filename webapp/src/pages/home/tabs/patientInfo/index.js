@@ -15,26 +15,33 @@ function PatientInfo(props) {
                 </Row>
                 <Row>
                     <div className='col-4'>
-                        <h2>{props.userData.name}</h2>
+                        <h2 className = "patientname">{props.userData.name}</h2>
+                    </div>
+                    <div className='col-4'>
+                        {/*<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />*/}
                     </div>
                 </Row>
                 <Row>
                     <div style={{height:40}}></div>
                 </Row>
-                <Row>
-                    <div className='col-4'>
-                        <h3>Basic Information</h3>
-                        <h4>Age: {props.userData.age} years old</h4>
-                        <h4>Biological Sex: {props.userData.biosex}</h4>
-                        <h4>Date of Birth: {props.userData.DOB}</h4>
-                    </div>
-                    <div className='col-2'></div>
-                    <div className='col-4'>
-                        <h3>Contact Information</h3>
-                        <h4>Patient ID: {props.userData.id}</h4>
-                        <h4>Email: {props.userData.email}</h4>
-                        <h4>Home Phone: {props.userData.homePhone}</h4>
-                    </div>
+                <Row >
+                    <Col className = "basicinfo">
+                        <div className='col-4'>
+                            <h3>Basic Information</h3>
+                            <h4>Age: {props.userData.age} years old</h4>
+                            <h4>Biological Sex: {props.userData.biosex}</h4>
+                            <h4>Date of Birth: {props.userData.DOB}</h4>
+                        </div>
+                    </Col>
+                    <Col>
+                        <div className='col-2'></div>
+                        <div className='col-4'>
+                            <h3>Contact Information</h3>
+                            <h4>Patient ID: {props.userData.id}</h4>
+                            <h4>Email: {props.userData.email}</h4>
+                            <h4>Home Phone: {props.userData.homePhone}</h4>
+                        </div>
+                    </Col>
                 </Row>
                 <Row>
                     <div style={{height:40}}></div>

@@ -123,3 +123,12 @@ p {
 .MuiFormLabel-root {
     font-family: Poppins !important
 }
+
+.patientname {
+    font-weight: bold;
+}
+
+.basicinfo {
+    background: rgba(196, 196, 196, 0.1);
+    box-shadow: 2px 4px #cfcfcf;
+}
