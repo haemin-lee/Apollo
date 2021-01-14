@@ -1,3 +1,19 @@
+html,
+body {
+    height: 100%;
+    font-family: Poppins;
+}
+
+body {
+    height: 100%;
+    font-family: Poppins;
+}
+
+#root {
+    height: 100%;
+    font-family: Poppins;
+}
+
 .loan-pill {
     padding: 15px 10px;
     border: black solid 1px;
@@ -7,11 +23,18 @@
 }
 
 .bg-dark {
-    background-color: #000000!important;
+    background-color: #000000 !important;
 }
 
 .navbar-light .navbar-brand {
     color: rgb(255 255 255 / 90%);
+}
+
+.loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 h1 {
@@ -21,4 +44,139 @@ h1 {
 h2 {
     font-family: Poppins;
     font-weight: 300;
+}
+
+h3 {
+    font-family: Poppins;
+    font-weight: 300;
+}
+h4 {
+    font-family: Poppins;
+    font-weight: 300;
+}
+
+p {
+    font-family: Poppins;
+    font-weight: 400;
+}
+
+.header {
+    font-weight: 700;
+}
+
+.patient-card {
+    cursor: pointer;
+    background: rgba(196, 196, 196, 0.1);
+    margin-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    transition: 0.2s ease all;
+}
+
+.patient-card:hover {
+    transition: 0.2s ease all;
+    background: rgba(196, 196, 196, 0.35);
+}
+
+.patient-card.active {
+    background: rgba(196, 196, 196, 0.35);
+}
+
+.patient-card p {
+    line-height: 0.75;
+}
+.patient-card p:not(:first-of-type) {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.subtext {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.nav-pills .nav-link.active {
+    background: #e5e5e5;
+    color: #000;
+    font-weight: 600;
+}
+
+.nav-pills .nav-link {
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 0;
+    margin-right: 5px;
+    color: #000;
+    padding: 10px 20px 10px 20px;
+    font-weight: 400;
+}
+
+
+
+.each-slide > div {
+    /*
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-position: center;
+    */
+    display: block;
+    margin: 0 auto;
+    background-size: cover;
+    height: 1000px;
+    
+
+}
+  
+.each-slide span {
+    padding: 20px;
+    font-size: 20px;
+    background: #efefef;
+    text-align: center;
+}
+
+.example-custom-input{
+    background: rgba(255, 255, 255, 0.35);
+    color: rgba(0, 0, 0, 1);
+    font-family: Poppins;
+    border: none
+}
+
+.MuiInputBase-input {
+    font-family: Poppins !important
+  }
+
+.MuiFormLabel-root {
+    font-family: Poppins !important
+}
+
+.patientname {
+    font-weight: bold;
+}
+
+.basicinfo {
+    background: rgba(196, 196, 196, 0.1);
+    padding: 20px;
+}
+
+.contactinfo {
+    background: rgba(196, 196, 196, 0.1);
+    padding: 20px;
+}
+
+.appointment {  
+    background: rgba(196, 196, 196, 0.1);
+    padding: 20px;
+}
+
+.notescol {
+    background: rgba(196, 196, 196, 0.1);
+    padding: 20px;
+}
+
+.smalltext {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 16px;
+}
+
+.biggertext {
+    color: rgba(0, 0, 0, 1);
+    font-size: 20px;
 }
