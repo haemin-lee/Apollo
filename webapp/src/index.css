@@ -130,20 +130,20 @@ p {
 
 .basicinfo {
     background: rgba(196, 196, 196, 0.1);
-    box-shadow: 2px 4px #cfcfcf;
 }
 
 .contactinfo {
     background: rgba(196, 196, 196, 0.1);
-    box-shadow: 2px 4px #cfcfcf;
 }
 
 .appointment {  
     background: rgba(196, 196, 196, 0.1);
-    box-shadow: 2px 4px #cfcfcf;
 }
 
 .notescol {
     background: rgba(196, 196, 196, 0.1);
-    box-shadow: 2px 4px #cfcfcf;
+}
+
+.smalltext {
+    color: rgba(0, 0, 0, 0.5);
 }

@@ -29,16 +29,16 @@ function PatientInfo(props) {
                 <Row >
                     <Col className = "basicinfo">
                             <h3>Basic Information</h3>
-                            <h4>Age: {props.userData.age} years old</h4>
-                            <h4>Biological Sex: {props.userData.biosex}</h4>
-                            <h4>Date of Birth: {props.userData.DOB}</h4>   
+                            <h4 className = "smalltext">Age: {props.userData.age} years old</h4>
+                            <h4 className = "smalltext">Biological Sex: {props.userData.biosex}</h4>
+                            <h4 className = "smalltext">Date of Birth: {props.userData.DOB}</h4>   
                     </Col>
                     <div style={{width:20}}></div>
                     <Col className = "contactinfo">
                             <h3>Contact Information</h3>
-                            <h4>Patient ID: {props.userData.id}</h4>
-                            <h4>Email: {props.userData.email}</h4>
-                            <h4>Home Phone: {props.userData.homePhone}</h4>
+                            <h4 className = "smalltext">Patient ID: {props.userData.id}</h4>
+                            <h4 className = "smalltext">Email: {props.userData.email}</h4>
+                            <h4 className = "smalltext">Home Phone: {props.userData.homePhone}</h4>
                     </Col>
                 </Row>
                 <Row>
@@ -47,17 +47,17 @@ function PatientInfo(props) {
                 <Row>
                     <Col className = "appointment">
                             <h3>Appointment</h3>
-                            <h4>Appointment Date: {props.userData.scheduledAppointmentDate}</h4>
-                            <h4>Appointment Time: {props.userData.scheduledAppointmentTime}</h4>
-                            <h4>Duration: {props.userData.duration} minutes</h4>
-                            <h4>Reason: {props.userData.reason}</h4>
-                            <h4>Reoccuring: {props.userData.reoccurring}</h4>
-                            <h4>Status: {props.userData.status}</h4>
+                            <h4 className = "smalltext">Appointment Date: {props.userData.scheduledAppointmentDate}</h4>
+                            <h4 className = "smalltext">Appointment Time: {props.userData.scheduledAppointmentTime}</h4>
+                            <h4 className = "smalltext">Duration: {props.userData.duration} minutes</h4>
+                            <h4 className = "smalltext">Reason: {props.userData.reason}</h4>
+                            <h4 className = "smalltext">Reoccuring: {props.userData.reoccuring}</h4>
+                            <h4 className = "smalltext">Status: {props.userData.status}</h4>
                     </Col>
                     <div style={{width:20}}></div>
                     <Col className = "notescol">
                             <h3>Notes</h3>
-                            <h4>{props.userData.notes}</h4>
+                            <h4 className = "smalltext">{props.userData.notes}</h4>
 
                     </Col>
                 </Row>

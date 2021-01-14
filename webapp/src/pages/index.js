@@ -115,6 +115,14 @@ function Home() {
         return strTime;
     }
 
+    function getAge(birthdayTemp)
+    { 
+        var birthday = new Date(birthdayTemp);
+        var ageDifMs = Date.now() - birthday;
+        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
+
     function correlatePatientsWithAppointments(){
         var i, j;
         users = [];
@@ -133,13 +141,16 @@ function Home() {
                     var formattedDOB = getFormattedDate(patients[i].data.date_of_birth);
                     var appointment_date = getFormattedDate(patients[i].data.date_of_birth);
                     var appointment_time = getFormattedTime(patients[i].data.date_of_birth);
-                    var reoccuring_appointment_temp = Boolean.toString(appointments[j].data.reoccuring_appointment);
+                    var reoccuring_appointment_temp = appointments[j].data.recurring_appointment.toString();
+                    var age = getAge(patients[i].data.date_of_birth);
+                    console.log("why isnt this working");
+                    console.log(reoccuring_appointment_temp);
                     var totalName = patients[i].data.first_name + " " +  patients[i].data.last_name;
                     let newUserTemp = new User(
                                         patients[i].data.patient_photo,
                                         totalName, 
                                         id, 
-                                        "nullrn", 
+                                        age, 
                                         patients[i].data.gender, 
                                         formattedDOB, 
                                         patients[i].data.email, 
@@ -308,7 +319,7 @@ function Home() {
                     onClick={() => changeSelectedUser(i)}
                 >
                     <p>{user.name}</p>
-                    <p>{user.appointment || 'Cardiology'}</p>
+                    <p>{user.date || '6/30/2021'}</p>
                     <p>{user.time || '10:45 AM'}</p>
                 </div>
             </div>
