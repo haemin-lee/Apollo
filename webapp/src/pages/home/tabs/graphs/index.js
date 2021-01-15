@@ -555,6 +555,7 @@ function Graphs(props) {
                 legendPosition: 'middle'
             }}
             pointSize={10}
+            isInteractive={true}
             pointColor={{ theme: 'background' }}
             pointBorderWidth={2}
             pointBorderColor={{ from: 'serieColor' }}
